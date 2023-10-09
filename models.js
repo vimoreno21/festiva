@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 mongoose.connect(process.env.CONN_STRING);
 
@@ -17,7 +17,9 @@ const userSchema = new mongoose.Schema({
         type: String, 
         require: true
     }
-}, { collection: 'users' }) 
+}, { collection: 'users' });
+const User = new mongoose.model("User", userSchema);
+
 
 const questionSchema = new mongoose.Schema({ 
     question: { 
@@ -25,14 +27,20 @@ const questionSchema = new mongoose.Schema({
         unique: true,
         require: true
     }
-}, { collection: 'questions' }) 
-  
-const User = new mongoose.model("User", userSchema);
+}, { collection: 'questions' });
 const Question = new mongoose.model("Question", questionSchema);
 
-// Example of adding to the database
-// const q = new Question({ 
-//     question: "How are you today?", 
-// }); 
+
+const savedGamesSchema = new mongoose.Schema({ 
+    user_id: { 
+        type: mongoose.Types.ObjectId, 
+        ref: "User",
+        require: true
+    },
+    game_info: {
+        type: String,
+        require: true
+    }
+}, { collection: 'saved_games' });
   
-// q.save();
+const SavedGameInfo = new mongoose.model("SavedGameInfo", savedGamesSchema);
