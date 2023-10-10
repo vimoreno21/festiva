@@ -1,7 +1,7 @@
 // Simple JavaScript code
 
 // Declare a variable and assign a value
-let message = "Hello, world!";
+let message = "Hello, world!!";
 
 // Print the message to the console
 console.log(message);
