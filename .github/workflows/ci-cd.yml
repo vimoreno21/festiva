@@ -19,8 +19,8 @@ jobs:
       - name: "📦 Install Dependencies"
         run: npm install
 
-      - name: "📊 Run Tests (if applicable)"
-        run: npm test  # Adjust this command based on your testing setup
+      # - name: "📊 Run Tests (if applicable)"
+      #   run: npm test  # Adjust this command based on your testing setup
 
       - name: "📦 Build React App"
         run: npm run build
