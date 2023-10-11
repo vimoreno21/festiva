@@ -2,14 +2,17 @@ name: Deploy
 on:
   push:
     branches:
-      -main
+      - main
+      - react-app
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      uses: actions/checkout@v2
-      uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Deploy to Heroku 
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           branch: main
           heroku_api_key: ${{secrets.HEROKU.API.KEY}}
