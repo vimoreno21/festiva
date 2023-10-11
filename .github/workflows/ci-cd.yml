@@ -16,7 +16,7 @@ jobs:
       - name: "🔧 Setup Node.js"
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 146
 
       - name: "🔧 Install npm@latest"
         run: npm i -g npm@latest
@@ -34,5 +34,5 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}  # Set this secret in your repository settings
-          heroku_app_name: your-heroku-app-name  # Replace with your Heroku app name
-          heroku_email: your-email@example.com  # Replace with your Heroku account email
+          heroku_app_name: festiva-ucf  # Replace with your Heroku app name
+          heroku_email: rjbarrioslll@gmail.com  # Replace with your Heroku account email
