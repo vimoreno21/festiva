@@ -16,7 +16,7 @@ jobs:
       - name: "🔧 Setup Node.js"
         uses: actions/setup-node@v2
         with:
-          node-version: 146
+          node-version: 16
 
       - name: "🔧 Install npm@latest"
         run: npm i -g npm@latest
