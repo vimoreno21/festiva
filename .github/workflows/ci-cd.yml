@@ -1,33 +1,33 @@
-name: CI/CD for MERN Stack
+# name: CI/CD for MERN Stack
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: "☁️ Checkout Repository"
-        uses: actions/checkout@v2
+#     steps:
+#       - name: "☁️ Checkout Repository"
+#         uses: actions/checkout@v2
 
-      - name: "🔧 Install npm@latest"
-        run: npm i -g npm@latest
+#       - name: "🔧 Install npm@latest"
+#         run: npm i -g npm@latest
 
-      - name: "📦 Install Dependencies"
-        run: npm install
+#       - name: "📦 Install Dependencies"
+#         run: npm install
 
-      # - name: "📊 Run Tests (if applicable)"
-      #   run: npm test  # Adjust this command based on your testing setup
+#       # - name: "📊 Run Tests (if applicable)"
+#       #   run: npm test  # Adjust this command based on your testing setup
 
-      - name: "📦 Build React App"
-        run: npm run build
+#       - name: "📦 Build React App"
+#         run: npm run build
 
-      - name: "🚀 Deploy to Heroku (or your hosting platform)"
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}  # Set this secret in your repository settings
-          heroku_app_name: festiva-ucf  # Replace with your Heroku app name
-          heroku_email: rjbarrioslll@gmail.com  # Replace with your Heroku account email
+#       - name: "🚀 Deploy to Heroku (or your hosting platform)"
+#         uses: akhileshns/heroku-deploy@v3.12.12
+#         with:
+#           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}  # Set this secret in your repository settings
+#           heroku_app_name: festiva-ucf  # Replace with your Heroku app name
+#           heroku_email: rjbarrioslll@gmail.com  # Replace with your Heroku account email

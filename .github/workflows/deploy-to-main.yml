@@ -16,4 +16,4 @@ jobs:
           branch: main
           heroku_api_key: ${{secrets.HEROKU.API.KEY}}
           heroku_app_name: festiva-ucf
-          heroku_email: rjbarrioslll@gmail.com
+          heroku_email: toriamoreno8@gmail.com
