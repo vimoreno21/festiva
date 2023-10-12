@@ -14,6 +14,6 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           branch: main
-          heroku_api_key: ${{secrets.HEROKU.API.KEY}}
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: festiva-ucf
-          heroku_email: toriamoreno8@gmail.com
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
