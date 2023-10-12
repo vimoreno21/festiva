@@ -8,9 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout Code!
         uses: actions/checkout@v2
-      - name: Deploy to Heroku 
+      - name: Deploy to Heroku!
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           branch: main
