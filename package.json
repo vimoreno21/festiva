@@ -4,8 +4,9 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "start": "node models.js",
-        "next": "node server.js",
+        "start": "node server.js",
+        "schema-one": "node schema/questionModel.js",
+        "schema-two": "node schema/userModel.js",
         "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
     },
     "keywords": [],
