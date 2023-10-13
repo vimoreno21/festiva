@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const path = require('path');
 const PORT = process.env.PORT || 5000;
-
+console.log("port is " + PORT);
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
