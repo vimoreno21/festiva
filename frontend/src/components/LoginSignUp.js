@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
 function LoginSignUp() {
+    var loginEmail;
+    var loginPassword;
+  
+    const [message,setMessage] = useState('');
     const [isSignUp, setIsSignUp] = useState(false);
 
     const togglePanel = () => {
@@ -9,14 +13,46 @@ function LoginSignUp() {
 
     const doLogin = async (event) => {
         event.preventDefault();
-        alert('doIt()'); // Replace this with your desired login logic
+        // Replace this with your desired login logic
+        var obj = {email:loginEmail.value,password:loginPassword.value};
+        var js = JSON.stringify(obj);
+
+        try
+        {    
+            const response = await fetch('http://localhost:5000/api/login',
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            var res = JSON.parse(await response.text());
+
+            if( res.id <= 0 )
+            {
+                setMessage('User/Password combination incorrect');
+            }
+            else
+            {
+                var user = {email:res.email,_id:res._id}
+                localStorage.setItem('user_data', JSON.stringify(user));
+
+                setMessage('we did it!');
+                //window.location.href = '/cards';
+            }
+        }
+        catch(e)
+        {
+            alert(e.toString());
+            return;
+        }
+    };
+    const doSignup = async (event) => {
+        event.preventDefault();
+        alert('doIt()'); // Replace this with your desired signup logic
     };
 
     return (
         <div> 
             <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container">
                 <div className="form-container sign-up-container">
-                    <form onSubmit={doLogin}>
+                    <form onSubmit={doSignup}>
                         <h1>Create Account</h1>
                         <input type="text" placeholder="Name" />
                         <input type="email" placeholder="Email" />
@@ -27,10 +63,11 @@ function LoginSignUp() {
                 <div className="form-container sign-in-container">
                     <form onSubmit={doLogin}>
                         <h1>Sign in</h1>
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
+                        <input type="email" placeholder="Email" ref={(c) => loginEmail = c}/>
+                        <input type="password" placeholder="Password" ref={(c) => loginPassword = c}/>
                         <p onClick={togglePanel}>Forgot your password?</p>
                         <button type="submit">Sign In</button>
+                        <span id="loginResult">{message}</span>
                     </form>
                 </div>
                 <div className="overlay-container">
