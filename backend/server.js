@@ -46,3 +46,32 @@ app.listen(PORT, () =>
 {
     console.log('Server listening on port ' + PORT);
 }); 
+
+app.post('/api/login', async (req, res, next) => 
+{
+  // incoming: login, password
+  // outgoing: id, firstName, lastName, error
+	
+ var error = '';
+
+  const { email, password } = req.body;
+
+  const db = client.db();
+  const results = await db.collection('users').find({email:email,password:password}).toArray();
+
+
+  var id = -1;
+  var name = '';
+  var avatar = '';
+
+  if( results.length > 0 )
+  {
+    id = results[0]._id;
+    name = results[0].name;
+    avatar = results[0].avatar;
+  }
+
+  var ret = { id:id, name:name, avatar:avatar, error:''};
+  console.log(ret)
+  res.status(200).json(ret);
+});

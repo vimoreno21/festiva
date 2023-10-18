@@ -4,7 +4,7 @@ function Login()
     const doLogin = async event =>
     {
     event.preventDefault();
-    alert('doIt()');
+    alert('im doing it');
     };
     return(
         <div id="loginDiv">
