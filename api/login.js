@@ -8,13 +8,10 @@ router.post('/', async (req, res) =>
   // outgoing: id, firstName, lastName, error
 
   let error = '';
-
   const { email, password } = req.body;
 
-  //const db = client.db();
-  //const results = await db.collection('users').find({email:email,password:password}).toArray();
   results = await User.find({email:email,password:password});
-  console.log('USER RESULTS:', results);
+  //console.log('USER RESULTS:', results);
 
   let id = -1;
   let name = '';
@@ -28,7 +25,7 @@ router.post('/', async (req, res) =>
   }
 
   let ret = { id:id, name:name, avatar:avatar, error:''};
-  console.log(ret)
+  //console.log(ret)
   res.status(200).json(ret);
 
 });
