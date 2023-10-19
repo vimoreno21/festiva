@@ -14,8 +14,7 @@ const userSchema = mongoose.Schema({
         require: true
     },
     avatar: {
-        type: String, 
-        require: true
+        type: String 
     }, 
     friend_ids: [{ type : mongoose.Types.ObjectId, ref: 'User' }]
 }, { collection: 'users' });
