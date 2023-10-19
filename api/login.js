@@ -17,7 +17,7 @@ router.post('/', async (req, res) =>
   let name = '';
   let avatar = '';
 
-  if( results.length > 0 )
+  if (results.length > 0)
   {
     id = results[0]._id;
     name = results[0].name;
@@ -25,7 +25,6 @@ router.post('/', async (req, res) =>
   }
 
   let ret = { id:id, name:name, avatar:avatar, error:''};
-  //console.log(ret)
   res.status(200).json(ret);
 
 });
