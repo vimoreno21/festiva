@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 
 function LoginSignUp() {
-    var loginEmail;
-    var loginPassword;
+    let loginEmail;
+    let loginPassword;
+    let signUpName;
+    let signUpEmail;
+    let signUpPassword;
   
     const [message,setMessage] = useState('');
+    const [resultSignUp, setResultSignUp] = useState('');
     const [isSignUp, setIsSignUp] = useState(false);
 
     const togglePanel = () => {
@@ -13,17 +17,15 @@ function LoginSignUp() {
 
     const doLogin = async (event) => {
         event.preventDefault();
-        // Replace this with your desired login logic
-        var obj = {email:loginEmail.value,password:loginPassword.value};
-        var js = JSON.stringify(obj);
+        let obj = {email:loginEmail.value,password:loginPassword.value};
+        let js = JSON.stringify(obj);
 
         try
         {    
-            // line below is missing path
             const response = await fetch('/api/login',
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
-            var res = await response.json();
+            let res = await response.json();
 
             if ( res.id <= 0 )
             {
@@ -31,7 +33,7 @@ function LoginSignUp() {
             }
             else
             {
-                var user = {email:res.email,_id:res._id}
+                let user = {email:res.email,_id:res._id}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
                 setMessage('we did it!');
@@ -46,7 +48,29 @@ function LoginSignUp() {
     };
     const doSignup = async (event) => {
         event.preventDefault();
-        alert('doIt()'); // Replace this with your desired signup logic
+        let obj = {name:signUpName.value,email:signUpEmail.value,password:signUpPassword.value};
+        let jsonBody = JSON.stringify(obj);
+
+        try
+        {    
+            const response = await fetch('/api/register',
+                {method:'POST',body:jsonBody,headers:{'Content-Type': 'application/json'}});
+
+            let res = await response.json();
+            if ( res.message === "Created account successfully!" )
+            {
+                setResultSignUp('Created new user!');
+            }
+            else
+            {
+                setResultSignUp('Error creating account.');
+            }
+        }
+        catch(e)
+        {
+            alert(e.toString());
+            return;
+        }
     };
 
     return (
@@ -55,10 +79,11 @@ function LoginSignUp() {
                 <div className="form-container sign-up-container">
                     <form onSubmit={doSignup}>
                         <h1>Create Account</h1>
-                        <input type="text" placeholder="Name" />
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
+                        <input type="text" placeholder="Name" ref={(c) => signUpName = c}/>
+                        <input type="email" placeholder="Email" ref={(c) => signUpEmail = c}/>
+                        <input type="password" placeholder="Password" ref={(c) => signUpPassword = c} />
                         <button type="submit">Sign Up</button>
+                        <span id="signInResult">{resultSignUp}</span>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">

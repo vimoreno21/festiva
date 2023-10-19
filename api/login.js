@@ -7,11 +7,9 @@ router.post('/', async (req, res) =>
   // incoming: login, password
   // outgoing: id, firstName, lastName, error
 
-  let error = '';
   const { email, password } = req.body;
 
   results = await User.find({email:email,password:password});
-  //console.log('USER RESULTS:', results);
 
   let id = -1;
   let name = '';

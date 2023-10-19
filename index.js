@@ -9,10 +9,6 @@ const path = require('path');
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-
-// might not need this line
-//app.set('port', (process.env.PORT || 5000));
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use((req, res, next) =>
@@ -40,15 +36,12 @@ if (process.env.NODE_ENV === 'production')
     });
 }
 
+// API
 const loginRouter = require('./api/login');
 app.use('/api/login', loginRouter);
 
-
 const registerRouter = require('./api/register');
 app.use('/api/register', registerRouter);
-
-  
-
 
 
 app.listen(PORT, () =>
