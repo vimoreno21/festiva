@@ -5,8 +5,8 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "schema-one": "node schema/questionModel.js",
-        "schema-two": "node schema/userModel.js"
+        "schema-one": "node ../schema/questionModel.js",
+        "schema-two": "node ../schema/userModel.js"
     },
     "keywords": [],
     "author": "",

@@ -7,11 +7,12 @@ const cors = require('cors');
 
 console.log("2");
 const path = require('path');
+console.log("path: " + path);
 const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
-console.log("3");
+console.log("3#");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -31,15 +32,25 @@ app.use((req, res, next) =>
 console.log("4");
 
 
-if (process.env.NODE_ENV === 'production')
-{
+// if (process.env.NODE_ENV === 'production')
+// {
+//     // Set static folder
+//     app.use(express.static('frontend/build'));
+//     app.get('*', (req, res) =>
+//     {
+//         res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+//     });
+// }
+
+if (process.env.NODE_ENV === 'production') {
     // Set static folder
-    app.use(express.static('frontend/build'));
-    app.get('*', (req, res) =>
-    {
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    app.use(express.static('../frontend/build'));
+    app.get('*', (req, res) => {
+        
+      res.sendFile(path.resolve(__dirname, '..', 'frontend', 'build', 'index.html'));
     });
 }
+  
 
 console.log("5");
 
