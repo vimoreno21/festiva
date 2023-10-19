@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'production')
 }
 
 const loginRouter = require('./api/login');
-app.use('./api/login', loginRouter);
+app.use('/api/login', loginRouter);
 
   
 

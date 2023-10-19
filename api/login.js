@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/userModel')
 
-router.post('/', (req, res) => 
+router.post('/', async (req, res) => 
 {
   // incoming: login, password
   // outgoing: id, firstName, lastName, error
@@ -13,8 +13,8 @@ router.post('/', (req, res) =>
 
   //const db = client.db();
   //const results = await db.collection('users').find({email:email,password:password}).toArray();
-  results = User.find({email:email,password:password}).toArray();
-  console.log(results);
+  results = await User.find({email:email,password:password});
+  console.log('USER RESULTS:', results);
 
   let id = -1;
   let name = '';

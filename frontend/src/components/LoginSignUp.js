@@ -19,12 +19,13 @@ function LoginSignUp() {
 
         try
         {    
-            const response = await fetch('http://localhost:5000/api/login',
+            // line below is missing path
+            const response = await fetch('/api/login',
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
-            var res = JSON.parse(await response.text());
+            var res = await response.json();
 
-            if( res.id <= 0 )
+            if ( res.id <= 0 )
             {
                 setMessage('User/Password combination incorrect');
             }
