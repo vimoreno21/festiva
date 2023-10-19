@@ -2,8 +2,9 @@
     "name": "festiva",
     "version": "1.0.0",
     "description": "",
-    "main": "backend/server.js",
+    "main": "index.js",
     "scripts": {
+        "dev": "nodemon index.js",
         "start": "node index.js",
         "heroku-postbuild": "cd frontend && npm install && npm run build"
     },
@@ -17,6 +18,7 @@
         "express": "^4.18.2",
         "mongodb": "^6.1.0",
         "mongoose": "^7.6.0",
+        "nodemon": "^3.0.1",
         "react-router-dom": "^6.16.0"
     },
     "devDependencies": {
