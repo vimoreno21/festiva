@@ -45,9 +45,9 @@ console.log("5");
 
 const MongoClient = require('mongodb').MongoClient;
 const url = process.env.CONN_STRING;
+console.log(url);
 const client = new MongoClient(url);
 client.connect()
-console.log("6");
 
 app.listen(PORT, () =>
 {

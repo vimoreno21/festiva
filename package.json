@@ -4,9 +4,7 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js",
-        "schema-one": "node schema/questionModel.js",
-        "schema-two": "node schema/userModel.js",
+        "start": "concurrently \"cd backend && npm start\" \"cd frontend && npm start\"",
         "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
     },
     "keywords": [],
@@ -20,5 +18,8 @@
         "mongodb": "^6.1.0",
         "mongoose": "^7.6.0",
         "react-router-dom": "^6.16.0"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
     }
 }
