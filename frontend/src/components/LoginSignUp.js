@@ -101,15 +101,15 @@ function LoginSignUp() {
                         <div className={`overlay-panel ${isSignUp ? 'overlay-left' : 'overlay-right'}`}>
                             {isSignUp ? (
                                 <>
-                                    <h1>Hello, Friend!</h1>
-                                    <p>Enter your personal details and start the journey with us</p>
-                                    <button className="ghost" onClick={togglePanel}id="signUp">Sign Up</button>
-                                </>
-                            ) : (
-                                <>
                                     <h1>Welcome Back!</h1>
                                     <p>To keep connected with us please login with your personal info</p>
                                     <button className="ghost" onClick={togglePanel} id="signIn">Sign In</button>
+                                </>
+                            ) : (
+                                <>
+                                    <h1>Hello, Friend!</h1>
+                                    <p>Enter your personal details and start the journey with us</p>
+                                    <button className="ghost" onClick={togglePanel}id="signUp">Sign Up</button>
                                 </>
                             )}
                         </div>
