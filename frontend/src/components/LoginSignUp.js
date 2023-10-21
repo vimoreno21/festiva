@@ -73,10 +73,10 @@ function LoginSignUp() {
   };
 
   return (
-    <Container style={{  backgroundColor: 'transparent', border: 'none', maxWidth: '768px', padding: 0, margin: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightblue', border: '2px solid blue'}}>
-      <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container" style={{backgroundColor: 'lightgreen', border: '2px solid green'}}>
-        <Row>
-          <Col md={6} className="form-container sign-up-container">
+    <Container style={{  backgroundColor: 'transparent', border: 'none', maxWidth: '768px', padding: 0, margin: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightblue', border: '2px solid blue',  width: '100%'}}>
+      <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container" style={{backgroundColor: 'lightgreen', border: '2px solid green',  padding: 0, margin: 0,  maxWidth: '90%'}}>
+        <Row style={{ zIndex: 1 }}>
+          <Col md={6} className="form-container sign-up-container" style={{backgroundColor: 'pink', border: '2px solid pink', padding: 0, margin: 0, maxWidth: '50%'}}>
             <form onSubmit={doSignup}>
               <h1>Create Account</h1>
               <input type="text" className="form-control" placeholder="Name" ref={(c) => (signUpName = c)} />
@@ -90,7 +90,7 @@ function LoginSignUp() {
               </span>
             </form>
           </Col>
-          <Col md={6} className="form-container sign-in-container">
+          <Col md={6} className="form-container sign-in-container" style={{backgroundColor: 'purple', border: '2px solid purple', padding: 0, margin: 0, maxWidth: '50%'}}>
             <form onSubmit={doLogin}>
               <h1>Sign in</h1>
               <input type="email" className="form-control" placeholder="Email" ref={(c) => (loginEmail = c)} />
@@ -105,7 +105,7 @@ function LoginSignUp() {
             </form>
           </Col>
         </Row>
-        <div className="overlay-container">
+        <div className="overlay-container" style={{zIndex: 0}}>
           <div className="overlay">
             <div className={`overlay-panel ${isSignUp ? 'overlay-left' : 'overlay-right'}`}>
               {isSignUp ? (

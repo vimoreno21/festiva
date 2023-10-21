@@ -121,17 +121,10 @@ input {
 	min-height: 480px;
 }
 
-@media (max-width: 768px) {
-	.container {
-	  width: 100%; /* Full width for smaller screens */
-	}
-}
 
-@media (min-width: 768px) {
-	.container {
-	  max-width: 768px; /* Set a maximum width for larger screens */
-	}
-  }
+.full-width {
+    width: 100%;
+}
 
 .form-container {
 	position: absolute;
