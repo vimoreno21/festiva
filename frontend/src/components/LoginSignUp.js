@@ -73,8 +73,8 @@ function LoginSignUp() {
   };
 
   return (
-    <Container>
-      <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container">
+    <Container style={{  backgroundColor: 'transparent', border: 'none', maxWidth: '768px', padding: 0, margin: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightblue', border: '2px solid blue'}}>
+      <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container" style={{backgroundColor: 'lightgreen', border: '2px solid green'}}>
         <Row>
           <Col md={6} className="form-container sign-up-container">
             <form onSubmit={doSignup}>

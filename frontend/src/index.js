@@ -4,12 +4,16 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Container, Row, Col } from 'reactstrap';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Container fluid>
+      <App />
+    </Container>
+    
   </React.StrictMode>
 );
 
