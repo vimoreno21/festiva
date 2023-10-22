@@ -11,7 +11,7 @@ body {
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
+	min-height: 100vh;
 	margin: -20px 0 50px;
 }
 
@@ -274,4 +274,73 @@ footer i {
 footer a {
     color: #3c97bf;
     text-decoration: none;
+}
+
+
+/* HomePage classes */
+.homepage_div {
+	background-color: #8CD9E4;
+	background-size: cover;
+	padding: 4rem;
+	height: 100%;
+}
+
+.img_style {
+	max-width: 24rem;
+	max-height: 24rem;
+	width: 100%;
+	height: auto;
+}
+
+.img_sizing {
+	width:30%;
+	height:30%;
+}
+
+.button_style {
+	background-color: #FF695c;
+	border-radius: 20px;
+	color:#222;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	margin-top: 10%;
+	padding: 12px 45px;
+	font-weight: bold;
+}
+
+.button_style:hover {
+	background-color: #ff796d;
+}
+
+@media (min-width: 768px) {
+	.md\:flex-col{
+		flex-direction: column !important;
+	}
+
+	.md\:flex-row{
+		flex-direction: row !important;
+	}
+
+
+}
+
+.items-center{
+	align-items: center;
+}
+
+.flex{
+	display: flex;
+}
+
+.flex-row{
+	flex-direction: row;
+}
+
+.flex-col{
+	flex-direction: column;
+}
+
+.flex-col-reverse{
+	flex-direction: column-reverse;
 }
