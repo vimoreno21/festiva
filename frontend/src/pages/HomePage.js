@@ -29,7 +29,7 @@ const HomePage = () => {
 
             <div className='d-flex flex-column align-items-center justify-content-center w-50'>
                 <img src={QrCodeImg} alt='qr code' className='img_sizing'/>
-                <Link to='./LoginPage.js' className='button_style text-decoration-none'>
+                <Link to='./StartPage.js' className='button_style text-decoration-none'>
                    Get started
                 </Link>
             </div>
