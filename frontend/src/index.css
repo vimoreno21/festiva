@@ -344,3 +344,107 @@ footer a {
 .flex-col-reverse{
 	flex-direction: column-reverse;
 }
+
+
+/* HomePage classes */
+.homepage_div {
+	background-color: #8CD9E4;
+	background-size: cover;
+	padding: 4rem;
+	height: 100%;
+}
+
+.img_style {
+	max-width: 24rem;
+	max-height: 24rem;
+	width: 100%;
+	height: auto;
+}
+
+.img_sizing {
+	width:30%;
+	height:30%;
+}
+
+.button_style {
+	background-color: #FF695c;
+	border-radius: 20px;
+	color:#222;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	margin-top: 10%;
+	padding: 12px 45px;
+	font-weight: bold;
+}
+
+.button_style:hover {
+	background-color: #ff796d;
+}
+
+@media (min-width: 768px) {
+	.md\:flex-col{
+		flex-direction: column !important;
+	}
+
+	.md\:flex-row{
+		flex-direction: row !important;
+	}
+
+}
+
+.items-center{
+	align-items: center;
+}
+
+.flex{
+	display: flex;
+}
+
+.flex-row{
+	flex-direction: row;
+}
+
+.flex-col{
+	flex-direction: column;
+}
+
+.flex-col-reverse{
+	flex-direction: column-reverse;
+}
+
+
+
+   /* NavigationBar.css */
+.navbar {
+	margin-top: 120px;
+	background-color: none; /* Set your desired background color */
+	color: #fff;
+	position: fixed; /* Make the navigation bar fixed at the top */
+	width: 100%; /* Make the navigation bar full-width */
+	z-index: 100; /* Ensure it's on top of other content */
+	text-align: right; /* Align the text (list items) to the right */
+  }
+  
+  .navbar-list {
+	list-style: none;
+	padding: 0; /* Set padding to 0 to control spacing between items */
+	text-align: right;
+  }
+  
+  .navbar-item {
+	display: inline-block; /* Display list items inline next to each other */
+	margin-right: 10px; /* Add margin to control spacing between items, adjust as needed */
+  }
+  
+  .navbar-link {
+	text-decoration: none;
+	color: #000000; /* Set your desired text color */
+	font-weight: bold;
+	font-size: 20px;
+  }
+  
+  .navbar-link:hover {
+	text-decoration: underline;
+  }
+  
