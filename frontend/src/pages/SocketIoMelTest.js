@@ -1,35 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import {io} from 'socket.io-client'
-
-const socket = io("http://localhost:8080");
-console.log(socket)
-
-// will listen to any event (socket.on)
-socket.on('connect', () => {
-    console.log(`You connected with id: ${socket.id}`)
-})
-
-// example useless event
-// take any event and send it to the server (socket.emit)
-socket.emit('custom-e', 110, 'yo', {a:'a'})
+import React, { useState } from 'react'
 
 const SocketIoMelTest = () => {
-    
-    socket.on('receieve-message', message => {
-        console.log(message)
-    })
+
     const [inputMessage, setInputMessage] = useState("");
     const [room, setRoom] = useState("");
 
     const [showResults, setShowResults] = useState([]);
-
-    // url here is where server on backend for the sockets is running
-    // change this when commit?????
-    
-
     const onClickRoom = () => {
         if(room && room.trim()){
-            setShowResults(prev => [room, ...prev]);
+            setShowResults(prev => [...prev, room]);
             setRoom('');
          }
     }
@@ -38,10 +17,9 @@ const SocketIoMelTest = () => {
     const [showMessage, setShowMessage] = useState([]);
     const onClickSend = () => {
         if(inputMessage && inputMessage.trim()){
-           setShowMessage(prev => [inputMessage, ...prev]);
+           setShowMessage(prev => [...prev, inputMessage]);
            setInputMessage('');
         }
-        socket.emit('send-message', inputMessage)
     }
 
 
