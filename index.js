@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { instrument } = require('@socket.io/admin-ui')
 const http = require('http');
 const { Server } = require('socket.io')
 
@@ -24,14 +25,10 @@ const io = new Server(serverGame, {
 // runs every single time the client connects to our server
 // gives socket instance for every one of them
 io.on('connection', socket => {
-    console.log(socket.id)
+
+    console.log(`user connected with id: ${socket.id}`)
+
     socket.on('send-message', (message, room) => {
-        // console.log(message)
-
-        // sends message to all other clients (including the one that made the request in the first place)
-        //, every other socket out there
-        // io.emit('receieve-message', message)
-
         if (room === '') {
             // take current socket, and from that socket, broadcast message to 
             // every socket that is not the current one
@@ -47,14 +44,16 @@ io.on('connection', socket => {
     socket.on('join-room', room => {
         // join room
         socket.join(room)
+        console.log(`user with ID: ${socket.id} joined room: ${room}`)
     })
 
     socket.on('disconnect', () => {
-        console.log('User disconnected', socket.id)
+        console.log('user disconnected', socket.id)
     })
 })
 
-
+// socket.io admin ui
+instrument(io, { auth: false })
 
 app.use(cors());
 app.use(bodyParser.json());
