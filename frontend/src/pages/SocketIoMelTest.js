@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 
 // will listen to any event (socket.on)
-// socket.on('connect', () => {
-//     console.log(`You connected with id: ${socket.id}`)
-// })
 
 // example useless event
 // take any event and send it to the server (socket.emit)
@@ -20,11 +17,7 @@ const SocketIoMelTest = ({socket}) => {
     const [room, setRoom] = useState("");
 
     const [showResults, setShowResults] = useState([]);
-
-    // url here is where server on backend for the sockets is running
-    // change this when commit?????
     
-
     const onClickRoom = () => {
         if(room && room.trim()){
             setShowResults(prev => [room, ...prev]);
