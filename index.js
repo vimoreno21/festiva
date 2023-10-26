@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { Server } = require('socket.io')
 
 require('./database/database');
 
@@ -10,29 +11,41 @@ const path = require('path');
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-
-
-
 // socket.io
-
-//idk if this port is right...
-const ioPort = process.env.PORT || 8080;
-const io = require('socket.io')(ioPort, {
+const serverGame = http.createServer(app);
+const io = new Server(serverGame, {
     cors: {
-        origin: ['http://localhost:3000']
+      origin: "*",
+      methods: ["GET", "POST", "DELETE", "PUT"],
     }
-});
+})
 
 // runs every single time the client connects to our server
-//gives socket instance for every one of them
+// gives socket instance for every one of them
 io.on('connection', socket => {
     console.log(socket.id)
-    socket.on('send-message', (message) => {
-        console.log(message)
+    socket.on('send-message', (message, room) => {
+        // console.log(message)
 
         // sends message to all other clients (including the one that made the request in the first place)
         //, every other socket out there
-        io.emit('receieve-message', message)
+        // io.emit('receieve-message', message)
+
+        if (room === '') {
+            // take current socket, and from that socket, broadcast message to 
+            // every socket that is not the current one
+            socket.broadcast.emit('receieve-message', message)
+        }
+        // if we do have a room, send message just to that room
+        else {
+            // .to already sends to everyone except yourself like broadcast does :)
+            socket.to(room).emit('receieve-message', message)
+        }
+    })
+
+    socket.on('join-room', room => {
+        // join room
+        socket.join(room)
     })
 })
 

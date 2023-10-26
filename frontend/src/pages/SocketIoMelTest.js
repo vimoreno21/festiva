@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import {io} from 'socket.io-client'
 
-const socket = io("http://localhost:8080");
-console.log(socket)
 
 // will listen to any event (socket.on)
-socket.on('connect', () => {
-    console.log(`You connected with id: ${socket.id}`)
-})
+// socket.on('connect', () => {
+//     console.log(`You connected with id: ${socket.id}`)
+// })
 
 // example useless event
 // take any event and send it to the server (socket.emit)
-socket.emit('custom-e', 110, 'yo', {a:'a'})
+//socket.emit('custom-e', 110, 'yo', {a:'a'})
 
-const SocketIoMelTest = () => {
+const SocketIoMelTest = ({socket}) => {
     
     socket.on('receieve-message', message => {
-        console.log(message)
+        console.log("receieved message: ", message)
     })
+
     const [inputMessage, setInputMessage] = useState("");
     const [room, setRoom] = useState("");
 
@@ -30,7 +28,9 @@ const SocketIoMelTest = () => {
     const onClickRoom = () => {
         if(room && room.trim()){
             setShowResults(prev => [room, ...prev]);
-            setRoom('');
+            // telling server we want to join a room
+            socket.emit('join-room', room)
+            // setRoom('');
          }
     }
 
@@ -41,7 +41,8 @@ const SocketIoMelTest = () => {
            setShowMessage(prev => [inputMessage, ...prev]);
            setInputMessage('');
         }
-        socket.emit('send-message', inputMessage)
+        console.log("printing room: ", room)
+        socket.emit('send-message', inputMessage, room)
     }
 
 
