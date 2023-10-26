@@ -48,6 +48,10 @@ io.on('connection', socket => {
         // join room
         socket.join(room)
     })
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected', socket.id)
+    })
 })
 
 
@@ -87,7 +91,7 @@ const registerRouter = require('./api/register');
 app.use('/api/register', registerRouter);
 
 
-app.listen(PORT, () =>
+serverGame.listen(PORT, () => 
 {
     console.log('Server listening on port ' + PORT);
 }); 
