@@ -5,7 +5,7 @@ import NavBar from './components/NavBar';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 //import {io} from 'socket.io-client';
-import {io} from 'socket.io-client/dist/socket.io';
+import {io} from 'socket.io-client';
 import { Container, Row, Col } from 'reactstrap';
 import SocketIoMelTest from './pages/SocketIoMelTest';
 
