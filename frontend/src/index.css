@@ -416,20 +416,21 @@ footer a {
 
 
    /* NavigationBar.css */
-.navbar {
-	margin-top: 120px;
-	background-color: none; /* Set your desired background color */
-	color: #fff;
-	position: fixed; /* Make the navigation bar fixed at the top */
+.navbar_style {
+	position: absolute; /* Make the navigation bar fixed at the top */
 	width: 100%; /* Make the navigation bar full-width */
 	z-index: 100; /* Ensure it's on top of other content */
-	text-align: right; /* Align the text (list items) to the right */
+	justify-content: flex-start;
+	display: flex;
+	justify-items: around;
+	align-items: center;
+	padding: 2rem;
   }
   
   .navbar-list {
 	list-style: none;
-	padding: 0; /* Set padding to 0 to control spacing between items */
-	text-align: right;
+	/* padding: 0; Set padding to 0 to control spacing between items */
+	/* text-align: right; */
   }
   
   .navbar-item {
@@ -439,8 +440,8 @@ footer a {
   
   .navbar-link {
 	text-decoration: none;
-	color: #000000; /* Set your desired text color */
-	font-weight: bold;
+	color: #5E6472; /* Set your desired text color */
+	font-weight: normal;
 	font-size: 20px;
   }
   
@@ -448,3 +449,6 @@ footer a {
 	text-decoration: underline;
   }
   
+  .set_width {
+	width:65%;
+  }

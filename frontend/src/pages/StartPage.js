@@ -5,7 +5,7 @@ import LoginSignUp from '../components/LoginSignUp';
 const StartPage = () =>
 {
     return(
-        <div className="container-fluid center-content">
+        <div className="center-content">
         <PageTitle />
         <LoginSignUp className="center-content"/>
         </div>
