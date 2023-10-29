@@ -9,7 +9,7 @@ const HomePage = () => {
     <div className="homepage_div">
         <div className="flex flex-col-reverse md:flex-row items-center justify-content-between mb-4">
             <SvgUndraw className='img_style'/>
-            <div className='d-flex flex-column w-50'>
+            <div className='mx-5 d-flex flex-column w-75'>
                 <p className="h3 text-start fw-bold">The game:</p>
                 <p className='fs-5 text-start fw-normal '>Unleash the fun with Festiva! Dive into a whirlwind of hilarious prompts, witty comebacks, and unforgettable party moments.
                     Perfect for friends, family, and every festivity in between. Let the games begin!</p>

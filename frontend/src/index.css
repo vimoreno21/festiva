@@ -12,7 +12,8 @@ body {
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	min-height: 100vh;
-	margin: -20px 0 50px;
+	/* margin: -20px 0 50px; */
+	/* padding-top: 100px; */
 }
 
 #root {
@@ -309,8 +310,28 @@ footer a {
 	font-weight: bold;
 }
 
+.button_style2 {
+	background-color: #a7ce87;
+	border-radius: 20px;
+	color:#222;
+	margin-top: 10px;
+	padding: 12px 45px;
+	font-weight: bold;
+	border-color:#a7ce87;
+	text-align: center;
+}
+
 .button_style:hover {
 	background-color: #ff796d;
+}
+
+.button_style:focus {
+	text-decoration: underline;
+}
+
+.button_style2:hover {
+	background-color:#b4de91;
+	border-color:#b4de91;
 }
 
 @media (min-width: 768px) {
@@ -322,7 +343,14 @@ footer a {
 		flex-direction: row !important;
 	}
 
+	.small_screen {
+		width:50%;
+	}
 
+}
+
+.bg-nav {
+	background-color: #FF695c;
 }
 
 .items-center{
@@ -374,7 +402,7 @@ footer a {
 	display: flex;
 	align-items: center;
 	margin-top: 10%;
-	padding: 12px 45px;
+	padding: 12px 30px;
 	font-weight: bold;
 }
 
@@ -413,34 +441,33 @@ footer a {
 	flex-direction: column-reverse;
 }
 
+.set_back {
+	background-color: #FF695C;
+}
 
 
    /* NavigationBar.css */
 .navbar_style {
 	position: absolute; /* Make the navigation bar fixed at the top */
-	width: 100%; /* Make the navigation bar full-width */
-	z-index: 100; /* Ensure it's on top of other content */
-	justify-content: flex-start;
+	justify-content:space-around;
 	display: flex;
-	justify-items: around;
-	align-items: center;
+	width:100%;
 	padding: 2rem;
+	top:0px;
+	align-items: center;
   }
   
   .navbar-list {
 	list-style: none;
-	/* padding: 0; Set padding to 0 to control spacing between items */
-	/* text-align: right; */
   }
   
   .navbar-item {
 	display: inline-block; /* Display list items inline next to each other */
-	margin-right: 10px; /* Add margin to control spacing between items, adjust as needed */
   }
   
   .navbar-link {
 	text-decoration: none;
-	color: #5E6472; /* Set your desired text color */
+	color: black; /* Set your desired text color */
 	font-weight: normal;
 	font-size: 20px;
   }
@@ -449,6 +476,36 @@ footer a {
 	text-decoration: underline;
   }
   
-  .set_width {
-	width:65%;
+  .set_z {
+	z-index: 105;
   }
+  .set_width {
+	width:40%;
+  }
+
+  .pick_game_style {
+	background-color:#f7c6d1;
+	background-size: cover;
+	height: 100vh;
+	width: 100vw;
+  }
+
+  .div_style {
+	margin-top:100px;
+	align-items: center;
+  }
+
+  .set_color {
+	background-color: #fb8b81;
+  }
+
+  .set_color:hover {
+	background-color: #fba8a1;
+  }
+
+ .wait_play_style {
+	background-color:#B4E091;
+	background-size: cover;
+	height: 100vh;
+	width: 100vw;
+ }
