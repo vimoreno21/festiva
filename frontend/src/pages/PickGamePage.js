@@ -23,16 +23,11 @@ const onPlayGame = () => {
 }
 
   return (
-    <section className='pick_game_style'>
+    <>
+    <div className='pick_game_style container-p'>
         
-        <div className='d-flex flex-row'>
-            <div className='w-50 div_style p-5 d-flex flex-column'>
-                <div className='w-75 h-100 set_back fs-3 rounded text-center justify-content-center d-flex'>
-                    <button value={game} onClick={onClickGame} className='button_style border h-25 border-light set_color text-nowrap fs-5'>Fill in the Blank</button>
-                </div>
-                <Link to='/waitToPlayGame' onClick={onPlayGame} className='button_style2 w-50 text-decoration-none'>Play Now</Link>
-            </div>
-            <div className='w-75 div_style d-flex flex-col p-5'>
+        <div className='flex flex-col md:flex-row justify-around'>
+            <div className='md:w-50 div_style flex flex-col'>
                 
                 <p className='fs-2 fw-bold'> <GiPartyPopper/> Step 1: Pick A Game <GiPartyPopper/></p>
                 <div className='border border-dark p-4'>
@@ -49,8 +44,16 @@ const onPlayGame = () => {
                 </div>
 
             </div>
+            <div className='md:w-50 div_style flex flex-col'>
+                <div className='w-75 h-100 set_back fs-3 rounded text-center justify-content-center flex'>
+                    <button value={game} onClick={onClickGame} className='button_style border h-25 border-light set_color text-nowrap fs-5'>Fill in the Blank</button>
+                </div>
+                <Link to='/waitToPlayGame' onClick={onPlayGame} className='button_style2 w-50 text-decoration-none'>Play Now</Link>
+            </div>
+
         </div>
-    </section>
+    </div>
+    </>
   )
 }
 
