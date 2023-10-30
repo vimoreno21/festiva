@@ -7,13 +7,8 @@
 body {
 	background: #f6f5f7;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	min-height: 100vh;
-	/* margin: -20px 0 50px; */
-	/* padding-top: 100px; */
 }
 
 #root {
@@ -21,6 +16,40 @@ body {
 	padding: 0;  /* Remove any padding to ensure full width */
 	margin: 0;   /* Remove any margin to ensure full width */
 }
+
+@media (max-width: 640px) {
+	.container-p{
+		padding: 1rem;
+	}
+
+}
+
+@media (min-width: 640px) {
+	.container-p{
+		padding: 1.5rem;
+	}
+
+}
+
+@media (min-width: 768px) {
+	.container-p{
+		padding: 2rem;
+	}
+
+}
+@media (min-width: 1024px) {
+	.container-p{
+		padding: 2.5rem;
+	}
+
+}
+@media (min-width: 1280px) {
+	.container-p{
+		padding: 3rem;
+	}
+
+}
+
 
 .center-content {
 	display: flex;
@@ -282,7 +311,6 @@ footer a {
 .homepage_div {
 	background-color: #8CD9E4;
 	background-size: cover;
-	padding: 4rem;
 	height: 100%;
 }
 
@@ -347,6 +375,10 @@ footer a {
 		width:50%;
 	}
 
+	.md\:w-50{
+		width: 50%;
+	}
+
 }
 
 .bg-nav {
@@ -378,7 +410,6 @@ footer a {
 .homepage_div {
 	background-color: #8CD9E4;
 	background-size: cover;
-	padding: 4rem;
 	height: 100%;
 }
 
@@ -402,7 +433,6 @@ footer a {
 	display: flex;
 	align-items: center;
 	margin-top: 10%;
-	padding: 12px 30px;
 	font-weight: bold;
 }
 
@@ -448,7 +478,7 @@ footer a {
 
    /* NavigationBar.css */
 .navbar_style {
-	position: absolute; /* Make the navigation bar fixed at the top */
+	/* position: absolute; Make the navigation bar fixed at the top */
 	justify-content:space-around;
 	display: flex;
 	width:100%;
@@ -486,8 +516,7 @@ footer a {
   .pick_game_style {
 	background-color:#f7c6d1;
 	background-size: cover;
-	height: 100vh;
-	width: 100vw;
+	min-height: 100%;
   }
 
   .div_style {
@@ -506,6 +535,5 @@ footer a {
  .wait_play_style {
 	background-color:#B4E091;
 	background-size: cover;
-	height: 100vh;
-	width: 100vw;
+	min-height:100%;
  }

@@ -1,14 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, resolvePath } from 'react-router-dom'; // Import Link from react-router-dom
 import festivaImg from '../images/Festiva.png'
 import { Sling as Hamburger} from 'hamburger-react'
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function NavBar() {
+
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+
+  const backgrounds = {
+    '/': '#8CD9E4',
+    '/pickgame': '#f7c6d1', 
+    '/waitToPlayGame': '#B4E091'
+  }
 
   return (
-    <nav className="navbar_style align-middle py-3 ">
+    <nav style={{backgroundColor: backgrounds[location.pathname]}} className={"navbar_style align-middle py-3 "}>
 
       <ul className="w-75 d-flex flex-row justify-content-start">
         <li className="navbar-item">
@@ -40,10 +49,10 @@ function NavBar() {
 
             <ul className="position-fixed bg-nav rounded text-center list-unstyled p-1 set_z">
                 <li className='py-4 px-2'>
-                    <Link href="#" className='text-dark navbar-link'>About Us</Link>
+                    <Link to="/about" className='text-dark navbar-link'>About Us</Link>
                 </li>
                 <li className='py-4 px-2'> 
-                    <Link href="#" className='text-dark navbar-link'>Start</Link>
+                    <Link to="/start" className='text-dark navbar-link'>Start</Link>
                 </li>
             </ul>
         }

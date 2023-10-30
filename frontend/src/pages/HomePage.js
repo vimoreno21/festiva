@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const HomePage = () => {
   return (
-    <div className="homepage_div">
+    <div className="homepage_div container-p">
         <div className="flex flex-col-reverse md:flex-row items-center justify-content-between mb-4">
             <SvgUndraw className='img_style'/>
             <div className='mx-5 d-flex flex-column w-75'>
