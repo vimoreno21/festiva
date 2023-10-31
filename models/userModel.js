@@ -13,6 +13,10 @@ const userSchema = mongoose.Schema({
         type: String, 
         require: true
     },
+    verified: {
+        type: Boolean,
+        require: true
+    },
     avatar: {
         type: String 
     }, 
