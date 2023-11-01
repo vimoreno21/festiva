@@ -46,7 +46,7 @@ const onPlayGame = () => {
             </div>
             <div className='md:w-50 div_style flex flex-col'>
                 <div className='w-75 h-100 set_back fs-3 rounded text-center justify-content-center flex'>
-                    <button value={game} onClick={onClickGame} className='button_style border h-25 border-light set_color text-nowrap fs-5'>Fill in the Blank</button>
+                    <button value={game} onClick={onClickGame} className='button_style border h-25 border-light set_color text-nowrap fs-5'>Quizoot</button>
                 </div>
                 <Link to='/waitToPlayGame' onClick={onPlayGame} className='button_style2 w-50 text-decoration-none'>Play Now</Link>
             </div>

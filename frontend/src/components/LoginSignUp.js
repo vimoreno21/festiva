@@ -54,6 +54,8 @@ function LoginSignUp() {
       name: signUpName.value,
       email: signUpEmail.value,
       password: signUpPassword.value,
+      verified: false,
+      avatar: ''
     };
     let jsonBody = JSON.stringify(obj);
 

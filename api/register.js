@@ -6,9 +6,9 @@ router.post('/', (req, res) => {
 
     // incoming: name, email, password, avatar
     // outgoing: result
-    const { name, email, password, avatar } = req.body;
+    const { name, email, password, verified, avatar } = req.body;
     const new_user = new User({
-        name: name, email: email, password: password, avatar: avatar
+        name: name, email: email, password: password, verified: verified, avatar: avatar
     })
 
     new_user.save()
