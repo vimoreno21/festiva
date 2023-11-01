@@ -11,7 +11,7 @@ import { Container, Row, Col } from 'reactstrap';
 import SocketIoMelTest from './pages/SocketIoMelTest';
 
 const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
-// const socket = io.connect("http://localhost:5000");
+//const socket = io.connect("http://localhost:5000");
 // console.log(socket)
 
 function App() {
