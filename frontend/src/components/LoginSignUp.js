@@ -35,12 +35,11 @@ function LoginSignUp() {
       if (res.id <= 0) {
         setMessage('User/Password combination incorrect');
       } else {
-        let user = { email: res.email, _id: res._id };
+        let user = { email: res.email, name:res.name, _id: res.id };
+        console.log(user)
         localStorage.setItem('user_data', JSON.stringify(user));
         setMessage('we did it!');
         navigate('/pickgame')
-
-        // window.location.href = '/cards';
       }
     } catch (e) {
       alert(e.toString());

@@ -22,7 +22,7 @@ router.post('/', async (req, res) =>
     avatar = results[0].avatar;
   }
 
-  let ret = { id:id, name:name, avatar:avatar, error:''};
+  let ret = { id:id, name:name, email:email, avatar:avatar, error:''};
   res.status(200).json(ret);
 
 });
