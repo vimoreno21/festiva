@@ -1,16 +1,17 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import StartPage from './pages/StartPage';
-import NavBar from './components/NavBar';
-import AboutPage from './pages/AboutPage';
-import HomePage from './pages/HomePage';
-import PickGamePage from './pages/PickGamePage';
-import WaitPlayGame from './pages/WaitPlayGame';
-import io from 'socket.io-client';
-import { Container, Row, Col } from 'reactstrap';
-import SocketIoMelTest from './pages/SocketIoMelTest';
-import QuestionDisplayPage from './pages/QuestionDisplayPage';
-import QuizGameLibraryPage from './pages/QuizGameLibraryPage';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import StartPage from "./pages/StartPage";
+import NavBar from "./components/NavBar";
+import AboutPage from "./pages/AboutPage";
+import HomePage from "./pages/HomePage";
+import PickGamePage from "./pages/PickGamePage";
+import WaitPlayGame from "./pages/WaitPlayGame";
+import io from "socket.io-client";
+import { Container, Row, Col } from "reactstrap";
+import SocketIoMelTest from "./pages/SocketIoMelTest";
+import QuestionDisplayPage from "./pages/QuestionDisplayPage";
+import QuizGameLibraryPage from "./pages/QuizGameLibraryPage";
+import EmailVerify from "./components/EmailVerify/index";
 
 const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
 //const socket = io.connect("http://localhost:5000");
@@ -19,19 +20,20 @@ const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
 function App() {
   return (
     <BrowserRouter>
-      <NavBar/>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/start" element={<StartPage />} />
-          <Route path="/pickgame" element={<PickGamePage />} />
-          <Route path="/waitToPlayGame" element={<WaitPlayGame />} />
-          <Route path="/questionDisplay" element={<QuestionDisplayPage/>}/>
-          <Route path="/quizGameLibrary" element={<QuizGameLibraryPage/>}/>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/start" element={<StartPage />} />
+        <Route path="/pickgame" element={<PickGamePage />} />
+        <Route path="/waitToPlayGame" element={<WaitPlayGame />} />
+        <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+        <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
+        <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
 
-          {/* ignore this route im just using it for testing displaying socket stuff on frontend -melanie */}
-          <Route path="/socketio" element={<SocketIoMelTest socket={socket}/>} />
-        </Routes>
+        {/* ignore this route im just using it for testing displaying socket stuff on frontend -melanie */}
+        <Route path="/socketio" element={<SocketIoMelTest socket={socket} />} />
+      </Routes>
     </BrowserRouter>
   );
 }
