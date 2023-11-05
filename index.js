@@ -89,6 +89,9 @@ app.use('/api/login', loginRouter);
 const registerRouter = require('./api/register');
 app.use('/api/register', registerRouter);
 
+//const createQuizRouter = require('./api/createQuiz');
+//app.use('/api/createQuiz', createQuizRouter);
+
 
 serverGame.listen(PORT, () => 
 {
