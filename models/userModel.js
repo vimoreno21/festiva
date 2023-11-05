@@ -6,16 +6,20 @@ const userSchema = mongoose.Schema({
     }, 
     email: { 
         type: String, 
-        unique: true,
+        unique: false,
         require: true
     }, 
     password: { 
         type: String, 
         require: true
     },
+    verified: {
+        type: Boolean,
+        require: true,
+    },
     avatar: {
         type: String 
-    }, 
+    },
     friend_ids: [{ type : mongoose.Types.ObjectId, ref: 'User' }]
 }, { collection: 'users' });
 
