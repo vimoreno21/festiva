@@ -1,10 +1,8 @@
 const express = require('express');
+const router = express.Router();
 const Quiz = require('../models/quizModel')
 
 router.post('/', async (req, res) => {
-
-    // incoming: name, email, password, avatar
-    // outgoing: result
 
     const { owner_id, quiz_name, quiz_description, number_of_questions, q_and_a} = req.body;
     const new_quiz = new Quiz({
@@ -22,3 +20,5 @@ router.post('/', async (req, res) => {
 
 
 })
+
+module.exports = router ;
