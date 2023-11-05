@@ -16,7 +16,9 @@ const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
 //const socket = io.connect("http://localhost:5000");
 // console.log(socket)
 
+
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -38,9 +40,9 @@ function App() {
         <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
         <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
 
-        {/* ignore this route im just using it for testing displaying socket stuff on frontend -melanie */}
-        <Route path="/socketio" element={<SocketIoMelTest socket={socket} />} />
-      </Routes>
+          {/* ignore this route im just using it for testing displaying socket stuff on frontend -melanie */}
+          <Route path="/socketio" element={<SocketIoMelTest socket={socket}/>} />
+        </Routes>
     </BrowserRouter>
   );
 }
