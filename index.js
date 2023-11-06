@@ -92,6 +92,18 @@ app.use('/api/register', registerRouter);
 const createQuizRouter = require('./api/createQuiz');
 app.use('/api/createQuiz', createQuizRouter);
 
+const searchPremadeQuizRouter = require('./api/searchPremadeQuiz');
+app.use('/api/searchPremadeQuiz', searchPremadeQuizRouter);
+
+const searchUserQuizRouter = require('./api/searchUserQuiz');
+app.use('/api/searchUserQuiz', searchUserQuizRouter);
+
+const getPremadeQuizzesRouter = require('./api/getPremadeQuizzes');
+app.use('/api/getPremadeQuizzes', getPremadeQuizzesRouter);
+
+const getUserQuizzesRouter = require('./api/getUserQuizzes');
+app.use('/api/getUserQuizzes', getUserQuizzesRouter);
+
 
 serverGame.listen(PORT, () => 
 {
