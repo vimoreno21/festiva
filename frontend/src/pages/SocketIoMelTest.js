@@ -9,9 +9,9 @@ import React, { useState, useEffect } from 'react'
 
 const SocketIoMelTest = ({socket}) => {
     
-    socket.on('receieve-message', message => {
-        console.log("receieved message: ", message)
-    })
+    // socket.on('receieve-message', message => {
+    //     console.log("receieved message: ", message)
+    // })
 
     const [inputMessage, setInputMessage] = useState("");
     const [room, setRoom] = useState("");
@@ -39,10 +39,79 @@ const SocketIoMelTest = ({socket}) => {
     }
 
 
+    const [game, setGame] = useState({
+        id: '',
+        users: {}
+    });
+
+    const [nickname, setNickname] = useState('')
+
+    useEffect(() => {
+        socket.on('receieve-users', newGame => {
+            console.log("users arr on fronten", newGame)
+            setGame(newGame);
+        })
+
+    }, [socket])
+
   return (
     <>
+
+        <div className='flex flex-col w-25'>
+
+            <p>users: {Object.keys(game.users).length} in game {game.id ? game.id : 'NULL'}</p>
+            <ul>
+                {
+                    Object.keys(game.users)?.map( u => 
+                        <li key={u}>{game.users[u]}</li>
+                    )
+                }
+            </ul>
+
+
+            <input 
+                type='text'
+                value={game.id}
+                onChange={e => setGame(prev => ({...prev, id: e.target.value}))}
+            />
+
+            <button 
+                style={{backgroundColor: 'blue'}}
+                className='my-2'
+                onClick={() => {
+                    socket.emit('create-game', game);
+                }}
+            >
+                create game
+            </button>
+
+            <button
+                className='my-2'
+                onClick={() => {
+                    socket.emit('join-game', game, nickname);
+                }}
+            >
+                JOIN GAME ID is {game.id}, nickname {nickname}
+            </button>
+
+            <p>Enter nickname below:</p>
+            <input 
+                type='text' 
+                value={nickname}
+                onChange={e => setNickname(e.target.value)}
+            />
+
+            {/* <div>
+                {
+                    users.map((n) =>
+                    <li>{n}</li>
+                    )
+                }  
+            </div>  */}
+        </div>
         
         <form>
+
 
             <label htmlFor={'messageId'}>Message</label>
             <input 

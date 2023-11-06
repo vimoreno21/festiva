@@ -1,14 +1,14 @@
 import React from 'react';
-import PageTitle from '../components/PageTitle';
 import LoginSignUp from '../components/LoginSignUp';
 
 const StartPage = () =>
 {
     return(
-        <div className="center-content">
-        <PageTitle />
+        <div className="startpage_div container-p center-content">
         <LoginSignUp className="center-content"/>
         </div>
     );
 };
 export default StartPage;
+
+

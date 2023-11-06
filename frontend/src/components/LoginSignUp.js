@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import { useNavigate } from "react-router-dom";
 
 function LoginSignUp() {
@@ -35,12 +35,11 @@ function LoginSignUp() {
       if (res.id <= 0) {
         setMessage('User/Password combination incorrect');
       } else {
-        let user = { email: res.email, _id: res._id };
+        let user = { email: res.email, name:res.name, _id: res.id };
+        console.log(user)
         localStorage.setItem('user_data', JSON.stringify(user));
         setMessage('we did it!');
         navigate('/pickgame')
-
-        // window.location.href = '/cards';
       }
     } catch (e) {
       alert(e.toString());
@@ -79,16 +78,15 @@ function LoginSignUp() {
   };
 
   return (
-    // <Container style={{  backgroundColor: 'transparent', border: 'none', maxWidth: '768px', padding: 0, margin: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightblue', border: '2px solid blue',  width: '100%'}}>
-      <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container" style={{backgroundColor: 'lightgreen', border: '2px solid green',  padding: 0, margin: 0,  maxWidth: '90%'}}>
+      <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container" style={{ border: '2px solid #8CD9E4', padding: 0, margin: 0,  maxWidth: '85%'}}>
         <Row style={{ zIndex: 1 }}>
-          <Col md={6} className="form-container sign-up-container" style={{backgroundColor: 'pink', border: '2px solid pink', padding: 0, margin: 0, maxWidth: '50%'}}>
+          <Col md={6} className="form-container sign-up-container" style={{ padding: 0, margin: 0, maxWidth: '50%'}}>
             <form onSubmit={doSignup}>
               <h1>Create Account</h1>
               <input type="text" className="form-control mt-3" placeholder="Name" ref={(c) => (signUpName = c)} />
               <input type="email" className="form-control mt-3" placeholder="Email" ref={(c) => (signUpEmail = c)} />
               <input type="password" className="form-control mt-3" placeholder="Password" ref={(c) => (signUpPassword = c)} />
-              <button className="btn btn-primary mt-3" type="submit">
+              <button className="button_style" type="submit">
                 Sign Up
               </button>
               <span className="text-danger" id="signInResult">
@@ -96,13 +94,13 @@ function LoginSignUp() {
               </span>
             </form>
           </Col>
-          <Col md={6} className="form-container sign-in-container" style={{backgroundColor: 'purple', border: '2px solid purple', padding: 0, margin: 0, maxWidth: '50%'}}>
+          <Col md={6} className="form-container sign-in-container" style={{padding: 0, margin: 0, maxWidth: '50%'}}>
             <form onSubmit={doLogin}>
               <h1>Sign in</h1>
               <input type="email" className="form-control mt-3" placeholder="Email" ref={(c) => (loginEmail = c)} />
               <input type="password" className="form-control mt-3" placeholder="Password" ref={(c) => (loginPassword = c)} />
               <p onClick={togglePanel} className='mt-3'>Forgot your password?</p>
-              <button className="btn btn-primary mt-3" type="submit">
+              <button className="button_style" type="submit">
                 Sign In
               </button>
               <span className="text-danger" id="loginResult">
@@ -117,16 +115,17 @@ function LoginSignUp() {
               {isSignUp ? (
                 <>
                   <h1>Welcome Back!</h1>
-                  <p>To keep connected with us please login with your personal info</p>
-                  <button className="btn btn-secondary ghost mt-5" onClick={togglePanel} id="signIn">
+                  <p>Already have an account? Please login with your personal info</p>
+                  <button className="button_style" onClick={togglePanel} id="signIn">
                     Sign In
                   </button>
                 </>
               ) : (
                 <>
                   <h1>Hello, Friend!</h1>
+                  <p>Don't have an account? </p>
                   <p>Enter your personal details and start the journey with us</p>
-                  <button className="btn btn-secondary ghost mt-5" onClick={togglePanel} id="signUp">
+                  <button className="button_style" onClick={togglePanel} id="signUp">
                     Sign Up
                   </button>
                 </>
@@ -135,7 +134,6 @@ function LoginSignUp() {
           </div>
         </div>
       </div>
-    // </Container>
   );
 }
 
