@@ -9,6 +9,8 @@ import WaitPlayGame from './pages/WaitPlayGame';
 import io from 'socket.io-client';
 import { Container, Row, Col } from 'reactstrap';
 import SocketIoMelTest from './pages/SocketIoMelTest';
+import QuestionDisplayPage from './pages/QuestionDisplayPage';
+import QuizGameLibraryPage from './pages/QuizGameLibraryPage';
 
 const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
 //const socket = io.connect("http://localhost:5000");
@@ -24,6 +26,8 @@ function App() {
           <Route path="/start" element={<StartPage />} />
           <Route path="/pickgame" element={<PickGamePage />} />
           <Route path="/waitToPlayGame" element={<WaitPlayGame />} />
+          <Route path="/questionDisplay" element={<QuestionDisplayPage/>}/>
+          <Route path="/quizGameLibrary" element={<QuizGameLibraryPage/>}/>
 
           {/* ignore this route im just using it for testing displaying socket stuff on frontend -melanie */}
           <Route path="/socketio" element={<SocketIoMelTest socket={socket}/>} />
