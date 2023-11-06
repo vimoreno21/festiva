@@ -66,8 +66,8 @@ function LoginSignUp() {
       });
 
       let res = await response.json();
-      if (res.message === 'Created account successfully!') {
-        setResultSignUp('Created new user!');
+      if (res.message === 'Created account successfully! An Email has been sent to your account, please verify to login.') {
+        setResultSignUp('Created account successfully! An Email has been sent to your account, please verify to login.');
       } else {
         setResultSignUp('Error creating account.');
       }

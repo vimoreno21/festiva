@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
     }, 
     email: { 
         type: String, 
-        unique: true,
+        unique: false,
         require: true
     }, 
     password: { 
@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     },
     avatar: {
         type: String 
-    }, 
+    },
     friend_ids: [{ type : mongoose.Types.ObjectId, ref: 'User' }]
 }, { collection: 'users' });
 
