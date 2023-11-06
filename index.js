@@ -17,7 +17,7 @@ const app = express();
 const serverGame = http.createServer(app);
 const io = new Server(serverGame, {
     cors: {
-      origin: ["http://localhost:3000", "https://admin.socket.io", "https://festiva-ucf-3a962394b6e7.herokuapp.com"],
+      origin: ["*"],
       methods: ["GET", "POST", "DELETE", "PUT"],
     }
 })
