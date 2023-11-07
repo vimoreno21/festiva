@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styles from "./styles.module.css";
 import { Fragment } from 'react';
-const verify = require('./LoginSignUp');
 
 const EmailVerify = () => {
 	const [validUrl, setValidUrl] = useState(true);
