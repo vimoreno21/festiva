@@ -7,6 +7,7 @@ import { Fragment } from 'react';
 const EmailVerify = () => {
 	const [validUrl, setValidUrl] = useState(true);
 	const param = useParams();
+	console.log(param);
 
 	useEffect(() => {
 		const verifyEmailUrl = async () => {
@@ -24,9 +25,9 @@ const EmailVerify = () => {
 			  
 					let res = await response.json();
 					if (res.message === 'Account verified successfully! You may close this window and log in.') {
-					  setResultSignUp('Account verified successfully! You may close this window and log in.');
+					  console.log("worked")
 					} else {
-					  setResultSignUp('Error Verifying account.');
+					  console.log("didnt work")
 					}
 				  } catch (e) {
 					alert(e.toString());
