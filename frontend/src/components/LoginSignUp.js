@@ -79,9 +79,8 @@ function LoginSignUp() {
 
   const doRegisterVerify = async (event) => {
 
-
     try {
-      const response = await fetch('/api/registerVerification/', {
+      const response = await fetch('/api/registerVerification/:id/verify/:token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
