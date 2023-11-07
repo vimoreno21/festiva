@@ -206,6 +206,9 @@ app.use('/api/login', loginRouter);
 const registerRouter = require('./api/register');
 app.use('/api/register', registerRouter);
 
+const registerVerificationRouter = require('./api/registerVerification');
+app.use('/api/registerVerification', registerVerificationRouter);
+
 const createQuizRouter = require('./api/createQuiz');
 app.use('/api/createQuiz', createQuizRouter);
 
