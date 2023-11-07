@@ -5,9 +5,9 @@ const Quiz = require('../models/quizModel')
 router.post('/', async (req, res) => {
 
     const name = req.body.quiz_name;
-    console.log(name)
+    const id = req.body._id
 
-    results = await Quiz.find({quiz_name: {$regex: name, $options: "i"}})
+    results = await Quiz.find({_id: id, quiz_name: {$regex: name, $options: "i"}})
 
     if (results.length > 0)
     {
