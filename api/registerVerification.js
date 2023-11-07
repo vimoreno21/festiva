@@ -3,6 +3,7 @@ const router = express.Router()
 const User = require('../models/userModel')
 
 router.post("/", async (req, res) => {
+    console.log("inside register verification!")
     try {
         console.log("inside register verification!")
         console.log(req.params);
