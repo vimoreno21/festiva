@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router()
 const User = require('../models/userModel')
 
-router.get("/:id/verify/:token", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         console.log("inside register verification!")
         console.log(req.params);
