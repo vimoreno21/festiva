@@ -22,6 +22,7 @@ router.post("/:id/verify/:token", async (req, res) => {
         //if(!token) return res.status(400).send({message: "invalid link"});
 
         await User.updateOne({ _id: id }, { verified: true });
+        console.log("user has been updated!!!!")
         return res.status(200).send({message: "Account verified successfully! You may close this window and log in."})
     } catch(error) {
         console.log(error);
