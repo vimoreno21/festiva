@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TimerWithCircle from "../components/TimerWithCircle";
+import backgroundMusic from "../audio/hipjazz.mp3";
+import AudioPlayer from "../components/AudioPlayer";
+
 const temp = [
   {
     quiz_name: "team quiz",
@@ -28,20 +31,45 @@ const temp = [
 
 function QuestionDisplayPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [resetTimer, setResetTimer] = useState(false);
   const currentQuestion = temp[0].q_and_a[currentQuestionIndex];
+  const [resetTimer, setResetTimer] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
+  // gets the correct background color for each button
+  function getBackgroundColor(answerIndex) {
+    const colors = ["#ECD483", "#FF9B9B", "#8CD9E4", "#A4D67D"];
+    return colors[answerIndex % colors.length];
+  }
+
+  // plays or pauses audio
+  const toggleAudio = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  // handles instructions once timer ends
   const handleTimerEnd = () => {
-    setResetTimer(true);
     if (currentQuestionIndex < temp[0].q_and_a.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+
+      // ** change later so we move to next question after leaderboard has been shown
+      moveToNextQuestion();
     } else {
       setResetTimer(false);
+      setIsPlaying(false);
     }
+  };
+
+  // Handles moving to the next question
+  const moveToNextQuestion = () => {
+    setResetTimer(true);
+    setIsPlaying(true);
   };
 
   return (
     <div className="questionDisplay-container">
+      <div>
+        <AudioPlayer src={backgroundMusic} isPlaying={isPlaying} />
+      </div>
       <div className="timer-container">
         <TimerWithCircle
           duration={10}
@@ -57,7 +85,7 @@ function QuestionDisplayPage() {
             <button
               key={answerIndex}
               className="answer-button"
-              style={{ height: "3rem" }}
+              style={{ backgroundColor: getBackgroundColor(answerIndex) }}
             >
               {answer}
             </button>

@@ -561,15 +561,14 @@ footer a {
 
 .answer-button {
   padding: 1rem;
-  background-color: #ccc;
   border: 1px solid #999;
   height: 7rem !important;
+  color: #222;
 }
 
 .temp {
   color: white;
   text-decoration: none;
-  border: solid white;
   margin-left: 10%;
   margin-top: 1.5rem;
 }
