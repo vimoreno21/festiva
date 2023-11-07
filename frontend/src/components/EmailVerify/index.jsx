@@ -7,11 +7,17 @@ import { Fragment } from 'react';
 const EmailVerify = () => {
 	const [validUrl, setValidUrl] = useState(true);
 	const param = useParams();
+	console.log("these are the param inside index.jsx")
 	console.log(param);
 
 	useEffect(() => {
 		const verifyEmailUrl = async () => {
 			console.log("in verifyEmailURL -> index.jsx")
+			let obj = {
+				_id: param._id,
+				token: param.token
+			  };
+			  let jsonBody = JSON.stringify(obj);
 			try {
 				//const url = `https://festiva-ucf-3a962394b6e7.herokuapp.com/api/registerVerification/:id/verify/:token`;
 				//const { data } = await axios.get(url);
@@ -20,6 +26,7 @@ const EmailVerify = () => {
 				try {
 					const response = await fetch('/api/registerVerification/:id/verify/:token', {
 					  method: 'POST',
+					  body: jsonBody, 
 					  headers: { 'Content-Type': 'application/json' },
 					});
 			  
