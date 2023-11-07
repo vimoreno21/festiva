@@ -25,7 +25,7 @@ function App() {
           <Route path="/start" element={<StartPage />} />
           <Route path="/pickgame" element={<PickGamePage />} />
           <Route path="/waitToPlayGame" element={<WaitPlayGame />} />
-          <Route path="/users/:id/verify/:token" element={<EmailVerify/>}/>
+          <Route path="/api/registerVerification/:id/verify/:token" element={<EmailVerify/>}/>
 
           {/* ignore this route im just using it for testing displaying socket stuff on frontend -melanie */}
           <Route path="/socketio" element={<SocketIoMelTest socket={socket}/>} />
