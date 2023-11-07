@@ -14,7 +14,7 @@ const EmailVerify = () => {
 		const verifyEmailUrl = async () => {
 			console.log("in verifyEmailURL -> index.jsx")
 			let obj = {
-				_id: param._id,
+				_id: param.id,
 				token: param.token
 			  };
 			  let jsonBody = JSON.stringify(obj);
