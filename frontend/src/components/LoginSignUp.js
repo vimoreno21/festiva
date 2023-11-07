@@ -31,14 +31,20 @@ function LoginSignUp() {
       });
 
       let res = await response.json();
+      console.log(res)
 
-      if (res.id <= 0) {
+      if (res.message == "Invalid Email or Password") {
         setMessage('User/Password combination incorrect');
-      } else {
+        console.log("login signup no user")
+      } 
+      else if (res.message == "An email has been sent to your account to verify. You must verify before logging in.")
+      {
+        setMessage('An email has been sent to your account to verify. You must verify before logging in.');
+      }
+      else {
         let user = { email: res.email, name:res.name, _id: res.id };
-        console.log(user)
+        console.log("inside loginsignup")
         localStorage.setItem('user_data', JSON.stringify(user));
-        setMessage('we did it!');
         navigate('/pickgame')
       }
     } catch (e) {
