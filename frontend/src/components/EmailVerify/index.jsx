@@ -11,7 +11,7 @@ const EmailVerify = () => {
 	useEffect(() => {
 		const verifyEmailUrl = async () => {
 			try {
-				const url = `https://festiva-ucf-3a962394b6e7.herokuapp.com/api/users/${param.id}/verify/${param.token}`;
+				const url = `https://festiva-ucf-3a962394b6e7.herokuapp.com/api/registerVerification`;
 				const { data } = await axios.get(url);
 				console.log(data);
 				setValidUrl(true);
@@ -28,7 +28,7 @@ const EmailVerify = () => {
 			{validUrl ? (
 				<div className={styles.container}>
 					<h1>Email verified successfully</h1>
-					<Link to="/login">
+					<Link to="/start">
 						<button className={styles.green_btn}>Login</button>
 					</Link>
 				</div>
