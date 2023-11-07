@@ -77,6 +77,27 @@ function LoginSignUp() {
     }
   };
 
+  const doRegisterVerify = async (event) => {
+
+
+    try {
+      const response = await fetch('/api/registerVerification', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      let res = await response.json();
+      if (res.message === 'Account verified successfully! You may close this window and log in.') {
+        setResultSignUp('Account verified successfully! You may close this window and log in.');
+      } else {
+        setResultSignUp('Error Verifying account.');
+      }
+    } catch (e) {
+      alert(e.toString());
+      return;
+    }
+  };
+
   return (
       <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container" style={{ border: '2px solid #8CD9E4', padding: 0, margin: 0,  maxWidth: '85%'}}>
         <Row style={{ zIndex: 1 }}>
