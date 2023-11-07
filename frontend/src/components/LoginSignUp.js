@@ -81,7 +81,7 @@ function LoginSignUp() {
 
 
     try {
-      const response = await fetch('/api/registerVerification', {
+      const response = await fetch('/api/registerVerification/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
