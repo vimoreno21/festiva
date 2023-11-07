@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
         token: crypto.randomBytes(32).toString("hex")
     }).save();
 
-    const url = `https://festiva-ucf-3a962394b6e7.herokuapp.com/api/registerVerification/${new_user._id}/verify/${token.token}`;
+    const url = `http://festiva-ucf-3a962394b6e7.herokuapp.com/api/registerVerification/${new_user._id}/verify/${token.token}`;
     await sendEmail(new_user.email, "Verify Email", url)
 
 })
