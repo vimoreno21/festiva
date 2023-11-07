@@ -3,12 +3,11 @@ const router = express.Router()
 const User = require('../models/userModel')
 
 router.post("/:id/verify/:token", async (req, res) => {
-    console.log("inside register verification!")
     try {
         console.log("inside register verification!")
-        console.log(req.params);
+        console.log(req.body);
 
-        const id = req.params.id
+        const id = req.body._id
         const user = await User.find({_id: id});
         console.log(user)
 
