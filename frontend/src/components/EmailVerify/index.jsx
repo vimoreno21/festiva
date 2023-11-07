@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styles from "./styles.module.css";
 import { Fragment } from 'react';
+const verify = require('./LoginSignUp');
 
 const EmailVerify = () => {
 	const [validUrl, setValidUrl] = useState(true);
@@ -10,12 +11,30 @@ const EmailVerify = () => {
 
 	useEffect(() => {
 		const verifyEmailUrl = async () => {
+			console.log("in verifyEmailURL -> index.jsx")
 			try {
-				const url = `https://festiva-ucf-3a962394b6e7.herokuapp.com/api/registerVerification`;
-				const { data } = await axios.get(url);
-				console.log(data);
+				//const url = `https://festiva-ucf-3a962394b6e7.herokuapp.com/api/registerVerification/:id/verify/:token`;
+				//const { data } = await axios.get(url);
+				//console.log(data);
 				setValidUrl(true);
+				try {
+					const response = await fetch('/api/registerVerification/:id/verify/:token', {
+					  method: 'POST',
+					  headers: { 'Content-Type': 'application/json' },
+					});
+			  
+					let res = await response.json();
+					if (res.message === 'Account verified successfully! You may close this window and log in.') {
+					  setResultSignUp('Account verified successfully! You may close this window and log in.');
+					} else {
+					  setResultSignUp('Error Verifying account.');
+					}
+				  } catch (e) {
+					alert(e.toString());
+					return;
+				  }
 			} catch (error) {
+				console.log("WE HAVE AN ERROR");
 				console.log(error);
 				setValidUrl(false);
 			}
