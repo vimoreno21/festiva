@@ -30,6 +30,8 @@ function App() {
           path="/api/registerVerification/:id/verify/:token"
           element={<EmailVerify />}
         />
+        <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
+        <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
 
         {/* ignore this route im just using it for testing displaying socket stuff on frontend -melanie */}
         <Route path="/socketio" element={<SocketIoMelTest socket={socket} />} />
