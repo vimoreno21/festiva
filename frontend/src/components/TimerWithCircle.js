@@ -20,8 +20,8 @@ function TimerWithCircle({ duration, onTimerEnd, resetTimer, setResetTimer }) {
 
   useEffect(() => {
     if (resetTimer) {
-      setTimer(duration);
-      setResetTimer(false);
+      setTimer(duration); // Reset the timer when resetTimer becomes true
+      setResetTimer(false); // Reset the resetTimer flag
     }
   }, [resetTimer, duration, setResetTimer]);
 
