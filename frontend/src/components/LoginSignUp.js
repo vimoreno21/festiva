@@ -75,7 +75,11 @@ function LoginSignUp() {
       let res = await response.json();
       if (res.message === 'Created account successfully! An Email has been sent to your account, please verify to login.') {
         setResultSignUp('Created account successfully! An Email has been sent to your account, please verify to login.');
-      } else {
+      } 
+      else if (res.message === 'User already exists with email.') {
+        setResultSignUp('User already exists with email.')
+      }
+      else {
         setResultSignUp('Error creating account.');
       }
     } catch (e) {
