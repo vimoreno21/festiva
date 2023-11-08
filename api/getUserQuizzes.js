@@ -6,7 +6,7 @@ router.post('/', async (req, res) => {
 
     const id = req.body._id
 
-    results = await Quiz.find({_id: id, quiz_name: {$regex: "", $options: "i"}})
+    results = await Quiz.find({owner_id: id, quiz_name: {$regex: "", $options: "i"}})
 
     if (results.length > 0)
     {
