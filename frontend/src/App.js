@@ -19,6 +19,11 @@ const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
 function App() {
   return (
     <BrowserRouter>
+      <Routes>
+        {" "}
+        {/* Routes without navbar */}
+        <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
+      </Routes>
       <GlobalNavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />

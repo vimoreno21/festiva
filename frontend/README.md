@@ -68,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Background Music Attribution
+
+The background music used in this project is provided by [Bensound.com](https://www.bensound.com) under the following licenses:
+
+1. **Royalty-Free Music**
+
+   - Music by: Bensound.com/royalty-free-music
+   - License code: UYOGOEPAUYEIU4W8
+
+2. **Free Music for Videos**
+   - Music by: Bensound.com/free-music-for-videos
+   - License code: 1IILFNQOXYEPDLPQ

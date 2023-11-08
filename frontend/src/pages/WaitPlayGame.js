@@ -14,11 +14,9 @@ const WaitPlayGame = () => {
           <p className="fw-bold fs-1 mr-5">934840</p>
         </div>
         <p className="fs-1 fw-normal mt-5">Players</p>
-        <button className="button_style">
-          <Link to="/questionDisplay" className="temp">
-            Team Quiz
-          </Link>
-        </button>
+        <Link to="/questionDisplay">
+          <button className="button_style">Team Quiz</button>
+        </Link>
       </div>
     </section>
   );

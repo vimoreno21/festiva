@@ -59,7 +59,7 @@ const PickGamePage = () => {
               </button>
             </div>
             <Link
-              to="/quizGameLibrar"
+              to="/quizGameLibrary"
               onClick={onPlayGame}
               className="button_style2 w-50 text-decoration-none"
             >
