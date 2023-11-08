@@ -18,6 +18,7 @@ function LoginSignUp() {
     setIsSignUp(!isSignUp);
   };
 
+  // to use these function locally add http://localhost:5000 to before every /api
   const doLogin = async (event) => {
     event.preventDefault();
     let obj = { email: loginEmail.value, password: loginPassword.value };
