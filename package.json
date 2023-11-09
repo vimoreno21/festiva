@@ -12,6 +12,11 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.4.2",
+        "@fortawesome/free-brands-svg-icons": "^6.4.2",
+        "@fortawesome/free-regular-svg-icons": "^6.4.2",
+        "@fortawesome/free-solid-svg-icons": "^6.4.2",
+        "@fortawesome/react-fontawesome": "^0.2.0",
         "@socket.io/admin-ui": "^0.5.1",
         "body-parser": "^1.20.2",
         "cors": "^2.8.5",
@@ -22,6 +27,7 @@
         "nodemailer": "^6.9.7",
         "nodemon": "^3.0.1",
         "react-router-dom": "^6.18.0",
+        "react-scale-text": "^1.2.2",
         "socket.io": "^4.7.2",
         "socket.io-client": "^4.7.2"
     },

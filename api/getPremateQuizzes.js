@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Quiz = require('../models/quizModel')
+const PQuiz = require('../models/premadeQuizModel')
 
 router.post('/', async (req, res) => {
 
-    const name = req.body.quiz_name;
-    const id = req.body._id
 
-    results = await Quiz.find({owner_id: id, quiz_name: {$regex: name, $options: "i"}})
+    results = await PQuiz.find({quiz_name: {$regex: "", $options: "i"}})
 
     if (results.length > 0)
     {

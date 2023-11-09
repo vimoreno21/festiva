@@ -12,8 +12,13 @@ router.post('/', async (req, res) => {
     const { name, email, password, avatar, verified} = req.body;
     const new_user = new User({
         name: name, email: email, password: password, verified: false, avatar: avatar
-
     })
+    );
+
+  const token = await new Token({
+    userId: new_user._id,
+    token: crypto.randomBytes(32).toString("hex"),
+  }).save();
 
     console.log("in register api!")
 
@@ -52,5 +57,19 @@ router.post('/', async (req, res) => {
 
 module.exports = router 
 
+    //if(!token) return res.status(400).send({message: "invalid link"});
 
+    await User.updateOne({ _id: id }, { verified: true });
+    return res
+      .status(200)
+      .send({
+        message:
+          "Account verified successfully! You may close this window and log in.",
+      });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({ message: "Internal server error" });
+  }
+});
 
+module.exports = router;
