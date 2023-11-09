@@ -9,7 +9,6 @@ router.post('/', async (req, res) => {
 
     // incoming: name, email, password, avatar
     // outgoing: result
-
     const { name, email, password, avatar, verified} = req.body;
     const new_user = new User({
         name: name, email: email, password: password, verified: false, avatar: avatar

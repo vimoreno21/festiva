@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
   if(verified){
     let ret = { id:id, name:name, avatar:avatar, error:''};
     console.log("Login Success!")
-    res.status(200).json(ret);
+    return res.status(200).json(ret);
   }
   else{
     console.log("Not verified")

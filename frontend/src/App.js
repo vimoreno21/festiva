@@ -12,11 +12,14 @@ import QuestionDisplayPage from "./pages/QuestionDisplayPage";
 import QuizGameLibraryPage from "./pages/QuizGameLibraryPage";
 import EmailVerify from "./components/EmailVerify/index";
 
+
 const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
 //const socket = io.connect("http://localhost:5000");
 // console.log(socket)
 
+
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
