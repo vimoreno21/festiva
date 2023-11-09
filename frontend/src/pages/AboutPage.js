@@ -4,8 +4,8 @@ import React from 'react';
 function AboutPage() {
   return (
     <div className="aboutpage_div container-p" >
-      <h2>Meet The Team</h2>
-      <p>This is the About Us page.</p>
+      <div className="title-for-about">nice to meet you</div>
+      <p>This is our team</p>
     </div>
   );
 }
