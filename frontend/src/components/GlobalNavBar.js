@@ -45,14 +45,8 @@ const GlobalNavBar = () => {
                         <Link to="/about" className="navbar-link">About Us</Link>
                     </li>
                     <li className="navbar-item fs-2 mx-5 text-nowrap">
-                        <Profile src={profilePic}/> 
-                    </li>
-                    {/* <div className="app__profile-menu">
-                        <Profile src={profilePic} />
-                    </div> */}
-                    {/* <li className="navbar-item fs-2 mx-5 text-nowrap">
                         <Link to="/" className="navbar-link" onClick={handleLogoutClick}>Log Out</Link>
-                    </li> */}
+                    </li>
                 </ul>
             )
         }
