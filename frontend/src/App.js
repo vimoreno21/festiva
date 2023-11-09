@@ -6,6 +6,7 @@ import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import PickGamePage from "./pages/PickGamePage";
 import WaitPlayGame from "./pages/WaitPlayGame";
+import Socket2Page from './pages/Socket2Page';
 import io from "socket.io-client";
 import SocketIoMelTest from "./pages/SocketIoMelTest";
 import QuestionDisplayPage from "./pages/QuestionDisplayPage";
@@ -41,9 +42,12 @@ function App() {
         <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
         <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
 
-        {/* ignore this route im just using it for testing displaying socket stuff on frontend -melanie */}
-        <Route path="/socketio" element={<SocketIoMelTest socket={socket} />} />
-      </Routes>
+          {/* represents web frontend */}
+          <Route path="/socketio" element={<SocketIoMelTest socket={socket}/>} />
+
+          {/* represents mobile frontend */}
+          <Route path="/sockettwo" element={<Socket2Page socket={socket}/>}/>
+        </Routes>
     </BrowserRouter>
   );
 }
