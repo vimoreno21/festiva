@@ -27,7 +27,7 @@ function LoginSignUp() {
     let js = JSON.stringify(obj);
 
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch('/api/login', {
         method: 'POST',
         body: js,
         headers: { 'Content-Type': 'application/json' },
@@ -80,7 +80,7 @@ function LoginSignUp() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/register', {
+      const response = await fetch('api/register', {
         method: 'POST',
         body: jsonBody,
         headers: { 'Content-Type': 'application/json' },
@@ -105,7 +105,7 @@ function LoginSignUp() {
   const doRegisterVerify = async (event) => {
 
     try {
-      const response = await fetch('http://localhost:5000/api/registerVerification/:id/verify/:token', {
+      const response = await fetch('/api/registerVerification/:id/verify/:token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
