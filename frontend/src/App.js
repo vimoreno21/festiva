@@ -42,7 +42,7 @@ function App() {
         <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
 
         {/* ignore this route im just using it for testing displaying socket stuff on frontend -melanie */}
-        {/* <Route path="/socketio" element={<SocketIoMelTest socket={socket} />} /> */}
+        <Route path="/socketio" element={<SocketIoMelTest socket={socket} />} />
       </Routes>
     </BrowserRouter>
   );
