@@ -6,6 +6,7 @@ import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 import PickGamePage from './pages/PickGamePage';
 import WaitPlayGame from './pages/WaitPlayGame';
+import Socket2Page from './pages/Socket2Page';
 import io from 'socket.io-client';
 import { Container, Row, Col } from 'reactstrap';
 import SocketIoMelTest from './pages/SocketIoMelTest';
@@ -25,8 +26,11 @@ function App() {
           <Route path="/pickgame" element={<PickGamePage />} />
           <Route path="/waitToPlayGame" element={<WaitPlayGame />} />
 
-          {/* ignore this route im just using it for testing displaying socket stuff on frontend -melanie */}
+          {/* represents web frontend */}
           <Route path="/socketio" element={<SocketIoMelTest socket={socket}/>} />
+
+          {/* represents mobile frontend */}
+          <Route path="/sockettwo" element={<Socket2Page socket={socket}/>}/>
         </Routes>
     </BrowserRouter>
   );

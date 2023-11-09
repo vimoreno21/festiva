@@ -13,7 +13,9 @@ function NavBar() {
   const backgrounds = {
     '/': '#8CD9E4',
     '/pickgame': '#f7c6d1', 
-    '/waitToPlayGame': '#B4E091'
+    '/waitToPlayGame': '#B4E091',
+    '/about': '#FFA4A4',
+    '/start': '#FBE28F'
   }
 
   return (
