@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+/* styles.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 
 * {
   box-sizing: border-box;
@@ -320,6 +325,14 @@ footer a {
   width: 100%;
   height: auto;
 }
+.user-icon {
+  padding-top: 5px;
+  width: 60px; /* Adjust the width as needed */
+  height: 60px; /* Adjust the height as needed */
+  border-radius: 50%; /* Create a circular shape */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  /* border: 2px solid #fff; Optional: Add a border around the icon */
+}
 
 .img_sizing {
   width: 30%;
@@ -475,12 +488,12 @@ footer a {
 /* NavigationBar.css */
 .navbar_style {
   /* position: absolute; Make the navigation bar fixed at the top */
-  justify-content: space-around;
+  /* justify-content: space-around; */
   display: flex;
   width: 100%;
   padding: 2rem;
   top: 0px;
-  align-items: center;
+  align-items: start;
 }
 
 .navbar-list {
