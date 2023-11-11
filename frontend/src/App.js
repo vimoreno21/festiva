@@ -12,6 +12,7 @@ import SocketIoMelTest from "./pages/SocketIoMelTest";
 import QuestionDisplayPage from "./pages/QuestionDisplayPage";
 import QuizGameLibraryPage from "./pages/QuizGameLibraryPage";
 import EmailVerify from "./components/EmailVerify/index";
+import CreateGame from "./pages/CreateGame";
 
 
 const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
@@ -20,7 +21,6 @@ const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
 
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
@@ -41,6 +41,7 @@ function App() {
         />
         <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
         <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
+        <Route path="/CreateGame" element={<CreateGame />} />
 
           {/* represents web frontend */}
           <Route path="/socketio" element={<SocketIoMelTest socket={socket}/>} />

@@ -39,9 +39,10 @@ export const getUserInfo = () => {
   if (isLoggedIn()) {
     try {
       const user = JSON.parse(userData);
-      if (user.name) {
+      if (user.name && user._id) {
         return {
-          name: user.name
+          name: user.name,
+          id: user._id
         };
       }
     } catch (error) {
@@ -51,5 +52,5 @@ export const getUserInfo = () => {
   }
 
   // Return null if user data is not available or valid
-  return "No Name";
+  return "No Name!";
 };

@@ -14,6 +14,7 @@ router.post('/', async (req, res) => {
     }
     else
     {
+        console.log("No quizzes found");
         return res.status(400).send({message: "No quizzes found."})
     }
 

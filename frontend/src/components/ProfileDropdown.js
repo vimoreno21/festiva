@@ -6,6 +6,7 @@ import {PlusIcon} from "./PlusIcon.jsx";
 import { logout , getUserInfo} from "../actions/currentUser.js"
 import profilePic from '../images/profile.png';
 
+
 const ProfileDropdown = () => {
 
   const navigate = useNavigate();
@@ -15,9 +16,8 @@ const ProfileDropdown = () => {
     logout()
     navigate('/');
   }
-
+  console.log(userInfo);
   return (
-
     <Dropdown
     showArrow
     radius="sm"
@@ -28,12 +28,25 @@ const ProfileDropdown = () => {
   >
     <DropdownTrigger>
       {/* <Button variant="bordered" color="danger" disableRipple>Open Menu</Button> */}
-      <img src={profilePic} alt='profile' className="user-icon justify-content-start"/>
+      <img src={profilePic} alt='profile' className="user-icon justify-content-start" textvalue="profile"/>
     </DropdownTrigger>
     <DropdownMenu
       aria-label="Custom item styles"
       disabledKeys={["profile"]}
       className="p-3"
+      itemClasses={{
+        base: [
+          "rounded-md",
+          "text-default-500",
+          "transition-opacity",
+          "data-[hover=true]:text-foreground",
+          "data-[hover=true]:bg-default-100",
+          "dark:data-[hover=true]:bg-default-50",
+          "data-[selectable=true]:focus:bg-default-50",
+          "data-[pressed=true]:opacity-70",
+          "data-[focus-visible=true]:ring-default-500",
+        ],
+      }}
     >
       <DropdownSection aria-label="Profile & Actions" showDivider>
         <DropdownItem
@@ -41,6 +54,7 @@ const ProfileDropdown = () => {
           key="profile"
           // className="h-14 gap-2"
           className="opacity-100 h-14 gap-2"
+          textValue="User Profile"
         >
           <User
             name={userInfo.name}

@@ -137,13 +137,13 @@ form {
   text-align: center;
 }
 
-input {
+/* input {
   background-color: #eee;
   border: none;
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
-}
+} */
 
 .container {
   background: #ffeeb6;
@@ -334,6 +334,42 @@ footer a {
   /* border: 2px solid #fff; Optional: Add a border around the icon */
 }
 
+.game-library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust the minmax values as needed */
+  gap: 30px; /* Adjust the gap between items as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Adjust as needed for your layout */
+  margin: 0 auto;
+  max-width: 90%;
+  flex-wrap: wrap;
+}
+.game-library-grid > * {
+  margin-bottom: 0px; /* Adjust the vertical gap between items */
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* white polaroid */
+.game-card {
+  flex: 0 0 calc(33.33% - 20px);
+  background-position: center;
+  background-size: 102% 102%;
+  background-color: transparent;
+  padding: 0.7rem;
+  box-shadow: 0 0.2rem 30rem rgba(0,0,0,0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
 .img_sizing {
   width: 30%;
   height: 30%;
@@ -347,7 +383,7 @@ footer a {
   display: flex;
   align-items: center;
   margin-top: 10%;
-  padding: 12px 45px;
+  /* padding: 12px 45px; */
   font-weight: bold;
 }
 
@@ -356,7 +392,7 @@ footer a {
   border-radius: 20px;
   color: #222;
   margin-top: 10px;
-  padding: 12px 45px;
+  /* padding: 12px 45px; */
   font-weight: bold;
   border-color: #a7ce87;
   text-align: center;
@@ -792,3 +828,4 @@ footer a {
 	margin-top: 5%;
 	position: flex;
 }
+

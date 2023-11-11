@@ -18,7 +18,8 @@ const GlobalNavBar = () => {
     '/pickgame': '#f7c6d1', 
     '/waitToPlayGame': '#B4E091',
     '/start':'#fbe28f',
-    '/about':'#ffa4a4'
+    '/about':'#ffa4a4',
+    '/creategame':'#8CD9E4',
     }
 
     const logoutOrStartLink = () => {

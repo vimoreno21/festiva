@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import GameLibrary from '../components/GamesLibrary.js';
+import '../dist/output.css';
 
 function QuizGameLibraryPage() {
     return (
-      <div>
+      <div >
         <h1>Choose quiz:</h1>
         <button>
             <Link to="/waitToPlayGame" className="temp">Team Quiz</Link>
