@@ -30,10 +30,10 @@ const CreateGameForm = () => {
   };
 
 
-  const user = getUserInfo();
-  let owner_id = user.id;
-
   const createQuiz = (quiz) => {
+    const user = getUserInfo();
+    let owner_id = user.id;
+    
     const quizData = {
       owner_id,
       gameName,
