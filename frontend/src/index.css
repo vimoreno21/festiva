@@ -358,7 +358,7 @@ footer a {
   flex: 0 0 calc(33.33% - 20px);
   background-position: center;
   background-size: 102% 102%;
-  background-color: transparent;
+  background-color: pink;
   padding: 0.7rem;
   box-shadow: 0 0.2rem 30rem rgba(0,0,0,0.2);
   text-align: center;
@@ -367,6 +367,7 @@ footer a {
   justify-content: center;
   align-items: center;
   position: relative;
+  border: none;
 }
 
 
@@ -451,6 +452,13 @@ footer a {
 
 .flex-col-reverse {
   flex-direction: column-reverse;
+}
+
+/* HomePage classes */
+.librarypage_div {
+  background-color: #d1bcf0;
+  background-size: cover;
+  height: 100%;
 }
 
 /* HomePage classes */

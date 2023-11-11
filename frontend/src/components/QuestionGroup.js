@@ -1,12 +1,12 @@
 import AnswerGroup from './AnswerGroup';
-import { Input, Card, CardBody } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 
 const QuestionGroup = ({ questionNumber }) => {
     return(
         <div style={{paddingTop: '0px'}}>
             <Input
             size="lg"
-            key='actualQuestion'
+            key={`Question-${questionNumber}`}
             type="string"
             color='danger'
             label={`Question ${questionNumber}`}

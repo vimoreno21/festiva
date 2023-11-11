@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from "../actions/currentUser";
 
 const GameLibrary = () => {
@@ -13,13 +13,10 @@ const GameLibrary = () => {
           quiz_name: "Game two",
           quiz_description: "LONG LONG LONG GAME",
         },
-        {
-          quiz_name:"Game three",
-          quiz_description: "LONG LONG LONG GAME",
-        },
       ];
 
       const [quizzes, setQuizzes] = useState([]);
+      // http://localhost:5000
       const apiEndpoint = '/api/getUserQuizzes'; 
       const user = getUserInfo();
       const navigate = useNavigate();
@@ -29,20 +26,20 @@ const GameLibrary = () => {
           try {
             const response = await fetch(apiEndpoint, {
               method: 'POST',
+              body: JSON.stringify({ _id: user.id }), 
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ _id: user.id }), // Replace 'user123' with the actual user ID
             });
     
             if (!response.ok) {
-              throw new Error('Failed to fetch quizzes');
+              throw new Error('Failed to fetch quizzes :(( ');
             }
     
             const data = await response.json();
             setQuizzes(data);
           } catch (error) {
-            console.error('Error fetching quizzes:', error.message);
+            console.error('Error fetching quizzes :((', error.message);
           }
         };
         fetchQuizzes();
@@ -59,7 +56,13 @@ const GameLibrary = () => {
   
   const handleQuizClick = (quiz) => {
     // Navigate to /waitToPlayGame and pass the selected quiz as state
-    navigate('/waitToPlayGame', { state: { quiz } });
+    if ( quiz.quiz_name === 'Create Game')
+    {
+      navigate('/creategame', { state: { quiz } });
+    }
+    else {
+      navigate('/waitToPlayGame', { state: { quiz } });
+    }
   };
   
   return (
