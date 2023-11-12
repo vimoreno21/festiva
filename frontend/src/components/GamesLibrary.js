@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from "../actions/currentUser";
 
 const GameLibrary = () => {
+  const [resultGetQuizzes, setResultGetQuizzes] = useState('');
     const list = [
         {
           quiz_name: "Create Game",
@@ -44,6 +45,35 @@ const GameLibrary = () => {
         };
         fetchQuizzes();
       }, []);
+
+      // let getQuizzes = async (event) => {
+      //   // event.preventDefault();
+      //   const user = getUserInfo();
+      //   let owner_id = user.id;
+      //   const userData = {
+      //     _id: owner_id,
+      //   };
+    
+      //   let jsonBody = JSON.stringify(userData);
+      //   console.log(jsonBody);
+    
+      //   try {
+      //     const response = await fetch(endpoint, {
+      //       method: 'POST',
+      //       body: jsonBody,
+      //       headers: { 'Content-Type': 'application/json' },
+      //     });
+      //     if (!response.ok) {
+      //       throw new Error('Failed to fetch quizzes :(( ');
+      //     }
+  
+          // const data = await response.json();
+          // setQuizzes(data);
+      //   } catch (error) {
+      //     console.error('Error fetching quizzes :((', error.message);
+      //   }
+      // };
+
   
   let combinedList;
   console.log(quizzes);

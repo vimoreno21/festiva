@@ -11,6 +11,8 @@ const CreateGameForm = () => {
   const [gameName, setGameName] = useState('');
   const [gameDescription, setGameDescription] = useState('');
   const [questions, setQuestions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState(Array(numQuestions).fill(null));
+  const [resultCreateQuiz, setResultCreateQuiz] = useState('');
 
   const navigate = useNavigate();
   // http://localhost:5000
@@ -20,48 +22,78 @@ const CreateGameForm = () => {
   const handleNumQuestionsChange = (e) => {
     // Ensure numQuestions is a non-negative integer
     const value = parseInt(e.target.value, 10);
+    const newNumQuestions = isNaN(value) ? 0 : Math.max(0, value);
+
+    const newSelectedOptions = Array(newNumQuestions).fill(null);
+    setSelectedOptions(newSelectedOptions);
+
     setNumQuestions(isNaN(value) ? 0 : Math.max(0, value));
   };
 
   const handleQuestionChange = (index, questionData) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[index] = questionData;
+    console.log(index);
+    updatedQuestions[index] = {
+      ...updatedQuestions[index], // Preserve existing properties
+      ...questionData, // Update with new question data
+    };
+    console.log(updatedQuestions);
     setQuestions(updatedQuestions);
   };
 
-
-  const user = getUserInfo();
-  let owner_id = user.id;
-
-  const createQuiz = (quiz) => {
+ 
+  let createQuiz = async (event) => {
+    // event.preventDefault();
+    const user = getUserInfo();
+    let owner_id = user.id;
     const quizData = {
-      owner_id,
-      gameName,
-      gameDescription,
-      numQuestions,
-      questions: Array.from({ length: numQuestions }, (_, index) => ({
-      questionNumber: index + 1,
-        
-      })),
+      owner_id: owner_id,
+      gameName: gameName,
+      gameDescription: gameDescription,
+      numQuestions: numQuestions,
+      questions: questions,
     };
-    console.log(quizData);
-    // Assuming you have a server endpoint for creating quizzes
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(quizData),
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Assuming your server responds with the created quiz
-      console.log("QUIZ MADE");
-    })
-    .catch(error => {
-      console.error('Error creating quiz:', error);
-    });
+
+    let jsonBody = JSON.stringify(quizData);
+    console.log(jsonBody);
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: jsonBody,
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      let res = await response.json();
+      if (res.message === 'Quiz created successfully') {
+        console.log("created quiz!");
+        setResultCreateQuiz('Quiz created successfully');
+      }
+      else {
+        setResultCreateQuiz('Error creating quiz.');
+      }
+    } catch (e) {
+      alert(e.toString());
+      return;
+    }
   };
+  //   // Assuming you have a server endpoint for creating quizzes
+  //   fetch(endpoint, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(jsonBody),
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     // Assuming your server responds with the created quiz
+  //     console.log("QUIZ MADE");
+  //   })
+  //   .catch(error => {
+  //     console.error('Error creating quiz:', error);
+  //   });
+  // };
 
   return (
     <Card className="max-w-[650px]" style={{maxHeight: '75vh'}}>
@@ -73,7 +105,6 @@ const CreateGameForm = () => {
             <p> 
             Please input your game's name, description, and the number of questions. Then input the questions with 4 answers. 
             </p>
-            
         <Input
           size="lg"
           key='name'
@@ -116,16 +147,20 @@ const CreateGameForm = () => {
         {Array.from({ length: numQuestions }, (_, index) => (
             <QuestionGroup key={index} 
             questionNumber={index + 1} 
-            onChange={(questionData) => handleQuestionChange(index, questionData)}/>
+            numQuestions={numQuestions}
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+            onChange={(index, updatedQuestionData) => handleQuestionChange(index, updatedQuestionData)}/>
         ))}
-
         <div style={{ marginBottom: '10px',}}/> 
           <Button radius="full" 
             className="text-white" style={{ backgroundColor:'#E3649C', border:'none',  paddingTop: '20px'}}
             onPress={() => createQuiz()}>
             Create Game
           </Button>
-          
+          <span className="text-danger" id="createQuizResult">
+                {resultCreateQuiz}
+          </span>
         </CardBody>
     </Card>
   );

@@ -1,22 +1,24 @@
 import React from 'react';
-import {input, Input}  from "@nextui-org/react";
+import {Input}  from "@nextui-org/react";
 
-const RadioWithInput = ({ label, radioValue, inputValue, onRadioChange, onInputChange, selectedOption}) => {
+const RadioWithInput = ({ label, radioValue, inputValue, onRadioChange, onInputChange, selectedOption, groupName}) => {
   const handleRadioChange = () => {
     onRadioChange(radioValue);
   };
-    console.log(radioValue + inputValue);
+    // console.log(radioValue + " " + selectedOption + groupName);
   return (
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <label style={{ marginRight: '10px' }}>
         <input
           type="radio"
-          name="options"
+          name={groupName}
           value={radioValue}
-          checked={radioValue === selectedOption}
+          checked={selectedOption}
+          // radioValue ===
           onChange={handleRadioChange}
         />
-        {label}
+        {/* i dont know what this is  */}
+        {label} 
       </label>
 
       <Input
@@ -24,7 +26,7 @@ const RadioWithInput = ({ label, radioValue, inputValue, onRadioChange, onInputC
         key='actualQuestion'
         color='danger'
         label="answer"
-        placeholder=""
+        placeholder=" "
         labelPlacement="outside"
         fullWidth
         type="text"
