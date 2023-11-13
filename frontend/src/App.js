@@ -13,41 +13,49 @@ import QuestionDisplayPage from "./pages/QuestionDisplayPage";
 import QuizGameLibraryPage from "./pages/QuizGameLibraryPage";
 import EmailVerify from "./components/EmailVerify/index";
 
-
 const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
-// const socket = io.connect("http://localhost:5000");
-// console.log(socket)
-
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
-        {" "}
-        {/* Routes without navbar */}
+        {/* Routes with navbar */}
+        <Route
+          path="/*"
+          element={
+            <div>
+              <GlobalNavBar />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/start" element={<StartPage />} />
+                <Route path="/pickgame" element={<PickGamePage />} />
+                <Route path="/waitToPlayGame" element={<WaitPlayGame />} />
+                <Route
+                  path="/api/registerVerification/:id/verify/:token"
+                  element={<EmailVerify />}
+                />
+                <Route
+                  path="/quizGameLibrary"
+                  element={<QuizGameLibraryPage />}
+                />
+                {/* represents web frontend */}
+                <Route
+                  path="/socketio"
+                  element={<SocketIoMelTest socket={socket} />}
+                />
+                {/* represents mobile frontend */}
+                <Route
+                  path="/sockettwo"
+                  element={<Socket2Page socket={socket} />}
+                />
+              </Routes>
+            </div>
+          }
+        />
+        {/* Route without navbar */}
         <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
       </Routes>
-      <GlobalNavBar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/start" element={<StartPage />} />
-        <Route path="/pickgame" element={<PickGamePage />} />
-        <Route path="/waitToPlayGame" element={<WaitPlayGame />} />
-        <Route
-          path="/api/registerVerification/:id/verify/:token"
-          element={<EmailVerify />}
-        />
-        <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
-        <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
-
-          {/* represents web frontend */}
-          <Route path="/socketio" element={<SocketIoMelTest socket={socket}/>} />
-
-          {/* represents mobile frontend */}
-          <Route path="/sockettwo" element={<Socket2Page socket={socket}/>}/>
-        </Routes>
     </BrowserRouter>
   );
 }
