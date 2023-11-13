@@ -80,7 +80,7 @@ function LoginSignUp() {
     }
 
     try {
-      const response = await fetch('api/register', {
+      const response = await fetch('/api/register', {
         method: 'POST',
         body: jsonBody,
         headers: { 'Content-Type': 'application/json' },
