@@ -12,8 +12,13 @@ import SocketIoMelTest from "./pages/SocketIoMelTest";
 import QuestionDisplayPage from "./pages/QuestionDisplayPage";
 import QuizGameLibraryPage from "./pages/QuizGameLibraryPage";
 import EmailVerify from "./components/EmailVerify/index";
+import CreateGame from "./pages/CreateGame";
 
 const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
+//const socket = io.connect("http://localhost:5000");
+
+
+
 
 function App() {
   return (
@@ -30,25 +35,14 @@ function App() {
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/start" element={<StartPage />} />
                 <Route path="/pickgame" element={<PickGamePage />} />
-                <Route path="/waitToPlayGame" element={<WaitPlayGame />} />
-                <Route
-                  path="/api/registerVerification/:id/verify/:token"
-                  element={<EmailVerify />}
-                />
-                <Route
-                  path="/quizGameLibrary"
-                  element={<QuizGameLibraryPage />}
-                />
+                <Route path="/waitToPlayGame" element={<WaitPlayGame socket={socket}/>} />
+                <Route path="/api/registerVerification/:id/verify/:token" element={<EmailVerify />} />
+                <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
+                <Route path="/CreateGame" element={<CreateGame />} />
                 {/* represents web frontend */}
-                <Route
-                  path="/socketio"
-                  element={<SocketIoMelTest socket={socket} />}
-                />
+                <Route path="/socketio" element={<SocketIoMelTest socket={socket} />} />
                 {/* represents mobile frontend */}
-                <Route
-                  path="/sockettwo"
-                  element={<Socket2Page socket={socket} />}
-                />
+                <Route path="/sockettwo" element={<Socket2Page socket={socket} />} />
               </Routes>
             </div>
           }

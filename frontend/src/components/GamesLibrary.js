@@ -1,75 +1,94 @@
-import React from "react";
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import React, { useState, useEffect } from 'react';
+import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
+import { useNavigate } from 'react-router-dom';
+import { getUserInfo } from "../actions/currentUser";
 
-const GameLibrary = () => {
-  const list = [
-    {
-      title: "Orange",
-      img: "/images/fruit-1.jpeg",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "/images/fruit-2.jpeg",
-      price: "$3.00",
-    },
-    {
-      title: "Raspberry",
-      img: "/images/fruit-3.jpeg",
-      price: "$10.00",
-    },
-    {
-      title: "Lemon",
-      img: "/images/fruit-4.jpeg",
-      price: "$5.30",
-    },
-    {
-      title: "Avocado",
-      img: "/images/fruit-5.jpeg",
-      price: "$15.70",
-    },
-    {
-      title: "Lemon 2",
-      img: "/images/fruit-6.jpeg",
-      price: "$8.00",
-    },
-    {
-      title: "Banana",
-      img: "/images/fruit-7.jpeg",
-      price: "$7.50",
-    },
-    {
-      title: "Watermelon",
-      img: "/images/fruit-8.jpeg",
-      price: "$12.20",
-    },
-  ];
+const GameLibrary = ({socket}) => {
+    const list = [
+        {
+          quiz_name: "Create Game",
+          quiz_description: "click here to create your own game.",
+        },
+      ];
 
+      const [quizzes, setQuizzes] = useState([]);
+      // http://localhost:5000
+      const apiEndpoint = '/api/getUserQuizzes'; 
+      const user = getUserInfo();
+      const navigate = useNavigate();
+
+      useEffect(() => {
+        const fetchQuizzes = async () => {
+          try {
+            const response = await fetch(apiEndpoint, {
+              method: 'POST',
+              body: JSON.stringify({ _id: user.id }), 
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+    
+            if (!response.ok) {
+              throw new Error('Failed to fetch quizzes :(( ');
+            }
+    
+            const data = await response.json();
+            setQuizzes(data);
+          } catch (error) {
+            console.error('Error fetching quizzes :((', error.message);
+          }
+        };
+        fetchQuizzes();
+      }, []);
+  
+  let combinedList;
+  console.log(quizzes);
+  if (quizzes.length !== 0)
+  {
+    combinedList = [...list, ...quizzes];
+  } else{
+    combinedList = list;
+  }
+  
+  const handleQuizClick = (quiz) => {
+    // Navigate to /waitToPlayGame and pass the selected quiz as state
+    if ( quiz.quiz_name === 'Create Game')
+    {
+      navigate('/creategame', { state: { quiz } });
+    }
+    else {
+      const game = {
+        id: 'dont21',
+        users: {},
+        round: 0,
+        q_and_a: quiz.questions
+      };
+      // start the game 
+      //socket.emit('create-game', game);
+      navigate('/waitToPlayGame', { state: { quiz, game} });
+    }
+  };
+  
   return (
-    <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
-      {list.map((item, index) => (
-        <Card
-          shadow="sm"
-          key={index}
-          isPressable
-          onPress={() => console.log("item pressed")}
-        >
-          <CardBody className="overflow-visible p-0">
-            <Image
-              shadow="sm"
-              radius="lg"
-              width="100%"
-              alt={item.title}
-              className="w-full object-cover h-[140px]"
-              src={item.img}
-            />
-          </CardBody>
-          <CardFooter className="text-small justify-between">
-            <b>{item.title}</b>
-            <p className="text-default-500">{item.price}</p>
-          </CardFooter>
-        </Card>
-      ))}
+    <div> 
+      <div className="game-library-grid">
+        {combinedList.map((quiz, index) => (
+            <Card shadow="sm" className="game-card max-w-[300px]" key={index} isPressable onPress={() => handleQuizClick(quiz)}>
+            {/* <Card className="max-w-[400px]"> */}
+                <CardHeader className="flex gap-3">
+                <div className="flex flex-col">
+                <p className="text-md">{quiz.quiz_name}</p>
+                </div>
+                </CardHeader>
+                <Divider/>
+                <CardBody  className="flexWrap">
+                <p>{quiz.quiz_description}</p>
+                </CardBody>
+                <Divider/>
+                {/* </Card> */}
+            </Card>
+        ))}
+      </div>
     </div>
   );
 };

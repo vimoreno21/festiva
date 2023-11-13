@@ -978,10 +978,6 @@ video {
   display: table;
 }
 
-.grid{
-  display: grid;
-}
-
 .inline-grid{
   display: inline-grid;
 }
@@ -1064,10 +1060,6 @@ video {
 
 .h-\[100dvh\]{
   height: 100dvh;
-}
-
-.h-\[140px\]{
-  height: 140px;
 }
 
 .h-\[2px\]{
@@ -1331,6 +1323,10 @@ video {
 
 .max-w-\[1536px\]{
   max-width: 1536px;
+}
+
+.max-w-\[400px\]{
+  max-width: 400px;
 }
 
 .max-w-\[640px\]{
@@ -1674,10 +1670,6 @@ video {
 .appearance-none{
   -webkit-appearance: none;
           appearance: none;
-}
-
-.grid-cols-2{
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-4{
@@ -4045,6 +4037,27 @@ footer a {
   /* border: 2px solid #fff; Optional: Add a border around the icon */
 }
 
+.game-library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* Adjust the minmax values as needed */
+  gap: 30px;
+  /* Adjust the gap between items as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  /* Adjust as needed for your layout */
+  margin: 0 auto;
+  max-width: 90%;
+  flex-wrap: wrap;
+}
+
+.game-library-grid > * {
+  margin-bottom: 0px;
+  /* Adjust the vertical gap between items */
+}
+
 .img_sizing {
   width: 30%;
   height: 30%;
@@ -4058,7 +4071,7 @@ footer a {
   display: flex;
   align-items: center;
   margin-top: 10%;
-  padding: 12px 45px;
+  /* padding: 12px 45px; */
   font-weight: bold;
 }
 
@@ -4067,7 +4080,7 @@ footer a {
   border-radius: 20px;
   color: #222;
   margin-top: 10px;
-  padding: 12px 45px;
+  /* padding: 12px 45px; */
   font-weight: bold;
   border-color: #a7ce87;
   text-align: center;
@@ -7894,10 +7907,6 @@ footer a {
   .sm\:my-16{
     margin-top: 4rem;
     margin-bottom: 4rem;
-  }
-
-  .sm\:grid-cols-4{
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .sm\:items-start{
