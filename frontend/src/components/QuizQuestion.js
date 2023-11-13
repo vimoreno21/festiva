@@ -15,7 +15,7 @@ function QuizQuestion({ setShowRanking, setIsPlaying}) {
 
       try {
         const response = await fetch(
-          "http://localhost:5000/api/searchPremadeQuiz",
+          "/api/searchPremadeQuiz",
           {
             method: "POST",
             body: js,
