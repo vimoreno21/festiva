@@ -81,3 +81,5 @@ The background music used in this project is provided by [Bensound.com](https://
 2. **Free Music for Videos**
    - Music by: Bensound.com/free-music-for-videos
    - License code: 1IILFNQOXYEPDLPQ
+
+The avatars used in this project is provided by "animated icons created by Freepik" - "https://www.flaticon.com/free-animated-icons/animals"
