@@ -36,11 +36,11 @@ function LoginSignUp() {
       let res = await response.json();
       console.log(res)
 
-      if (res.message == "Invalid Email or Password") {
+      if (res.message === "Invalid Email or Password") {
         setMessage('User/Password combination incorrect');
         console.log("login signup no user")
       } 
-      else if (res.message == "An email has been sent to your account to verify. You must verify before logging in.")
+      else if (res.message === "An email has been sent to your account to verify. You must verify before logging in.")
       {
         setMessage('An email has been sent to your account to verify. You must verify before logging in.');
       }
@@ -95,26 +95,6 @@ function LoginSignUp() {
       }
       else {
         setResultSignUp('Error creating account.');
-      }
-    } catch (e) {
-      alert(e.toString());
-      return;
-    }
-  };
-
-  const doRegisterVerify = async (event) => {
-
-    try {
-      const response = await fetch('/api/registerVerification/:id/verify/:token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      let res = await response.json();
-      if (res.message === 'Account verified successfully! You may close this window and log in.') {
-        setResultSignUp('Account verified successfully! You may close this window and log in.');
-      } else {
-        setResultSignUp('Error Verifying account.');
       }
     } catch (e) {
       alert(e.toString());
