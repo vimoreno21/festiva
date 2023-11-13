@@ -3,16 +3,11 @@ import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from "../actions/currentUser";
 
-const GameLibrary = () => {
-  const [resultGetQuizzes, setResultGetQuizzes] = useState('');
+const GameLibrary = ({socket}) => {
     const list = [
         {
           quiz_name: "Create Game",
           quiz_description: "click here to create your own game.",
-        },
-        {
-          quiz_name: "Game two",
-          quiz_description: "LONG LONG LONG GAME",
         },
       ];
 
@@ -45,35 +40,6 @@ const GameLibrary = () => {
         };
         fetchQuizzes();
       }, []);
-
-      // let getQuizzes = async (event) => {
-      //   // event.preventDefault();
-      //   const user = getUserInfo();
-      //   let owner_id = user.id;
-      //   const userData = {
-      //     _id: owner_id,
-      //   };
-    
-      //   let jsonBody = JSON.stringify(userData);
-      //   console.log(jsonBody);
-    
-      //   try {
-      //     const response = await fetch(endpoint, {
-      //       method: 'POST',
-      //       body: jsonBody,
-      //       headers: { 'Content-Type': 'application/json' },
-      //     });
-      //     if (!response.ok) {
-      //       throw new Error('Failed to fetch quizzes :(( ');
-      //     }
-  
-          // const data = await response.json();
-          // setQuizzes(data);
-      //   } catch (error) {
-      //     console.error('Error fetching quizzes :((', error.message);
-      //   }
-      // };
-
   
   let combinedList;
   console.log(quizzes);
@@ -91,28 +57,38 @@ const GameLibrary = () => {
       navigate('/creategame', { state: { quiz } });
     }
     else {
-      navigate('/waitToPlayGame', { state: { quiz } });
+      const game = {
+        id: 'dont21',
+        users: {},
+        round: 0,
+        q_and_a: quiz.questions
+      };
+      // start the game 
+      //socket.emit('create-game', game);
+      navigate('/waitToPlayGame', { state: { quiz, game} });
     }
   };
   
   return (
-    <div className="game-library-grid">
-      {combinedList.map((quiz, index) => (
-          <Card shadow="sm" className="game-card max-w-[300px]" key={index} isPressable onPress={() => handleQuizClick(quiz)}>
-          {/* <Card className="max-w-[400px]"> */}
-              <CardHeader className="flex gap-3">
-              <div className="flex flex-col">
-              <p className="text-md">{quiz.quiz_name}</p>
-              </div>
-              </CardHeader>
-              <Divider/>
-              <CardBody  className="flexWrap">
-              <p>{quiz.quiz_description}</p>
-              </CardBody>
-              <Divider/>
-              {/* </Card> */}
-          </Card>
-      ))}
+    <div> 
+      <div className="game-library-grid">
+        {combinedList.map((quiz, index) => (
+            <Card shadow="sm" className="game-card max-w-[300px]" key={index} isPressable onPress={() => handleQuizClick(quiz)}>
+            {/* <Card className="max-w-[400px]"> */}
+                <CardHeader className="flex gap-3">
+                <div className="flex flex-col">
+                <p className="text-md">{quiz.quiz_name}</p>
+                </div>
+                </CardHeader>
+                <Divider/>
+                <CardBody  className="flexWrap">
+                <p>{quiz.quiz_description}</p>
+                </CardBody>
+                <Divider/>
+                {/* </Card> */}
+            </Card>
+        ))}
+      </div>
     </div>
   );
 };

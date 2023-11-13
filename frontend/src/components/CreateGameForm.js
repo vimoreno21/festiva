@@ -13,10 +13,16 @@ const CreateGameForm = () => {
   const [questions, setQuestions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState(Array(numQuestions).fill(null));
   const [resultCreateQuiz, setResultCreateQuiz] = useState('');
+  const [firstButtonClicked, setFirstButtonClicked] = useState(false);
 
   const navigate = useNavigate();
   // http://localhost:5000
   let endpoint = '/api/createQuiz';
+
+  const goToLibrary = () => {
+    // Navigate to the desired page when the second button is clicked
+    navigate('/quizGameLibrary'); 
+  };
 
   // to display all the questions
   const handleNumQuestionsChange = (e) => {
@@ -48,10 +54,10 @@ const CreateGameForm = () => {
     let owner_id = user.id;
     const quizData = {
       owner_id: owner_id,
-      gameName: gameName,
-      gameDescription: gameDescription,
-      numQuestions: numQuestions,
-      questions: questions,
+      quiz_name: gameName,
+      quiz_description: gameDescription,
+      number_of_questions: numQuestions,
+      q_and_a: questions
     };
 
     let jsonBody = JSON.stringify(quizData);
@@ -76,24 +82,8 @@ const CreateGameForm = () => {
       alert(e.toString());
       return;
     }
+    setFirstButtonClicked(true);
   };
-  //   // Assuming you have a server endpoint for creating quizzes
-  //   fetch(endpoint, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(jsonBody),
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     // Assuming your server responds with the created quiz
-  //     console.log("QUIZ MADE");
-  //   })
-  //   .catch(error => {
-  //     console.error('Error creating quiz:', error);
-  //   });
-  // };
 
   return (
     <Card className="max-w-[650px]" style={{maxHeight: '75vh'}}>
@@ -158,9 +148,16 @@ const CreateGameForm = () => {
             onPress={() => createQuiz()}>
             Create Game
           </Button>
-          <span className="text-danger" id="createQuizResult">
-                {resultCreateQuiz}
-          </span>
+          <div style={{ marginBottom: '10px',}}/> 
+          {firstButtonClicked && (
+            // Button 2 will only appear if the first button was clicked
+            <Button
+              radius="full" 
+              className="text-white" style={{ backgroundColor:'#AF8CC5', border:'none',  paddingTop: '20px'}}
+              onPress={() => goToLibrary()}>
+              Sucessful! Go back to Library
+            </Button>
+          )}
         </CardBody>
     </Card>
   );

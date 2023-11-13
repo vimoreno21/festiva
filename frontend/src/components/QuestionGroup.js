@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 const QuestionGroup = ({ questionNumber, numQuestions, selectedOptions, setSelectedOptions, onChange}) => {
     const [question, setQuestion] = useState({
         question: '',
-        answers: [' ', ' ', ' ', ' '], // Initial empty answers array
+        answers: ['', '', '', ''], // Initial empty answers array
         correct_answer: '', // Initial empty correct answer
     });
 
