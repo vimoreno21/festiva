@@ -16,8 +16,8 @@ import CreateGame from "./pages/CreateGame";
 
 
 const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
-//const socket = io.connect("http://localhost:3000");
-// console.log(socket)
+//const socket = io.connect("http://localhost:5000");
+
 
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
           element={<EmailVerify />}
         />
         <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
-        <Route path="/quizGameLibrary" socket={socket} element={<QuizGameLibraryPage />} />
+        <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
         <Route path="/CreateGame" element={<CreateGame />} />
 
           {/* represents web frontend */}
