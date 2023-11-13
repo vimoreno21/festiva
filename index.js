@@ -196,14 +196,17 @@ io.on('connection', socket => {
     // working...
     socket.on('start-round', (game) => {
         // console.log("PRINTING THE GAME OBJ")
-        // console.log(game)
+        //console.log("hi")
         let currentGame = games[game.id];
         // console.log('---->>>>', currentGame.getUsers())
         if(Object.keys(currentGame.getUsers()).length === 0) return;
         if(currentGame.getRound() >= currentGame.getQ_and_A().length ) return;
         // console.log(currentGame.getRound(), currentGame.getUsers())
 
-        socket.to(game.id).emit('get-answers', {id: currentGame.getID(), users: currentGame.getUsers(), currentAnswer: currentGame.getQ_and_A()[currentGame.getRound()].answers});
+        // console.log(currentGame.getQ_and_A()[currentGame.getRound()].question)
+        // console.log(currentGame.getQ_and_A()[currentGame.getRound()].answers)
+        // console.log("yo what?");
+        socket.to(game.id).emit('get-answers', {id: currentGame.getID(), users: currentGame.getUsers(), currentAnswer: currentGame.getQ_and_A()[currentGame.getRound()].answers, currentQuestion:currentGame.getQ_and_A()[currentGame.getRound()].question});
         let remainingTime = 15;
         const intervalID = setInterval(() => {
             if (remainingTime > 0) {
