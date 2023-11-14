@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import GameLibrary from '../components/GamesLibrary.js';
 import '../dist/output.css';
 import {Breadcrumbs, BreadcrumbItem, Input, Autocomplete, AutocompleteItem } from "@nextui-org/react";
-import SearchIcons from '../images/search.png';
 import {SearchIcon} from "../images/SearchIcon.jsx";
 import { getUserInfo } from "../actions/currentUser";
 
