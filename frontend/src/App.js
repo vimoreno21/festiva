@@ -14,7 +14,6 @@ import QuizGameLibraryPage from "./pages/QuizGameLibraryPage";
 import EmailVerify from "./components/EmailVerify/index";
 import CreateGame from "./pages/CreateGame";
 
-
 const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
 // const socket = io.connect("http://localhost:5000");
 // console.log(socket)
@@ -24,21 +23,30 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {" "}
-        {/* Routes without navbar */}
-        <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
-      </Routes>
-      <GlobalNavBar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/start" element={<StartPage />} />
-        <Route path="/pickgame" element={<PickGamePage />} />
-        <Route path="/waitToPlayGame" element={<WaitPlayGame socket={socket}/>} />
+        {/* Routes with navbar */}
         <Route
-          path="/api/registerVerification/:id/verify/:token"
-          element={<EmailVerify />}
+          path="/*"
+          element={
+            <div>
+              <GlobalNavBar />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/start" element={<StartPage />} />
+                <Route path="/pickgame" element={<PickGamePage />} />
+                <Route path="/waitToPlayGame" element={<WaitPlayGame socket={socket}/>} />
+                <Route path="/api/registerVerification/:id/verify/:token" element={<EmailVerify />} />
+                <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
+                <Route path="/CreateGame" element={<CreateGame />} />
+                {/* represents web frontend */}
+                <Route path="/socketio" element={<SocketIoMelTest socket={socket} />} />
+                {/* represents mobile frontend */}
+                <Route path="/sockettwo" element={<Socket2Page socket={socket} />} />
+              </Routes>
+            </div>
+          }
         />
+        {/* Route without navbar */}
         <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
         <Route path="/quizGameLibrary" element={<QuizGameLibraryPage socket={socket}/>} />
         <Route path="/CreateGame" element={<CreateGame />} />

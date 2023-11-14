@@ -32,7 +32,7 @@ const Socket2Page = ({ socket }) => {
 
     useEffect(() => {
         socket.on('get-answers', value => {
-            // console.log('GETTING ANSWERS!!!!!!!', value)
+            //console.log('GETTING ANSWERS!!!!!!!', value)
             setGame(value);
             setGameOn(true);
             setWaiting(false);
@@ -102,6 +102,8 @@ const Socket2Page = ({ socket }) => {
                                 </>
                                 :
                                 <>
+                                
+                                    <h3>{game?.currentQuestion}</h3>
                                     <div className='flex w-100 justify-content-around'>
                                         <button onClick={() => handleSubmitAnswer(0)} style={{ backgroundColor: qColor[0] }}>
                                             Answer: {game?.currentAnswer[0]}
