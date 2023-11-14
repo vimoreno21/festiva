@@ -69,7 +69,6 @@ const SocketIoMelTest = ({ socket }) => {
 
         socket.on('get-scores', value => {
             // console.log('GETTING SCORES!!!!!!!', value);
-
             setScores(value);
         })
 
@@ -81,7 +80,6 @@ const SocketIoMelTest = ({ socket }) => {
 
     return (
         <>
-
             {
                 scores &&
                 <ul className='h-100'>

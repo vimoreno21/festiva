@@ -19,24 +19,21 @@ const WaitPlayGame = ({ socket }) => {
     1: 'blue',
     2: 'purple',
     3: 'green'
-}
+  }
 
-const [game, setGame] = useState(initial_game);
+  const [game, setGame] = useState(initial_game);
 
-  useEffect(() => {
+    useEffect(() => {
     socket.on('receieve-users', newUsers => {
-        // console.log('RECEIVE USERS!@', newUsers)
         setGame(prev => ({ ...prev, users: newUsers }));
-
     })
     socket.on('get-scores', value => {
-        // console.log('GETTING SCORES!!!!!!!', value);
         setScores(value);
     })
     socket.on('count-down', count => {
         setCountDown(count);
     })
-  }, [socket])
+    }, [socket])
 
   console.log(quiz);
 
@@ -56,7 +53,6 @@ const [game, setGame] = useState(initial_game);
           <p className="fw-bold fs-1 mr-5">{initial_game.id}</p>
         </div>
         <p className="fs-1 fw-normal mt-5">Players</p>
-        <p>users: {Object.keys(game.users).length} in game {game.id ? game.id : 'NULL'}</p>
         <ul>
           { Object.keys(game.users)?.map(u => {
               return <li key={u}>
@@ -66,18 +62,17 @@ const [game, setGame] = useState(initial_game);
           }
         </ul>
         <Link to="/questionDisplay">
-          <button className="button_style">Team Quiz</button>
+          <button style={{ backgroundColor: 'green', borderColor:'none'}} 
+            onClick={() => {
+              // console.log(game)
+              socket.emit('start-round', game);
+              setGameOn(true)
+              setScores(null);
+            }}
+          >
+            Start Game
+          </button>
         </Link>
-        <button style={{ backgroundColor: 'green' }} 
-          onClick={() => {
-            // console.log(game)
-            socket.emit('start-round', game);
-            setGameOn(true)
-            setScores(null);
-          }}
-        >
-          Start Game
-        </button>
       </div>
     </section>
   );
