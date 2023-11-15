@@ -167,11 +167,11 @@ io.on('connection', socket => {
                 socket.emit('count-down', "Time is up!");
                 socket.to(game.id).emit('count-down', "Time is up!");
 
+                
+                socket.emit('get-scores', currentGame.getUsers(), currentGame.getSubmitted());
+                socket.to(game.id).emit('get-scores', currentGame.getUsers(), currentGame.getSubmitted());
                 currentGame.resetSubmitted();
                 currentGame.increaseRound();
-
-                socket.emit('get-scores', currentGame.getUsers());
-                socket.to(game.id).emit('get-scores', currentGame.getUsers());
                 clearInterval(intervalID);
             }
         }, 1000)
@@ -179,19 +179,21 @@ io.on('connection', socket => {
 
     socket.on('submit-answer', (game) => {
         let currentGame = games[game.id];
+        
         if (currentGame) {
-            currentGame.addSubmitted(socket.id, game.answer);
             let currentUser = currentGame.getUser(socket.id);
             let points = 0;
+            const nickname = currentGame.getUser(socket.id).nickname;
             if (currentGame.getQ_and_A()[currentGame.getRound()].correct_answer === game.answer) {
                 points = game.count > 10 ? 100 : game.count * 10;
+                currentGame.addSubmitted(nickname, true);
             }
+            else currentGame.addSubmitted(nickname, false);
 
             currentGame.setUser(socket.id, {
                 ...currentUser,
                 points: currentUser.points + points
             })
-
         }
     })
 
