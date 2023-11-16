@@ -48,7 +48,7 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
           throw new Error('Failed to delete quizzes :(( ');
         }
         else{
-          fetchQuizzes(user, setQuizzes)
+          fetchQuizzes(user, setQuizzes);
         }
 
       } catch (error) {
