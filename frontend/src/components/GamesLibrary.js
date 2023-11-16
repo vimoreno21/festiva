@@ -49,6 +49,7 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
         }
         else{
           fetchQuizzes(user, setQuizzes);
+          alert('Button deleted!');
         }
 
       } catch (error) {
@@ -56,7 +57,6 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
       }
     };
     deleteQuiz();
-    alert('Button deleted!');
   };
 
   const navigate = useNavigate();
