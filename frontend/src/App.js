@@ -35,10 +35,7 @@ function App() {
         <Route path="/start" element={<StartPage />} />
         <Route path="/pickgame" element={<PickGamePage />} />
         <Route path="/waitToPlayGame" element={<WaitPlayGame />} />
-        <Route
-          path="/api/registerVerification/:id/verify/:token"
-          element={<EmailVerify />}
-        />
+        <Route path="/api/registerVerification/:id/verify/:token" element={<EmailVerify />} />
         <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
         <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
 
