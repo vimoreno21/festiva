@@ -38,7 +38,7 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
       try {
         const response = await fetch(apiEndpoint, {
           method: 'POST',
-          body: JSON.stringify({ id: quiz._id }), 
+          body: JSON.stringify({ _id: quiz._id }), 
           headers: {
             'Content-Type': 'application/json',
           },
