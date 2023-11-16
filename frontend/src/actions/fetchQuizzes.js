@@ -4,7 +4,7 @@ export const fetchQuizzes = async (user, setQuizzes) => {
     try {
       const response = await fetch(apiEndpoint, {
         method: 'POST',
-        body: JSON.stringify({ _id: user.id }), 
+        body: JSON.stringify({ id: user.id }), 
         headers: {
           'Content-Type': 'application/json',
         },
