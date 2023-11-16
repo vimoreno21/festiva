@@ -23,7 +23,7 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
 
   const handleMouseEnter = (index) => {
     const updatedHoverState = Array(quizzes.length).fill(false);
-    updatedHoverState[index] = true;
+    if (index !== 0) updatedHoverState[index] = true;
     setIsHovered(updatedHoverState);
   };
 
