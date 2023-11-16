@@ -337,13 +337,13 @@ footer a {
 .game-library-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust the minmax values as needed */
-  gap: 30px; /* Adjust the gap between items as needed */
+  gap: 50px; /* Adjust the gap between items as needed */
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh; /* Adjust as needed for your layout */
   margin: 0 auto;
-  max-width: 90%;
+  max-width: 95%;
   flex-wrap: wrap;
 }
 .game-library-grid > * {
@@ -355,7 +355,7 @@ footer a {
 
 /* white polaroid */
 .game-card {
-  flex: 0 0 calc(33.33% - 20px);
+  flex: 0 0 calc(40.33% - 20px);
   background-position: center;
   background-size: 102% 102%;
   background-color: pink;
