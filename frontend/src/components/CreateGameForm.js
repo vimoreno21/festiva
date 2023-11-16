@@ -17,7 +17,7 @@ const CreateGameForm = () => {
 
   const navigate = useNavigate();
   // http://localhost:5000
-  let endpoint = 'http://localhost:5000/api/createQuiz';
+  let endpoint = '/api/createQuiz';
 
   const goToLibrary = () => {
     // Navigate to the desired page when the second button is clicked
