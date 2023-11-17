@@ -261,8 +261,15 @@ app.use('/api/getPremadeQuizzes', getPremadeQuizzesRouter);
 const getUserQuizzesRouter = require('./api/getUserQuizzes');
 app.use('/api/getUserQuizzes', getUserQuizzesRouter);
 
+const sendPasswordRecoveryRouter = require('./api/sendPasswordRecovery');
+app.use('/api/sendPasswordRecovery', sendPasswordRecoveryRouter);
+
+const resetPasswordRouter = require('./api/resetPassword');
+app.use('/api/resetPassword', resetPasswordRouter);
+
 const delQuizRouter = require('./api/deleteQuiz');
 app.use('/api/deleteQuiz', delQuizRouter);
+
 
 
 serverGame.listen(PORT, () => {
