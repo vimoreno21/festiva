@@ -1,67 +1,81 @@
 import React, { useEffect, useState } from "react";
-import TimerWithCircle from "../components/TimerWithCircle";
-import backgroundMusic from "../audio/hipjazz.mp3";
-import AudioPlayer from "../components/AudioPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import ResponsiveTextContainer from "../components/ResponsiveTextContainer";
-//import ScaleText from "react-scale-text";
-import { useHistory } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
+import QuizQuestion from "../components/QuizQuestion";
+import QuizRanking from "../components/QuizRanking";
+import backgroundMusic from "../audio/hipjazz.mp3";
+import AudioPlayer from "../components/AudioPlayer";
+
 /*
     Notes
-    - connect to database
-    - after timer ends, show the correct answer
     - navigate to rankings
     - once all questions end navigate to leaderboard
     - once all users pick their answers we can move on to the next question without waiting for timer to end
     - if deemed necessary, fix timer so that it can play on reload and it stops playing when we go to previous page
-    - get rid of nav bar and instead add a go back button
     - make text responsive or add word count
-    - navbar went under :()
-
-    Done:
-    - add game title!
-    
-
+    - fix empty section on bottom of page
+    - change quiz_name so its passed on from game library page
 */
 
-const temp = [
+const temp_users = [
   {
-    quiz_name: "team quiz",
-    quiz_description: "blah blah",
-    number_of_questions: 3,
-    q_and_a: [
-      // each question, its set of answers, and the correct answer for the question is an object in this array
-      {
-        question: "Who is the project manager?",
-        answers: ["Muhadeseh", "Melanie", "Victoria", "Huda"],
-        correct_answer: "Victoria",
-      },
-      {
-        question: "Who is part of front-end web?",
-        answers: ["Huda", "Arian", "Ricardo", "Muhadeseh"],
-        correct_answer: "Muhadeseh",
-      },
-      {
-        question: "Who is the MVP?",
-        answers: ["Muhadeseh", "Ricardo", "Melanie", "Huda"],
-        correct_answer: "Melanie",
-      },
-    ],
+    user_name: "Mel",
+    user_avatar: require("../images/temporary_avatars/frog-transparent.gif"),
+    points: 10,
+  },
+  {
+    user_name: "Desa",
+    user_avatar: require("../images/temporary_avatars/hedgehog-transparent.gif"),
+    points: 0,
+  },
+  {
+    user_name: "Hudaa",
+    user_avatar: require("../images/temporary_avatars/parrot-transparent.gif"),
+    points: 20,
+  },
+  {
+    user_name: "Ricardo",
+    user_avatar: require("../images/temporary_avatars/owl-transparent.gif"),
+    points: 1000,
+  },
+  {
+    user_name: "Arian",
+    user_avatar: require("../images/temporary_avatars/walrus-transparent.gif"),
+    points: 2,
+  },
+  {
+    user_name: "Desa",
+    user_avatar: require("../images/temporary_avatars/hedgehog-transparent.gif"),
+    points: 0,
+  },
+  {
+    user_name: "Desa",
+    user_avatar: require("../images/temporary_avatars/hedgehog-transparent.gif"),
+    points: 0,
+  },
+  {
+    user_name: "Desa",
+    user_avatar: require("../images/temporary_avatars/hedgehog-transparent.gif"),
+    points: 0,
+  },
+  {
+    user_name: "Desa",
+    user_avatar: require("../images/temporary_avatars/hedgehog-transparent.gif"),
+    points: 0,
   },
 ];
 
 function QuestionDisplayPage() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const currentQuestion = temp[0].q_and_a[currentQuestionIndex];
-  const [resetTimer, setResetTimer] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [showRanking, setShowRanking] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true); // for audio
+
   const navigate = useNavigate();
 
   const handleExitButton = () => {
     // replaces history stack with the quizGameLibrary page
     navigate(-2, { replace: true });
+    setIsPlaying(false);
   };
 
   const leftArrowIcon = (
@@ -72,72 +86,27 @@ function QuestionDisplayPage() {
     />
   );
 
-  // gets the correct background color for each button
-  function getBackgroundColor(answerIndex) {
-    const colors = ["#ECD483", "#FF9B9B", "#8CD9E4", "#A4D67D"];
-    return colors[answerIndex % colors.length];
-  }
-
-  // handles instructions once timer ends
-  const handleTimerEnd = () => {
-    if (currentQuestionIndex < temp[0].q_and_a.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-
-      // ** change later so we move to next question after leaderboard has been shown
-      moveToNextQuestion();
-    } else {
-      setResetTimer(false);
-      setIsPlaying(false);
-    }
-  };
-
-  // Handles moving to the next question
-  const moveToNextQuestion = () => {
-    setResetTimer(true);
-    setIsPlaying(true);
-  };
-
   return (
     <div className="questionDisplay-container">
+      <AudioPlayer src={backgroundMusic} isPlaying={isPlaying} />
       <div className="game-nav">
-        <button className="back-button" onClick={handleExitButton}>
+        <button className="exit-button" onClick={handleExitButton}>
           {leftArrowIcon} Exit
         </button>
         <span className="game-title">Quizoot</span>
       </div>
-      <div>
-        <AudioPlayer src={backgroundMusic} isPlaying={isPlaying} />
-      </div>
-      <div className="timer-container">
-        <TimerWithCircle
-          duration={10}
-          onTimerEnd={handleTimerEnd}
-          resetTimer={resetTimer}
-          setResetTimer={setResetTimer}
+      {showRanking ? (
+        <QuizRanking
+          setShowRanking={setShowRanking}
+          setIsPlaying={setIsPlaying}
+          users={temp_users}
         />
-      </div>
-      <div className="question-container ">
-        <h2 className="question-text">{currentQuestion.question}</h2>
-        <div className="answer-grid">
-          {currentQuestion.answers.map((answer, answerIndex) => (
-            <button
-              key={answerIndex}
-              className="answer-button"
-              style={{ backgroundColor: getBackgroundColor(answerIndex) }}
-            >
-              {answer}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* deleting later
-      button skips question without the need to finish timer */}
-      <div>
-        <button onClick={handleTimerEnd} className="temp">
-          skip question (temporary)
-        </button>
-      </div>
+      ) : (
+        <QuizQuestion
+          setShowRanking={setShowRanking}
+          setIsPlaying={setIsPlaying}
+        />
+      )}
     </div>
   );
 }

@@ -28,4 +28,29 @@ export const logout = () => {
       localStorage.removeItem('user_data');
     }
 };
-  
+
+
+// Function to get the name and email of the logged-in user
+export const getUserInfo = () => {
+  // Get the user data from localStorage
+  const userData = localStorage.getItem('user_data');
+
+  // Check if user data exists and is valid
+  if (isLoggedIn()) {
+    try {
+      const user = JSON.parse(userData);
+      if (user.name && user._id) {
+        return {
+          name: user.name,
+          id: user._id
+        };
+      }
+    } catch (error) {
+      // Error parsing user data
+      console.error("Error parsing user data:", error);
+    }
+  }
+
+  // Return null if user data is not available or valid
+  return "No Name!";
+};

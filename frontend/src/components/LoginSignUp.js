@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'reactstrap';
-import { useNavigate } from "react-router-dom";
+// import { Link } from "@nextui-org/react";
+import { useNavigate, Link } from "react-router-dom";
+import ForgotPasswordPage from '../pages/ForgotPasswordPage';
 
 function LoginSignUp() {
   let loginEmail;
@@ -36,11 +38,11 @@ function LoginSignUp() {
       let res = await response.json();
       console.log(res)
 
-      if (res.message == "Invalid Email or Password") {
+      if (res.message === "Invalid Email or Password") {
         setMessage('User/Password combination incorrect');
         console.log("login signup no user")
       } 
-      else if (res.message == "An email has been sent to your account to verify. You must verify before logging in.")
+      else if (res.message === "An email has been sent to your account to verify. You must verify before logging in.")
       {
         setMessage('An email has been sent to your account to verify. You must verify before logging in.');
       }
@@ -80,7 +82,7 @@ function LoginSignUp() {
     }
 
     try {
-      const response = await fetch('api/register', {
+      const response = await fetch('/api/register', {
         method: 'POST',
         body: jsonBody,
         headers: { 'Content-Type': 'application/json' },
@@ -102,25 +104,9 @@ function LoginSignUp() {
     }
   };
 
-  const doRegisterVerify = async (event) => {
-
-    try {
-      const response = await fetch('/api/registerVerification/:id/verify/:token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      let res = await response.json();
-      if (res.message === 'Account verified successfully! You may close this window and log in.') {
-        setResultSignUp('Account verified successfully! You may close this window and log in.');
-      } else {
-        setResultSignUp('Error Verifying account.');
-      }
-    } catch (e) {
-      alert(e.toString());
-      return;
-    }
-  };
+  const doForgotPassword = async (event) => {
+    navigate(ForgotPasswordPage);
+  }
 
   return (
       <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container" style={{ border: '2px solid #8CD9E4', padding: 0, margin: 0,  maxWidth: '85%'}}>
@@ -145,7 +131,12 @@ function LoginSignUp() {
               <h1>Sign in</h1>
               <input type="email" className="form-control mt-3" placeholder="Email" ref={(c) => (loginEmail = c)} />
               <input type="password" className="form-control mt-3" placeholder="Password" ref={(c) => (loginPassword = c)} />
-              <p onClick={togglePanel} className='mt-3'>Forgot your password?</p>
+              <Link to="/ForgotPasswordPage" style={{
+                  color: 'blue',
+                  textDecoration: 'underline',
+                  cursor: 'pointer',
+                }}> Forgot Your Password? 
+              </Link>
               <button className="button_style" type="submit">
                 Sign In
               </button>

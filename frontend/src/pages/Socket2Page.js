@@ -19,6 +19,8 @@ const Socket2Page = ({ socket }) => {
     const [countDown, setCountDown] = useState(15);
     const [joined, setJoined] = useState(false);
 
+    const [isCorrect, setIsCorrect] = useState(null);
+
     const [waiting, setWaiting] = useState(false);
 
 
@@ -32,10 +34,11 @@ const Socket2Page = ({ socket }) => {
 
     useEffect(() => {
         socket.on('get-answers', value => {
-            // console.log('GETTING ANSWERS!!!!!!!', value)
+            //console.log('GETTING ANSWERS!!!!!!!', value)
             setGame(value);
             setGameOn(true);
             setWaiting(false);
+            setIsCorrect(null);
         })
 
         socket.on('receieve-users', newUsers => {
@@ -57,6 +60,14 @@ const Socket2Page = ({ socket }) => {
                 setWaiting(true);
             }
         })
+        
+        socket.on('get-scores', (scores, corrects) => {
+            //console.log(corrects)
+            if(corrects[sessionStorage.getItem('nickname')]){
+                setIsCorrect(true);
+            }
+            else setIsCorrect(false);
+        })
 
     }, [socket])
 
@@ -65,7 +76,15 @@ const Socket2Page = ({ socket }) => {
 
             {
                 waiting &&
-                <h1 className=' py-5 h-100'>WAITING.....</h1>
+                <>
+                    {
+                        isCorrect === null
+                        ?
+                            <h1 className=' py-5 h-100'>WAITING.....</h1>
+                        :
+                            <h1 className=' py-5 h-100'>{isCorrect ? 'Correct!' : 'Wrong!'}</h1>
+                    }
+                </>
             }
 
             {
@@ -102,6 +121,8 @@ const Socket2Page = ({ socket }) => {
                                 </>
                                 :
                                 <>
+                                
+                                    <h3>{game?.currentQuestion}</h3>
                                     <div className='flex w-100 justify-content-around'>
                                         <button onClick={() => handleSubmitAnswer(0)} style={{ backgroundColor: qColor[0] }}>
                                             Answer: {game?.currentAnswer[0]}

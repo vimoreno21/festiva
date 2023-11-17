@@ -17,14 +17,14 @@ const app = express();
 const serverGame = http.createServer(app);
 const io = new Server(serverGame, {
     cors: {
-      origin: "*",
-      methods: ["GET", "POST", "DELETE", "PUT"],
+        origin: "*",
+        methods: ["GET", "POST", "DELETE", "PUT"],
     }
 })
 
 class Game {
 
-    constructor(id, host, q_and_a){
+    constructor(id, host, q_and_a) {
         this._id = id;
         this._users = {};
         this._host = host;
@@ -33,96 +33,64 @@ class Game {
         this._submitted = {}
     }
 
-    getID(){
+    getID() {
         return this._id;
     }
 
-    getHost(){
+    getHost() {
         return this._host;
     }
 
-    setHost(newHost){
+    setHost(newHost) {
         this._host = newHost;
     }
 
-    getUsers(){
+    getUsers() {
         return this._users;
     }
 
-    getUser(key){
+    getUser(key) {
         return this._users[key];
     }
 
-    setUser(key, value){
+    setUser(key, value) {
         this._users[key] = value;
     }
 
-    removeUser(key){
+    removeUser(key) {
         delete this._users[key]
     }
 
-    getRound(){
+    getRound() {
         return this._round;
     }
 
-    increaseRound(){
+    increaseRound() {
         this._round += 1;
     }
 
-    getQ_and_A(){
+    getQ_and_A() {
         return this._q_and_a;
     }
 
-    setQ_and_A(newQ_and_A){
+    setQ_and_A(newQ_and_A) {
         this._q_and_a = newQ_and_A;
     }
 
-    getSubmitted(){
+    getSubmitted() {
         return this._submitted;
     }
 
-    addSubmitted(userID, answer){
+    addSubmitted(userID, answer) {
         this._submitted[userID] = answer;
     }
 
-    resetSubmitted(){
+    resetSubmitted() {
         this._submitted = {};
     }
 
 
 }
-
-/*
-    users = {
-        'auto created id from socketio': {
-            game_id: 123,
-            nickname: 'pepe'
-        }
-    }
-*/
-// const users = {};
-
-
-// const addUser = (socket, game, nickname) => {
-
-//     game.users[socket.id] = nickname;
-
-//     users[socket.id] = {
-//         game_id: game.id,
-//         nickname: nickname
-//     }
-// }
-
-// const getUsers = (socket) => {
-//     let tmpUsers = {};
-//     Object.keys(users).forEach(u => {
-//         if(users[u].game_id === users[socket.id].game_id){
-//             tmpUsers[u] = users[u].nickname
-//         }
-//     })
-
-//     return tmpUsers;
-// }
 
 const users = {};
 
@@ -137,7 +105,7 @@ const games = {};
 // gives socket instance for every one of them
 io.on('connection', socket => {
 
-    // console.log(`user connected with id: ${socket.id}`)
+    // this is for educational purposes
     socket.on('send-message', (message, room) => {
         if (room === '') {
             // take current socket, and from that socket, broadcast message to 
@@ -152,28 +120,21 @@ io.on('connection', socket => {
     })
 
     /*  kahoot <3 */
+
     // host has selected the quiz they want to host and said they want to play
     socket.on('create-game', (game) => {
-        if(game.id && !io.sockets.adapter.rooms.get(game.id)){
+        if (game.id && !io.sockets.adapter.rooms.get(game.id)) {
             socket.join(game.id);
-            // console.log(`user with ID: ${socket.id} created game: ${game.id}`);
-            
-            //addUser(socket, game, 'host');
+
             games[game.id] = new Game(game.id, socket.id, game.q_and_a);
-            //game.users[socket.id] = 'host';
-            
-            // console.log(game)
             socket.emit('receieve-users', game.users);
         }
     })
 
-    // on mobile, join game will send info about users joined. frontend web should be able to display
-    // those nicknames on the screen.... does this need editing for that to happen? 
     socket.on('join-game', (game, nickname) => {
 
-        if(game.id && io.sockets.adapter.rooms.get(game.id) && nickname && games[game.id].getHost() !== socket.id){
+        if (game.id && io.sockets.adapter.rooms.get(game.id) && nickname && games[game.id].getHost() !== socket.id) {
             socket.join(game.id);
-            // console.log(`user with ID: ${socket.id} aka '${nickname}' joined game: ${game.id}`);
 
             const currentGame = games[game.id];
             currentGame.setUser(socket.id, {
@@ -182,28 +143,19 @@ io.on('connection', socket => {
             });
             addUser(game.id, socket.id);
             const tmpUsers = games[game.id].getUsers();
-            // console.log(tmpUsers)
- 
+
             socket.emit('receieve-users', tmpUsers);
             socket.to(game.id).emit('receieve-users', tmpUsers);
 
-            // console.log(users)
-            // console.log(io.sockets.adapter.rooms.get(game.id))
         }
     })
 
-
-    // working...
     socket.on('start-round', (game) => {
-        // console.log("PRINTING THE GAME OBJ")
-        // console.log(game)
         let currentGame = games[game.id];
-        // console.log('---->>>>', currentGame.getUsers())
-        if(Object.keys(currentGame.getUsers()).length === 0) return;
-        if(currentGame.getRound() >= currentGame.getQ_and_A().length ) return;
-        // console.log(currentGame.getRound(), currentGame.getUsers())
+        if (Object.keys(currentGame.getUsers()).length === 0) return;
+        if (currentGame.getRound() >= currentGame.getQ_and_A().length) return;
 
-        socket.to(game.id).emit('get-answers', {id: currentGame.getID(), users: currentGame.getUsers(), currentAnswer: currentGame.getQ_and_A()[currentGame.getRound()].answers});
+        socket.to(game.id).emit('get-answers', { id: currentGame.getID(), users: currentGame.getUsers(), currentAnswer: currentGame.getQ_and_A()[currentGame.getRound()].answers, currentQuestion: currentGame.getQ_and_A()[currentGame.getRound()].question });
         let remainingTime = 15;
         const intervalID = setInterval(() => {
             if (remainingTime > 0) {
@@ -211,16 +163,15 @@ io.on('connection', socket => {
                 socket.to(game.id).emit('count-down', remainingTime);
                 remainingTime--;
             }
-            else if (remainingTime == 0)
-            {
+            else if (remainingTime == 0) {
                 socket.emit('count-down', "Time is up!");
                 socket.to(game.id).emit('count-down', "Time is up!");
 
+                
+                socket.emit('get-scores', currentGame.getUsers(), currentGame.getSubmitted());
+                socket.to(game.id).emit('get-scores', currentGame.getUsers(), currentGame.getSubmitted());
                 currentGame.resetSubmitted();
                 currentGame.increaseRound();
-                
-                socket.emit('get-scores', currentGame.getUsers());
-                socket.to(game.id).emit('get-scores', currentGame.getUsers());
                 clearInterval(intervalID);
             }
         }, 1000)
@@ -228,36 +179,29 @@ io.on('connection', socket => {
 
     socket.on('submit-answer', (game) => {
         let currentGame = games[game.id];
-        if(currentGame){
-            currentGame.addSubmitted(socket.id, game.answer);
+        
+        if (currentGame) {
             let currentUser = currentGame.getUser(socket.id);
             let points = 0;
-            // console.log('correct answer:', currentGame.getQ_and_A()[currentGame.getRound()].correct_answer)
-            if(currentGame.getQ_and_A()[currentGame.getRound()].correct_answer === game.answer){
-                points = game.count > 10 ? 100 : game.count*10;
+            const nickname = currentGame.getUser(socket.id).nickname;
+            if (currentGame.getQ_and_A()[currentGame.getRound()].correct_answer === game.answer) {
+                points = game.count > 10 ? 100 : game.count * 10;
+                currentGame.addSubmitted(nickname, true);
             }
-            
+            else currentGame.addSubmitted(nickname, false);
+
             currentGame.setUser(socket.id, {
                 ...currentUser,
-                points: currentUser.points + points 
+                points: currentUser.points + points
             })
-
-            // console.log('SUBMITED ANSWER!', currentGame.getUser(socket.id))
         }
     })
 
-
-    // this is not the final spot for this
-    // game_pin = String(Math.floor(Math.random() * 5000) + 1000) + '',
-
-
     socket.on('disconnect', () => {
-        // console.log('user disconnected', socket.id)
+        if (users[socket.id]) {
 
-        if(users[socket.id]){
-    
             games[users[socket.id]].removeUser(socket.id)
-            
+
             socket.to(users[socket.id]).emit('receieve-users', games[users[socket.id]].getUsers());
             delete users[socket.id];
         }
@@ -270,8 +214,7 @@ instrument(io, { auth: false })
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use((req, res, next) =>
-{
+app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
         'Access-Control-Allow-Headers',
@@ -285,12 +228,10 @@ app.use((req, res, next) =>
 });
 
 
-if (process.env.NODE_ENV === 'production')
-{
+if (process.env.NODE_ENV === 'production') {
     // Set static folder
     app.use(express.static('frontend/build'));
-    app.get('*', (req, res) =>
-    {
+    app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
     });
 }
@@ -326,8 +267,11 @@ app.use('/api/sendPasswordRecovery', sendPasswordRecoveryRouter);
 const resetPasswordRouter = require('./api/resetPassword');
 app.use('/api/resetPassword', resetPasswordRouter);
 
+const delQuizRouter = require('./api/deleteQuiz');
+app.use('/api/deleteQuiz', delQuizRouter);
 
-serverGame.listen(PORT, () => 
-{
+
+
+serverGame.listen(PORT, () => {
     console.log('Server listening on port ' + PORT);
 }); 
