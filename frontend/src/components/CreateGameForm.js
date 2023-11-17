@@ -86,7 +86,7 @@ const CreateGameForm = () => {
   };
 
   return (
-    <Card className="max-w-[650px]" style={{maxHeight: '75vh'}}>
+    <Card className="max-w-[650px]" style={{maxHeight: '80vh', paddingTop: '30px'}}>
       <CardHeader className="flex gap-3">
         <h1>Input Your Game Information</h1>
       </CardHeader>

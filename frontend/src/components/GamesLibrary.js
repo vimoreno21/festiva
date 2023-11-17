@@ -38,18 +38,18 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
       try {
         const response = await fetch(apiEndpoint, {
           method: 'POST',
-          body: JSON.stringify({ _id: quiz._id }), 
+          body: JSON.stringify({ id: quiz._id }), 
           headers: {
             'Content-Type': 'application/json',
           },
         });
-
+        const data = await response.json();
         if (!response.ok) {
+          console.error('Failed to delete quiz:', data.message);
           throw new Error('Failed to delete quizzes :(( ');
         }
         else{
-          fetchQuizzes(user, setQuizzes);
-          alert('Button deleted!');
+          fetchQuizzes(user, setQuizzes)
         }
 
       } catch (error) {
@@ -57,6 +57,7 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
       }
     };
     deleteQuiz();
+    alert('Button deleted!');
   };
 
   const navigate = useNavigate();
@@ -98,12 +99,8 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
             <Card shadow="sm" className="game-card max-w-[250px]" key={index} onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={() => handleMouseLeave(index)} isPressable onPress={() => handleQuizClick(quiz)}
              >
-            {/* <Card className="max-w-[400px]"> */}
                 <CardHeader>
-                  {/* className="flex gap-3" */}
-                  {/* <div> */}
                   <div style={{color:'#6a5acd', fontSize:'20px'}}>{quiz.quiz_name}</div>
-                  {/* </div> */}
                 </CardHeader>
                 <Divider/>
                 <CardBody >

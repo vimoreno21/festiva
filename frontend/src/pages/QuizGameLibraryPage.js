@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GameLibrary from '../components/GamesLibrary.js';
 import '../dist/output.css';
+import { useNavigate } from 'react-router-dom';
 import {Breadcrumbs, BreadcrumbItem, Input, Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import {SearchIcon} from "../images/SearchIcon.jsx";
 import { getUserInfo } from "../actions/currentUser";
@@ -9,13 +10,27 @@ import { fetchQuizzes } from '../actions/fetchQuizzes';
 function QuizGameLibraryPage({socket}) {
 
   const [quizzes, setQuizzes] = useState([]);
-  // http://localhost:5000
-  const apiEndpoint = '/api/getUserQuizzes'; 
   const user = getUserInfo();
+  const navigate = useNavigate();
 
   useEffect(() => {
   fetchQuizzes(user, setQuizzes);
   }, []);
+
+  const handleQuizClick = (quiz) => {
+    // id
+    const id = String(Math.floor(Math.random() * 5000) + 1000) + ''
+    // Navigate to /waitToPlayGame and pass the selected quiz as state
+    const game = {
+      id: id,
+      users: {},
+      round: 0,
+      q_and_a: quiz.questions
+    };
+    // start the game 
+    socket.emit('create-game', game);
+    navigate('/waitToPlayGame', { state: { quiz, game} });
+  };
 
 
     return (
@@ -41,7 +56,7 @@ function QuizGameLibraryPage({socket}) {
             }}
           >
             {quizzes.map((quiz) => (
-              <AutocompleteItem key={quiz.quiz_name} value={quiz.quiz_name}>
+              <AutocompleteItem key={quiz.quiz_name} value={quiz.quiz_name} onClick={() => handleQuizClick(quiz)}>
                 {quiz.quiz_name}
               </AutocompleteItem>
             ))}

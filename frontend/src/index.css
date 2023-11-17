@@ -463,11 +463,21 @@ footer a {
 	letter-spacing: 0.5px;
 }
 
-/* HomePage classes */
+/* Quizoot library classes */
 .librarypage_div {
   background-color: #d1bcf0;
   background-size: cover;
+  min-height: 100vh;
+}
+
+.forgot_pass_div {
+  background-color: #7fbdff;
+  background-size: cover;
   height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  min-height: 100vh;
 }
 
 /* HomePage classes */

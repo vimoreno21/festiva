@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'reactstrap';
-import { useNavigate } from "react-router-dom";
+// import { Link } from "@nextui-org/react";
+import { useNavigate, Link } from "react-router-dom";
+import ForgotPasswordPage from '../pages/ForgotPasswordPage';
 
 function LoginSignUp() {
   let loginEmail;
@@ -102,6 +104,10 @@ function LoginSignUp() {
     }
   };
 
+  const doForgotPassword = async (event) => {
+    navigate(ForgotPasswordPage);
+  }
+
   return (
       <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container" style={{ border: '2px solid #8CD9E4', padding: 0, margin: 0,  maxWidth: '85%'}}>
         <Row style={{ zIndex: 1 }}>
@@ -125,7 +131,12 @@ function LoginSignUp() {
               <h1>Sign in</h1>
               <input type="email" className="form-control mt-3" placeholder="Email" ref={(c) => (loginEmail = c)} />
               <input type="password" className="form-control mt-3" placeholder="Password" ref={(c) => (loginPassword = c)} />
-              <p onClick={togglePanel} className='mt-3'>Forgot your password?</p>
+              <Link to="/ForgotPasswordPage" style={{
+                  color: 'blue',
+                  textDecoration: 'underline',
+                  cursor: 'pointer',
+                }}> Forgot Your Password? 
+              </Link>
               <button className="button_style" type="submit">
                 Sign In
               </button>
