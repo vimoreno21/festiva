@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const Socket2Page = ({ socket }) => {
+const Socket2Page = ({ socket, icons }) => {
     const qColor = {
         0: 'orange',
         1: 'blue',
@@ -22,12 +22,13 @@ const Socket2Page = ({ socket }) => {
     const [isCorrect, setIsCorrect] = useState(null);
 
     const [waiting, setWaiting] = useState(false);
+    const [currentIcon, setCurrentIcon] = useState('frog');
 
 
     const handleSubmitAnswer = (value) => {
 
         // console.log(game.currentAnswer[value]);
-        socket.emit('submit-answer', {id: game.id, count: countDown, answer: game.currentAnswer[value]});
+        socket.emit('submit-answer', { id: game.id, count: countDown, answer: game.currentAnswer[value] });
         setWaiting(true);
 
     }
@@ -56,14 +57,14 @@ const Socket2Page = ({ socket }) => {
             // assuming starting count = 15
             // point = count > 10 ? 100 : count*10
             setCountDown(count);
-            if(count === 'Time is up!'){
+            if (count === 'Time is up!') {
                 setWaiting(true);
             }
         })
-        
+
         socket.on('get-scores', (scores, corrects) => {
             //console.log(corrects)
-            if(corrects[sessionStorage.getItem('nickname')]){
+            if (corrects[sessionStorage.getItem('nickname')]) {
                 setIsCorrect(true);
             }
             else setIsCorrect(false);
@@ -79,9 +80,9 @@ const Socket2Page = ({ socket }) => {
                 <>
                     {
                         isCorrect === null
-                        ?
+                            ?
                             <h1 className=' py-5 h-100'>WAITING.....</h1>
-                        :
+                            :
                             <h1 className=' py-5 h-100'>{isCorrect ? 'Correct!' : 'Wrong!'}</h1>
                     }
                 </>
@@ -121,7 +122,7 @@ const Socket2Page = ({ socket }) => {
                                 </>
                                 :
                                 <>
-                                
+
                                     <h3>{game?.currentQuestion}</h3>
                                     <div className='flex w-100 justify-content-around'>
                                         <button onClick={() => handleSubmitAnswer(0)} style={{ backgroundColor: qColor[0] }}>
@@ -166,10 +167,20 @@ const Socket2Page = ({ socket }) => {
                             onChange={e => setNickname(e.target.value)}
                         />
 
+                        <select value={currentIcon} onChange={e => setCurrentIcon(e.target.value)}>
+                            {
+                                Object.keys(icons).map(icon => (
+                                    <option value={icon} className='w-40 h-10'>
+                                        {icon.charAt(0).toUpperCase() + icon.slice(1)}
+                                    </option>
+                                ))
+                            }
+                        </select>
+
                         <button
                             className='my-2'
                             onClick={() => {
-                                socket.emit('join-game', game, nickname);
+                                socket.emit('join-game', game, nickname, currentIcon);
                                 sessionStorage.setItem('nickname', nickname);
                             }}
                         >

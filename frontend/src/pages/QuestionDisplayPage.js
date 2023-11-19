@@ -21,47 +21,47 @@ import AudioPlayer from "../components/AudioPlayer";
 const temp_users = [
   {
     user_name: "Mel",
-    user_avatar: require("../images/temporary_avatars/frog-transparent.gif"),
+    user_avatar: "/temporary_avatars/frog-transparent.gif",
     points: 10,
   },
   {
     user_name: "Desa",
-    user_avatar: require("../images/temporary_avatars/hedgehog-transparent.gif"),
+    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
     points: 0,
   },
   {
     user_name: "Hudaa",
-    user_avatar: require("../images/temporary_avatars/parrot-transparent.gif"),
+    user_avatar: "/temporary_avatars/parrot-transparent.gif",
     points: 20,
   },
   {
     user_name: "Ricardo",
-    user_avatar: require("../images/temporary_avatars/owl-transparent.gif"),
+    user_avatar: "/temporary_avatars/owl-transparent.gif",
     points: 1000,
   },
   {
     user_name: "Arian",
-    user_avatar: require("../images/temporary_avatars/walrus-transparent.gif"),
+    user_avatar: "/temporary_avatars/walrus-transparent.gif",
     points: 2,
   },
   {
     user_name: "Desa",
-    user_avatar: require("../images/temporary_avatars/hedgehog-transparent.gif"),
+    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
     points: 0,
   },
   {
     user_name: "Desa",
-    user_avatar: require("../images/temporary_avatars/hedgehog-transparent.gif"),
+    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
     points: 0,
   },
   {
     user_name: "Desa",
-    user_avatar: require("../images/temporary_avatars/hedgehog-transparent.gif"),
+    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
     points: 0,
   },
   {
     user_name: "Desa",
-    user_avatar: require("../images/temporary_avatars/hedgehog-transparent.gif"),
+    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
     points: 0,
   },
 ];
