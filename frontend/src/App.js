@@ -16,8 +16,8 @@ import CreateGame from "./pages/CreateGame";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import GlobalNavBar2 from "./components/GlobalNavBarTwo";
 
- //const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
+//const socket = io.connect("http://localhost:5000");
 // console.log(socket)
 
 
