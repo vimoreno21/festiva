@@ -265,6 +265,9 @@ app.use('/api/getUserQuizzes', getUserQuizzesRouter);
 const sendPasswordRecoveryRouter = require('./api/sendPasswordRecovery');
 app.use('/api/sendPasswordRecovery', sendPasswordRecoveryRouter);
 
+const verifyPasswordRecoveryPinRouter = require('./api/verifyPasswordRecoveryPin');
+app.use('/api/verifyPasswordRecoveryPin', verifyPasswordRecoveryPinRouter);
+
 const resetPasswordRouter = require('./api/resetPassword');
 app.use('/api/resetPassword', resetPasswordRouter);
 
