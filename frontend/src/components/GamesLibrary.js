@@ -3,7 +3,7 @@ import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from "../actions/currentUser";
 
-const GameLibrary = ({socket, quizzes}) => {
+const GameLibrary = ({socket, userQuizzes, premadeQuizzes}) => {
   const list = [
     {
       quiz_name: "Create Game",
@@ -13,11 +13,12 @@ const GameLibrary = ({socket, quizzes}) => {
 
   const navigate = useNavigate();
   let combinedList;
-  console.log(quizzes);
+  console.log("User Quizzes:", userQuizzes);
+  console.log("Premade Quizzes:", premadeQuizzes);
 
-  if (quizzes.length !== 0)
+  if (userQuizzes.length !== 0)
   {
-    combinedList = [...list, ...quizzes];
+    combinedList = [...list, ...userQuizzes];
   } else{
     combinedList = list;
   }
@@ -35,7 +36,7 @@ const GameLibrary = ({socket, quizzes}) => {
         id: id,
         users: {},
         round: 0,
-        q_and_a: quiz.questions
+        q_and_a: quiz.q_and_a
       };
       // start the game 
       socket.emit('create-game', game);
@@ -45,8 +46,28 @@ const GameLibrary = ({socket, quizzes}) => {
   
   return (
     <div> 
+      <p className='message'> User quizzes:</p>
       <div className="game-library-grid">
         {combinedList.map((quiz, index) => (
+            <Card shadow="sm" className="game-card max-w-[250px]" key={index} isPressable onPress={() => handleQuizClick(quiz)}>
+            {/* <Card className="max-w-[400px]"> */}
+                <CardHeader >
+                  {/* className="flex gap-3" */}
+                  {/* <div> */}
+                  <div style={{color:'#6a5acd', fontSize:'20px'}}>{quiz.quiz_name}</div>
+                  {/* </div> */}
+                </CardHeader>
+                <Divider/>
+                <CardBody  >
+                  {/* className="flexWrap" */}
+                  <p>{quiz.quiz_description}</p>
+                </CardBody>
+            </Card>
+        ))}
+      </div>
+      <p className='message'> Premade quizzes:</p>
+      <div className="game-library-grid">
+        {premadeQuizzes.map((quiz, index) => (
             <Card shadow="sm" className="game-card max-w-[250px]" key={index} isPressable onPress={() => handleQuizClick(quiz)}>
             {/* <Card className="max-w-[400px]"> */}
                 <CardHeader >

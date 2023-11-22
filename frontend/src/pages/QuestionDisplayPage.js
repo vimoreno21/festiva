@@ -6,6 +6,7 @@ import QuizQuestion from "../components/QuizQuestion";
 import QuizRanking from "../components/QuizRanking";
 import backgroundMusic from "../audio/hipjazz.mp3";
 import AudioPlayer from "../components/AudioPlayer";
+import { useLocation } from "react-router-dom";
 
 /*
     Notes
@@ -66,11 +67,27 @@ const temp_users = [
   },
 ];
 
-function QuestionDisplayPage() {
+function QuestionDisplayPage({ socket }) {
   const [showRanking, setShowRanking] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true); // for audio
+  const [scores, setScores] = useState(null);
 
+  const location = useLocation();
+  const quiz = location.state?.quiz || {};
+  const game = location.state?.game || {};
   const navigate = useNavigate();
+
+  useEffect(() => {
+
+    socket.on("get-scores", (value) => {
+      console.log("value", value);
+      setScores(value);
+      console.log("scores", scores);
+    });
+  }, [socket]);
+
+  console.log("quiz:", quiz);
+  console.log("game:", game);
 
   const handleExitButton = () => {
     // replaces history stack with the quizGameLibrary page
@@ -100,11 +117,20 @@ function QuestionDisplayPage() {
           setShowRanking={setShowRanking}
           setIsPlaying={setIsPlaying}
           users={temp_users}
+          game={game}
+          setScores={setScores}
+          scores={scores}
+          socket={socket}
         />
       ) : (
         <QuizQuestion
           setShowRanking={setShowRanking}
           setIsPlaying={setIsPlaying}
+          quiz={quiz}
+          game={game}
+          setScores={setScores}
+          scores={scores}
+          socket={socket}
         />
       )}
     </div>
