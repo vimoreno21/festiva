@@ -13,58 +13,9 @@ import WinnersPodium from "../components/WinnersPodium";
     Notes
     -  fix audio stuff
     - fix empty section on bottom of page
-    - add avatars
 */
 
-const temp_users = [
-  {
-    user_name: "Mel",
-    user_avatar: "/temporary_avatars/frog-transparent.gif",
-    points: 10,
-  },
-  {
-    user_name: "Desa",
-    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
-    points: 0,
-  },
-  {
-    user_name: "Hudaa",
-    user_avatar: "/temporary_avatars/parrot-transparent.gif",
-    points: 20,
-  },
-  {
-    user_name: "Ricardo",
-    user_avatar: "/temporary_avatars/owl-transparent.gif",
-    points: 1000,
-  },
-  {
-    user_name: "Arian",
-    user_avatar: "/temporary_avatars/walrus-transparent.gif",
-    points: 2,
-  },
-  {
-    user_name: "Desa",
-    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
-    points: 0,
-  },
-  {
-    user_name: "Desa",
-    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
-    points: 0,
-  },
-  {
-    user_name: "Desa",
-    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
-    points: 0,
-  },
-  {
-    user_name: "Desa",
-    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
-    points: 0,
-  },
-];
-
-function QuestionDisplayPage({ socket }) {
+function QuestionDisplayPage({ socket, icons }) {
   const [showRanking, setShowRanking] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true); // for audio
   const [scores, setScores] = useState(null);
@@ -106,17 +57,17 @@ function QuestionDisplayPage({ socket }) {
         <span className="game-title">Quizoot</span>
       </div>
       {showWinnersPodium ? (
-        <WinnersPodium scores={scores} temp_users={temp_users} />
+        <WinnersPodium scores={scores} icons={icons} />
       ) : showRanking ? (
         <QuizRanking
           setShowRanking={setShowRanking}
           setIsPlaying={setIsPlaying}
-          users={temp_users}
           gameObject={gameObject}
           setGameObject={setGameObject}
           scores={scores}
           setScores={setScores}
           socket={socket}
+          icons={icons}
         />
       ) : (
         <QuizQuestion

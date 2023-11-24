@@ -6,19 +6,13 @@ import { ConnectionStates } from "mongoose";
 function QuizRanking({
   setShowRanking,
   setIsPlaying,
-  users,
   gameObject,
   setGameObject,
   scores,
   setScores,
   socket,
+  icons
 }) {
-//   useEffect(() => {
-//     setIsPlaying(false);
-//   }, []);
-
-//   console.log(gameObject);
-//   console.log(scores);
 
   return (
     <>
@@ -44,11 +38,11 @@ function QuizRanking({
             <Row key={index}>
               <Col>{index + 1}</Col>
               <Col>
-                {/* <img
-                    src={user.user_avatar}
-                    alt={`Avatar for ${user.user_name}`}
-                    style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-                /> */}
+                <img
+                      src={icons[user.icon]}
+                      alt="icon"
+                      style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+                />
               </Col>
               <Col>{user.nickname}</Col>
               <Col>{user.points}</Col>

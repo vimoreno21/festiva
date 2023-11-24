@@ -46,7 +46,7 @@ function App() {
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/start" element={<StartPage />} />
                 <Route path="/pickgame" element={<PickGamePage />} />
-                <Route path="/waitToPlayGame" element={<WaitPlayGame socket={socket}/>} />
+                <Route path="/waitToPlayGame" element={<WaitPlayGame socket={socket} icons={icons}/>} />
                 <Route path="/api/registerVerification/:id/verify/:token" element={<EmailVerify />} />
                 <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
                 <Route path="/CreateGame" element={<CreateGame />} />
@@ -60,7 +60,7 @@ function App() {
           }
         />
         {/* Route without navbar */}
-        <Route path="/questionDisplay" element={<QuestionDisplayPage socket={socket} />} />
+        <Route path="/questionDisplay" element={<QuestionDisplayPage socket={socket} icons={icons}/>} />
         <Route path="/quizGameLibrary" element={<QuizGameLibraryPage socket={socket}/>} />
         <Route path="/CreateGame" element={<CreateGame />} />
     </BrowserRouter>

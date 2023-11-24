@@ -8,10 +8,7 @@ function TimerWithCircle({ onTimerEnd, socket }) {
         setCountDown(count);
       });
 
-      console.log("Countdown:", countDown);
-
       if (countDown === "Time is up!") {
-        console.log("Calling onTimerEnd()");
         onTimerEnd();
       }
   }, [socket, countDown, onTimerEnd]);

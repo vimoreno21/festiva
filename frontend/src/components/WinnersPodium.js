@@ -1,11 +1,10 @@
 import React from "react";
 
-function WinnersPodium({ scores, temp_users }) {
+function WinnersPodium({ scores, temp_users, icons }) {
   // Sort temp_users by points in descending order
-  const sortedUsers = temp_users.sort((a, b) => b.points - a.points);
+  const sortedUsers = Object.values(scores).sort((a, b) => b.points - a.points);
 
   // Separate top 3 winners
-  //const [firstPlace = {}, secondPlace = {}, thirdPlace = {}, ...otherPlayers] = sortedUsers;
   const [firstPlace, secondPlace, thirdPlace, ...otherPlayers] = sortedUsers;
 
   return (
@@ -17,12 +16,14 @@ function WinnersPodium({ scores, temp_users }) {
           <div>
             <img
               className="player-avatar"
-              src={secondPlace.user_avatar}
-              alt={""}
+              src={icons[secondPlace.icon]}
+              alt="icon"
               style={{ width: "50px", height: "50px", borderRadius: "50%" }}
             />
-            <div className="player-name">{secondPlace.user_name}</div>
-            <div className="podium-item second-place player-points">{secondPlace.points}</div>
+            <div className="player-name">{secondPlace.nickname}</div>
+            <div className="podium-item second-place player-points">
+              {secondPlace.points}
+            </div>
             <div className="player-placement">2nd</div>
           </div>
         ) : (
@@ -36,12 +37,14 @@ function WinnersPodium({ scores, temp_users }) {
           <div>
             <img
               className="player-avatar"
-              src={firstPlace.user_avatar}
-              alt={""}
+              src={icons[firstPlace.icon]}
+              alt="icon"
               style={{ width: "50px", height: "50px", borderRadius: "50%" }}
             />
-            <div className="player-name">{firstPlace.user_name}</div>
-            <div className="podium-item first-place player-points">{firstPlace.points}</div>
+            <div className="player-name">{firstPlace.nickname}</div>
+            <div className="podium-item first-place player-points">
+              {firstPlace.points}
+            </div>
             <div className="player-placement">1st</div>
           </div>
         ) : (
@@ -55,12 +58,14 @@ function WinnersPodium({ scores, temp_users }) {
           <div>
             <img
               className="player-avatar"
-              src={thirdPlace.user_avatar}
-              alt={""}
+              src={icons[thirdPlace.icon]}
+              alt="icon"
               style={{ width: "50px", height: "50px", borderRadius: "50%" }}
             />
-            <div className="player-name">{thirdPlace.user_name}</div>
-            <div className="podium-item third-place player-points">{thirdPlace.points}</div>
+            <div className="player-name">{thirdPlace.nickname}</div>
+            <div className="podium-item third-place player-points">
+              {thirdPlace.points}
+            </div>
             <div className="player-placement">3rd</div>
           </div>
         ) : (
@@ -77,11 +82,11 @@ function WinnersPodium({ scores, temp_users }) {
           <div key={index}>
             <img
               className="player-avatar"
-              src={user.user_avatar}
-              alt={`Avatar for ${user.user_name}`}
+              src={icons[user.icon]}
+              alt="icon"
               style={{ width: "50px", height: "50px", borderRadius: "50%" }}
             />
-            <div className="player-name">{user.user_name}</div>
+            <div className="player-name">{user.nickname}</div>
             <div className="player-points podium-item">{user.points}</div>
             <div className="player-placement">{index + 4}th</div>
           </div>

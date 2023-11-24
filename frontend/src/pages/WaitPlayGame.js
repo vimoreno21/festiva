@@ -6,7 +6,7 @@ import { getUserInfo } from "../actions/currentUser";
 import { Input } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
-const WaitPlayGame = ({ socket }) => {
+const WaitPlayGame = ({ socket, icons }) => {
   const location = useLocation();
   const quiz = location.state?.quiz || {};
   const initial_game = location.state?.game || {};
@@ -36,12 +36,26 @@ const WaitPlayGame = ({ socket }) => {
           <p className="fs-1 fw-normal me-1">Game Code: </p>
           <p className="fw-bold fs-1 mr-5">{initial_game.id}</p>
         </div>
-        <p className="fs-1 fw-normal mt-5">Players</p>
-        <ul>
-          {Object.keys(game.users)?.map((u) => {
-            return <li key={u}>{game.users[u].nickname}</li>;
-          })}
-        </ul>
+        <p className="fs-1 fw-normal mt-5">Players:</p>
+        <div className="waiting-area">
+          <ul>
+            {Object.keys(game.users)?.map((u) => {
+              return (
+                <li key={u}>
+                  {game.users[u].nickname}{" "}
+                  <img
+                    src={icons[game.users[u].icon]}
+                    alt="icon"
+                    className="img_sizing"
+                    style={{
+                      display: "inline-block",
+                    }}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
         <button
           style={{ backgroundColor: "green", borderColor: "none" }}
           onClick={() => {
