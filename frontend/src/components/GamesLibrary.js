@@ -1,24 +1,71 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Divider, Button } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from "../actions/currentUser";
+import { fetchQuizzes } from '../actions/fetchQuizzes';
 
-const GameLibrary = ({socket, userQuizzes, premadeQuizzes}) => {
+const GameLibrary = ({socket, quizzes, setQuizzes}) => {
   const list = [
     {
       quiz_name: "Create Game",
       quiz_description: "click here to create your own game.",
     },
   ];
+  const [isHovered, setIsHovered] = useState([]);
+  // http://localhost:5000
+  const apiEndpoint = '/api/deleteQuiz'; 
+  const user = getUserInfo();
+
+  useEffect(() => {
+    // Initialize isHovered with false for each quiz item
+    setIsHovered(Array(quizzes.length).fill(false));
+  }, [quizzes]);
+
+  const handleMouseEnter = (index) => {
+    const updatedHoverState = Array(quizzes.length).fill(false);
+    if (index !== 0) updatedHoverState[index] = true;
+    setIsHovered(updatedHoverState);
+  };
+
+  const handleMouseLeave = (index) => {
+    const updatedHoverState = Array(quizzes.length).fill(false);
+    updatedHoverState[index] = false;
+    setIsHovered(updatedHoverState);
+  };
+
+  const deletedQuiz = (quiz) => {
+    const deleteQuiz = async () => {
+      try {
+        const response = await fetch(apiEndpoint, {
+          method: 'POST',
+          body: JSON.stringify({ id: quiz._id }), 
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          console.error('Failed to delete quiz:', data.message);
+          throw new Error('Failed to delete quizzes :(( ');
+        }
+        else{
+          fetchQuizzes(user, setQuizzes)
+        }
+
+      } catch (error) {
+        console.error('Error deleting quizzes :((', error.message);
+      }
+    };
+    deleteQuiz();
+    alert('Button deleted!');
+  };
 
   const navigate = useNavigate();
   let combinedList;
-  console.log("User Quizzes:", userQuizzes);
-  console.log("Premade Quizzes:", premadeQuizzes);
 
-  if (userQuizzes.length !== 0)
+  if (quizzes.length !== 0)
   {
-    combinedList = [...list, ...userQuizzes];
+    combinedList = [...list, ...quizzes];
   } else{
     combinedList = list;
   }
@@ -46,41 +93,31 @@ const GameLibrary = ({socket, userQuizzes, premadeQuizzes}) => {
   
   return (
     <div> 
-      <p className='message'> User quizzes:</p>
       <div className="game-library-grid">
         {combinedList.map((quiz, index) => (
-            <Card shadow="sm" className="game-card max-w-[250px]" key={index} isPressable onPress={() => handleQuizClick(quiz)}>
-            {/* <Card className="max-w-[400px]"> */}
-                <CardHeader >
-                  {/* className="flex gap-3" */}
-                  {/* <div> */}
+            <Card shadow="sm" className="game-card max-w-[250px]" key={index} onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={() => handleMouseLeave(index)} isPressable onPress={() => handleQuizClick(quiz)}
+             >
+                <CardHeader>
                   <div style={{color:'#6a5acd', fontSize:'20px'}}>{quiz.quiz_name}</div>
-                  {/* </div> */}
                 </CardHeader>
                 <Divider/>
-                <CardBody  >
+                <CardBody >
                   {/* className="flexWrap" */}
                   <p>{quiz.quiz_description}</p>
                 </CardBody>
-            </Card>
-        ))}
-      </div>
-      <p className='message'> Premade quizzes:</p>
-      <div className="game-library-grid">
-        {premadeQuizzes.map((quiz, index) => (
-            <Card shadow="sm" className="game-card max-w-[250px]" key={index} isPressable onPress={() => handleQuizClick(quiz)}>
-            {/* <Card className="max-w-[400px]"> */}
-                <CardHeader >
-                  {/* className="flex gap-3" */}
-                  {/* <div> */}
-                  <div style={{color:'#6a5acd', fontSize:'20px'}}>{quiz.quiz_name}</div>
-                  {/* </div> */}
-                </CardHeader>
-                <Divider/>
-                <CardBody  >
-                  {/* className="flexWrap" */}
-                  <p>{quiz.quiz_description}</p>
-                </CardBody>
+                {isHovered[index] && (
+                  <Button
+                    className={" text-foreground border-default-200"}
+                    color="secondary"
+                    radius="full"
+                    size="sm"
+                    variant="flat"
+                    onPress={() => deletedQuiz(quiz)}
+                  >
+                    Delete
+                  </Button>
+                )}
             </Card>
         ))}
       </div>

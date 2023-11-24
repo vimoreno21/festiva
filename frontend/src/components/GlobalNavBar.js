@@ -21,6 +21,7 @@ const GlobalNavBar = () => {
     '/about':'#ffa4a4',
     '/creategame':'#8CD9E4',
     '/quizGameLibrary':'#d1bcf0',
+    '/ForgotPasswordPage':'#7fbdff'
     }
 
     const logoutOrStartLink = () => {

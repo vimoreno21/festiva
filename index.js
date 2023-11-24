@@ -131,7 +131,7 @@ io.on('connection', socket => {
         }
     })
 
-    socket.on('join-game', (game, nickname) => {
+    socket.on('join-game', (game, nickname, icon = 'frog') => {
 
         if (game.id && io.sockets.adapter.rooms.get(game.id) && nickname && games[game.id].getHost() !== socket.id) {
             socket.join(game.id);
@@ -139,7 +139,8 @@ io.on('connection', socket => {
             const currentGame = games[game.id];
             currentGame.setUser(socket.id, {
                 nickname: nickname,
-                points: 0
+                points: 0,
+                icon: icon
             });
             addUser(game.id, socket.id);
             const tmpUsers = games[game.id].getUsers();
@@ -152,7 +153,7 @@ io.on('connection', socket => {
 
     socket.on('start-round', (game) => {
         let currentGame = games[game.id];
-        if (Object.keys(currentGame.getUsers()).length === 0) return;
+        if (Object.keys(currentGame?.getUsers()).length === 0) return;
         if (currentGame.getRound() >= currentGame.getQ_and_A().length) return;
 
         socket.to(game.id).emit('get-answers', { id: currentGame.getID(), users: currentGame.getUsers(), currentAnswer: currentGame.getQ_and_A()[currentGame.getRound()].answers, currentQuestion: currentGame.getQ_and_A()[currentGame.getRound()].question });
@@ -261,8 +262,15 @@ app.use('/api/getPremadeQuizzes', getPremadeQuizzesRouter);
 const getUserQuizzesRouter = require('./api/getUserQuizzes');
 app.use('/api/getUserQuizzes', getUserQuizzesRouter);
 
+const sendPasswordRecoveryRouter = require('./api/sendPasswordRecovery');
+app.use('/api/sendPasswordRecovery', sendPasswordRecoveryRouter);
+
+const resetPasswordRouter = require('./api/resetPassword');
+app.use('/api/resetPassword', resetPasswordRouter);
+
 const delQuizRouter = require('./api/deleteQuiz');
 app.use('/api/deleteQuiz', delQuizRouter);
+
 
 
 serverGame.listen(PORT, () => {

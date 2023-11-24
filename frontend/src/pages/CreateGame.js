@@ -13,7 +13,7 @@ const CreateGame = () => {
         </Breadcrumbs>
         <CreateGameTitle/>
       </div>
-      <div style={{ paddingRight: '60px', paddingTop: '0px' }}>
+      <div style={{ paddingRight: '60px', paddingTop: '50px' }}>
         <CreateGameForm />
       </div>
     </div>

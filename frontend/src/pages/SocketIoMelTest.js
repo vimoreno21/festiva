@@ -12,7 +12,7 @@ import React, { useState, useEffect } from 'react'
 // take any event and send it to the server (socket.emit)
 //socket.emit('custom-e', 110, 'yo', {a:'a'})
 
-const SocketIoMelTest = ({ socket }) => {
+const SocketIoMelTest = ({ socket, icons }) => {
 
     const qColor = {
         0: 'orange',
@@ -86,7 +86,14 @@ const SocketIoMelTest = ({ socket }) => {
                     <h1>Round: {game.round + 1}</h1>
                     {
                         Object.keys(scores).map(s =>
-                            <li key={s + 'S'}>{scores[s].nickname}: {scores[s].points}</li>
+                            <li key={s + 'S'} className='flex items-center w-40 h-auto'>
+                                <img
+                                    src={icons[game.users[s].icon]}
+                                    alt='icon'
+                                    className='img_sizing'
+                                />
+                                {scores[s].nickname}: {scores[s].points}
+                            </li>
                         )
                     }
                     <div className='flex flex-row'>
@@ -96,7 +103,7 @@ const SocketIoMelTest = ({ socket }) => {
                                 socket.emit('start-round', game);
                                 setGameOn(true)
                                 setScores(null);
-                                setGame(prev => ({...prev, round: prev.round+1}))
+                                setGame(prev => ({ ...prev, round: prev.round + 1 }))
                             }}
                         >
                             Next Round
@@ -110,7 +117,14 @@ const SocketIoMelTest = ({ socket }) => {
             <ul>
                 {
                     Object.keys(game.users)?.map(u => {
-                        return <li key={u}>
+                        // console.log(game.users)
+                        // console.log(icons[game.users[u].icon])
+                        return <li key={u} className='flex items-center w-40 h-auto'>
+                            <img
+                                src={icons[game.users[u].icon]}
+                                alt='icon'
+                                className='img_sizing'
+                            />
                             {game.users[u].nickname}
                         </li>
                     })
