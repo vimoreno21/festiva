@@ -63,7 +63,6 @@ function App() {
         <Route path="/questionDisplay" element={<QuestionDisplayPage socket={socket} />} />
         <Route path="/quizGameLibrary" element={<QuizGameLibraryPage socket={socket}/>} />
         <Route path="/CreateGame" element={<CreateGame />} />
-      </Routes>
     </BrowserRouter>
   );
 }
