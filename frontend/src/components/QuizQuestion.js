@@ -1,53 +1,17 @@
 import React, { useEffect, useState } from "react";
 import TimerWithCircle from "../components/TimerWithCircle";
 
-
-function QuizQuestion({ setShowRanking, setIsPlaying}) {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [resetTimer, setResetTimer] = useState(false);
-  const [quizData, setQuizData] = useState([]);
+function QuizQuestion({ setShowRanking, setIsPlaying, quiz, gameObject, setShowWinnersPodium, socket }) {
   const [showAnswer, setShowAnswer] = useState(false);
 
   useEffect(() => {
-    async function fetchQuiz() {
-      let obj = { quiz_name: "team quiz 2" };
-      let js = JSON.stringify(obj);
-
-      try {
-        const response = await fetch(
-          "/api/searchPremadeQuiz",
-          {
-            method: "POST",
-            body: js,
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-
-        const res = await response.json();
-        setQuizData(res);
-      } catch (e) {
-        alert(e.toString());
-        return;
-      }
-    }
-
-    fetchQuiz();
+    setIsPlaying(true);
   }, []);
-
-  // Check if quizData is empty or currentQuestionIndex is out of bounds (usually because it hasn't loaded yet)
-  if (
-    quizData.length === 0 ||
-    currentQuestionIndex >= quizData[0].q_and_a.length
-  ) {
-    return <p className="message">Loading...</p>;
-  }
-
-  const currentQuestion = quizData[0].q_and_a[currentQuestionIndex];
-
+  
   // returns the className for the correct answer choice if correct and vice versa
-  function getButtonClass(answer) {
+  function getButtonClass(answerChoice, correctAnswer) {
     if (showAnswer)
-      if (currentQuestion.correct_answer === answer) return "correct-answer";
+      if (correctAnswer === answerChoice) return "correct-answer";
       else return "wrong-answer";
     // returns empty string to assign no className
     else return "";
@@ -60,58 +24,53 @@ function QuizQuestion({ setShowRanking, setIsPlaying}) {
 
   // handles instructions once timer ends
   const handleTimerEnd = () => {
-    if (currentQuestionIndex < quizData[0].q_and_a.length - 1) {
-      setShowAnswer(true);
-      setIsPlaying(false);
-
-      // delays moving to next step by 3 seconds to show correct answer
-      setTimeout(() => {
+    setIsPlaying(false);
+    setShowAnswer(true);
+    
+    // delays moving to next step by 3 seconds to show correct answer
+    setTimeout(() => {
+      if (gameObject.round < gameObject.q_and_a.length - 1) {
         setShowRanking(true);
         moveToNextQuestion();
-      }, 3000);
-    } else {
-      setResetTimer(false);
-      setIsPlaying(false);
-    }
+      } else {
+        setShowWinnersPodium(true);
+      }
+    }, 3000);
   };
 
-  // Handles moving to the next question
   const moveToNextQuestion = () => {
+    // setShowRanking(false);
     setIsPlaying(true);
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-    setResetTimer(true);
     setShowAnswer(false);
   };
 
   return (
     <>
-      <div className="timer-container">
-        <TimerWithCircle
-          duration={5}
-          onTimerEnd={handleTimerEnd}
-          resetTimer={resetTimer}
-          setResetTimer={setResetTimer}
-        />
-      </div>
-      <div className="question-container">
-        <h2 className="question-text">{currentQuestion.question}</h2>
-        <div className="answer-grid">
-          {currentQuestion.answers.map((answer, answerIndex) => (
-            <button
-              key={answerIndex}
-              className={`answer-button ${getButtonClass(answer)}`}
-              style={{ backgroundColor: getBackgroundColor(answerIndex) }}
-            >
-              {answer}
-            </button>
-          ))}
+      {
+      gameObject.round < gameObject.q_and_a.length &&
+      (<div>
+        <div className="timer-container">
+          <TimerWithCircle
+            onTimerEnd={handleTimerEnd}
+            socket={socket}
+          />
         </div>
-      </div>
-      <div>
-        <button onClick={handleTimerEnd} className="temp">
-          skip question (temporary)
-        </button>
-      </div>
+        <div className="question-container">
+          <h2 className="question-text">{gameObject.q_and_a[gameObject.round].question}</h2>
+          <div className="answer-grid">
+            {gameObject.q_and_a[gameObject.round].answers.map((answer, answerIndex) => (
+              <button
+                key={answerIndex}
+                className={`answer-button ${getButtonClass(answer, gameObject.q_and_a[gameObject.round].correct_answer)}`}
+                style={{ backgroundColor: getBackgroundColor(answerIndex) }}
+              >
+                {answer}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>)
+      }
     </>
   );
 }
