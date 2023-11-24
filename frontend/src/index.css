@@ -620,7 +620,6 @@ footer a {
   font-family: "Inria Sans", sans-serif;
   color: #222;
   margin-bottom: 2rem;
-  margin-top: 2rem;
 }
 
 .answer-grid {
@@ -657,6 +656,8 @@ footer a {
   text-align: center;
   width: 200px;
   margin: 0 auto;
+  position: relative;
+  bottom: 1.5rem;
 }
 
 .timer-clock {
@@ -718,6 +719,105 @@ footer a {
 .answer-button.correct-answer {
   animation: rotateSeesaw 1s ease-in-out infinite alternate;
   transform: scale(1.5);
+}
+
+.container.table-styles{
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 14px 28px rgb(0 0 0 / 20%), 0 10px 10px rgb(0 0 0 / 0%);
+  top: 1rem;
+  /* width: 40%; */
+}
+
+.nextRound-button {
+  background-color: #ffe289;
+  color: rgb(70, 70, 70);
+  margin-top: 3rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: solid 0.5px;
+}
+
+.nextRound-button:hover {
+  transform: scale(1.1);
+}
+
+.podium-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.winners-podium {
+  font-family: "Fredoka", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 5%;
+  align-items: flex-end;
+}
+
+.podium-item {
+  width: 80px;
+  background: linear-gradient(to bottom, #8CD9E4, #3498db);
+  padding-top: 5px;
+}
+.not-winners .podium-item {
+  background: #79cae2;
+}
+
+.first-place {
+  height: 150px;
+}
+
+.second-place {
+  height: 120px;
+}
+
+.third-place {
+  height: 90px;
+}
+
+.player-avatar {
+  margin:0 auto;
+}
+
+.player-points {
+  font-size: small;
+  text-align: center;
+}
+
+.player-name {
+  font-family: "Inria Sans", sans-serif;
+  text-align: center;
+}
+
+.player-placement {
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.3rem;
+}
+
+.not-winners  .player-placement{
+  font-size:1rem;
+}
+
+.winner-message {
+  text-align: center;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-top: 3%;
+}
+
+.not-winners {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  gap: 2rem;
+  margin-top:2rem;
 }
 
 @keyframes rotateSeesaw {

@@ -12,9 +12,6 @@ const WaitPlayGame = ({ socket }) => {
   const initial_game = location.state?.game || {};
   const navigate = useNavigate();
 
-  console.log("quiz:", quiz);
-  console.log("game:", initial_game);
-
   const [gameOn, setGameOn] = useState(false);
   const [game, setGame] = useState(initial_game);
 
@@ -23,8 +20,6 @@ const WaitPlayGame = ({ socket }) => {
       setGame((prev) => ({ ...prev, users: newUsers }));
     });
   }, [socket]);
-
-  console.log(quiz);
 
   return (
     <section className="wait_play_style container-p">

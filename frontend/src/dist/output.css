@@ -4291,7 +4291,7 @@ footer a {
   -webkit-animation: gradientAnimation 5s linear infinite;
           animation: gradientAnimation 5s linear infinite;
 }
-
+/* 
 @-webkit-keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
@@ -4318,7 +4318,7 @@ footer a {
   100% {
     background-position: 0% 50%;
   }
-}
+} */
 
 .question-text {
   font-family: "Inria Sans", sans-serif;
@@ -4329,7 +4329,7 @@ footer a {
 .answer-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 2rem;
   width: 80%;
   margin: 0 auto;
 }
@@ -4338,132 +4338,9 @@ footer a {
   font-family: "Inria Sans", sans-serif;
   padding: 1rem;
   border: 1px solid #999;
-  height: 8rem !important;
+  height: 8rem;
   color: #222;
-  /* Add the following styles to make text responsive */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 1rem;
-  /* Adjust the font size as needed */
-}
-
-.temp {
-  color: white;
-  text-decoration: none;
-  margin-left: 10%;
-  margin-top: 1.5rem;
-}
-
-.timer-container {
-  text-align: center;
-  width: 200px;
-  margin: 0 auto;
-}
-
-.timer-clock {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-  background: #f0f0f0;
-  border-radius: 50%;
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
-  transition: -webkit-transform 1s;
-  transition: transform 1s;
-  transition: transform 1s, -webkit-transform 1s;
-}
-
-.game-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 3%;
-  padding-left: 10%;
-  padding-right: 10%;
-}
-
-.game-title {
-  font-family: "Fredoka", sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 2.5rem;
-  letter-spacing: 0.05em;
-  color: #8cd9e4;
-  stroke-width: 10;
-  -webkit-text-stroke: 1px black;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.back-button {
-  background-color: transparent;
-  border: none;
-  stroke: black;
-  stroke-width: 10;
-  font-size: 2.3rem;
-  color: #ff695c;
-  -webkit-text-stroke: 1px black;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  transition: -webkit-transform 0.2s;
-  transition: transform 0.2s;
-  transition: transform 0.2s, -webkit-transform 0.2s;
-  padding: 0rem;
-}
-
-.back-button:hover {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
-}
-
-.questionDisplay-container {
-  /* Existing CSS styles for your component */
-  background-color: #fdefbd;
-  background-size: cover;
-  height: 100%;
-  /* Add this to create a gradient animation */
-  background: linear-gradient(45deg, #feefbf, #f9dbdb, #c2dfe3, #cee1bf);
-  background-size: 200% 100%;
-  -webkit-animation: gradientAnimation 5s linear infinite;
-          animation: gradientAnimation 5s linear infinite;
-}
-
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.question-text {
-  font-family: "Inria Sans", sans-serif;
-  color: #222;
-  margin-bottom: 2rem;
-}
-
-.answer-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  width: 80%;
-  margin: 0 auto;
-}
-
-.answer-button {
-  font-family: "Inria Sans", sans-serif;
-  padding: 1rem;
-  border: 1px solid #999;
-  height: 8rem !important;
-  color: #222;
-  /* Add the following styles to make text responsive */
-  white-space: nowrap;
+  white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 1rem;

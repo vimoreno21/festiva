@@ -7,16 +7,13 @@ import QuizRanking from "../components/QuizRanking";
 import backgroundMusic from "../audio/hipjazz.mp3";
 import AudioPlayer from "../components/AudioPlayer";
 import { useLocation } from "react-router-dom";
+import WinnersPodium from "../components/WinnersPodium";
 
 /*
     Notes
-    - navigate to rankings
-    - once all questions end navigate to leaderboard
-    - once all users pick their answers we can move on to the next question without waiting for timer to end
-    - if deemed necessary, fix timer so that it can play on reload and it stops playing when we go to previous page
-    - make text responsive or add word count
+    -  fix audio stuff
     - fix empty section on bottom of page
-    - change quiz_name so its passed on from game library page
+    - add avatars
 */
 
 const temp_users = [
@@ -71,23 +68,19 @@ function QuestionDisplayPage({ socket }) {
   const [showRanking, setShowRanking] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true); // for audio
   const [scores, setScores] = useState(null);
+  const [showWinnersPodium, setShowWinnersPodium] = useState(false);
 
   const location = useLocation();
   const quiz = location.state?.quiz || {};
   const game = location.state?.game || {};
   const navigate = useNavigate();
+  const [gameObject, setGameObject] = useState(game);
 
   useEffect(() => {
-
     socket.on("get-scores", (value) => {
-      console.log("value", value);
       setScores(value);
-      console.log("scores", scores);
     });
   }, [socket]);
-
-  console.log("quiz:", quiz);
-  console.log("game:", game);
 
   const handleExitButton = () => {
     // replaces history stack with the quizGameLibrary page
@@ -112,14 +105,17 @@ function QuestionDisplayPage({ socket }) {
         </button>
         <span className="game-title">Quizoot</span>
       </div>
-      {showRanking ? (
+      {showWinnersPodium ? (
+        <WinnersPodium scores={scores} temp_users={temp_users} />
+      ) : showRanking ? (
         <QuizRanking
           setShowRanking={setShowRanking}
           setIsPlaying={setIsPlaying}
           users={temp_users}
-          game={game}
-          setScores={setScores}
+          gameObject={gameObject}
+          setGameObject={setGameObject}
           scores={scores}
+          setScores={setScores}
           socket={socket}
         />
       ) : (
@@ -127,9 +123,8 @@ function QuestionDisplayPage({ socket }) {
           setShowRanking={setShowRanking}
           setIsPlaying={setIsPlaying}
           quiz={quiz}
-          game={game}
-          setScores={setScores}
-          scores={scores}
+          gameObject={gameObject}
+          setShowWinnersPodium={setShowWinnersPodium}
           socket={socket}
         />
       )}

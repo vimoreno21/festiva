@@ -1,92 +1,80 @@
 import React, { useEffect } from "react";
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col } from "reactstrap";
 import { useState } from "react";
 import { ConnectionStates } from "mongoose";
-  
-function QuizRanking({ setShowRanking, setIsPlaying, users, game, setScores, scores, socket}) {
-    // const [scores, setScores] = useState(null);
-    const [gameOn, setGameOn] = useState(false);
-    const [gameObject, setGameObject] = useState(game);
 
+function QuizRanking({
+  setShowRanking,
+  setIsPlaying,
+  users,
+  gameObject,
+  setGameObject,
+  scores,
+  setScores,
+  socket,
+}) {
+//   useEffect(() => {
+//     setIsPlaying(false);
+//   }, []);
 
-    useEffect(() => {
-    // setIsPlaying(false);
+//   console.log(gameObject);
+//   console.log(scores);
 
-
-
-    // Delayed action to hide rankings after 5000 milliseconds (5 seconds)
-    // setTimeout(() => {
-    // setShowRanking(false);
-    // }, 50000);
-    
-    }, [setShowRanking, socket]);
-
-return (
+  return (
     <>
-    <Container className="table-styles">
-    <h1 className="message">Rankings!</h1>
-    <Row>
-        <Col>
-        <h5>Rank</h5>
-        </Col>
-        <Col>
-        <h5>Avatar</h5>
-        </Col>
-        <Col>
-        <h5>User</h5>
-        </Col>
-        <Col>
-        <h5>Points</h5>
-        </Col>
-    </Row>
-    {users
-        .sort((a, b) => b.points - a.points)
-        .map((user, index) => (
-        <Row key={index}>
-            <Col>{index + 1}</Col>
-            <Col>
-            <img
-                src={user.user_avatar}
-                alt={`Avatar for ${user.user_name}`}
-                style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-            />
-            </Col>
-            <Col>{user.user_name}</Col>
-            <Col>{user.points}</Col>
+      <Container className="table-styles">
+        <h1 className="message">Round: {gameObject.round}!</h1>
+        <Row>
+          <Col>
+            <h5>Rank</h5>
+          </Col>
+          <Col>
+            <h5>Avatar</h5>
+          </Col>
+          <Col>
+            <h5>User</h5>
+          </Col>
+          <Col>
+            <h5>Points</h5>
+          </Col>
         </Row>
-        ))}
-    </Container>
-    
-    {
-        scores &&
-        <ul className='h-100'>
-            <h1>Round: {game.round + 1}</h1>
-            {
-                Object.keys(scores).map(s =>
-                    <li key={s + 'S'}>{scores[s].nickname}: {scores[s].points}</li>
-                )
-            }
-            <div className='flex flex-row'>
-                <button
-                    style={{ backgroundColor: 'green' }}
-                    onClick={() => {
-                        socket.emit('start-round', game);
-                        setGameOn(true)
-                        // setScores(null);
-                        setGameObject(prev => ({...prev, round: prev.round+1}))
-                        setShowRanking(false);
-                        setShowRanking(false);
+        {Object.values(scores)
+          .sort((a, b) => b.points - a.points)
+          .map((user, index) => (
+            <Row key={index}>
+              <Col>{index + 1}</Col>
+              <Col>
+                {/* <img
+                    src={user.user_avatar}
+                    alt={`Avatar for ${user.user_name}`}
+                    style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+                /> */}
+              </Col>
+              <Col>{user.nickname}</Col>
+              <Col>{user.points}</Col>
+            </Row>
+          ))}
+      </Container>
 
-                    }}
-                >
-                    Next Round
-                </button>
-            </div>
+      {scores && (
+        <ul className="h-100">
+          <div className="flex flex-row">
+            <button
+                className="nextRound-button mx-auto"
+              onClick={() => {
+                socket.emit("start-round", gameObject);
+                setScores(null);
+                setGameObject((prev) => ({ ...prev, round: prev.round + 1 }));
+                setShowRanking(false);
+              }}
+            >
+              Next Question
+            </button>
+          </div>
         </ul>
-
-    }
+      )}
     </>
-);
+  );
 }
 
 export default QuizRanking;

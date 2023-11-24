@@ -47,16 +47,10 @@ function App() {
           }
         />
         {/* Route without navbar */}
-        <Route path="/questionDisplay" element={<QuestionDisplayPage />} />
+        <Route path="/questionDisplay" element={<QuestionDisplayPage socket={socket} />} />
         <Route path="/quizGameLibrary" element={<QuizGameLibraryPage socket={socket}/>} />
         <Route path="/CreateGame" element={<CreateGame />} />
-
-          {/* represents web frontend */}
-          <Route path="/socketio" element={<SocketIoMelTest socket={socket}/>} />
-
-          {/* represents mobile frontend */}
-          <Route path="/sockettwo" element={<Socket2Page socket={socket}/>}/>
-        </Routes>
+      </Routes>
     </BrowserRouter>
   );
 }

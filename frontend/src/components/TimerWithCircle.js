@@ -1,41 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-function TimerWithCircle({ duration, onTimerEnd, resetTimer, setResetTimer }) {
-  const [timer, setTimer] = useState(duration);
+function TimerWithCircle({ onTimerEnd, socket }) {
+  const [countDown, setCountDown] = useState(15);
 
   useEffect(() => {
-    const timerInterval = setInterval(() => {
-      if (timer > 0) {
-        setTimer(timer - 1);
-      } else {
-        clearInterval(timerInterval);
+      socket.on("count-down", (count) => {
+        setCountDown(count);
+      });
+
+      console.log("Countdown:", countDown);
+
+      if (countDown === "Time is up!") {
+        console.log("Calling onTimerEnd()");
         onTimerEnd();
       }
-    }, 1000);
-
-    return () => {
-      clearInterval(timerInterval);
-    };
-  }, [timer, duration, onTimerEnd]);
-
-  useEffect(() => {
-    if (resetTimer) {
-      setTimer(duration); // Reset the timer when resetTimer becomes true
-      setResetTimer(false); // Reset the resetTimer flag
-    }
-  }, [resetTimer, duration, setResetTimer]);
+  }, [socket, countDown, onTimerEnd]);
 
   const radius = 40;
   const circumference = 2 * Math.PI * radius;
 
-  // Calculate strokeDasharray based on the timer
+  // Calculate strokeDasharray based on the countdown
   const strokeDasharray = `${
-    (timer / duration) * circumference
+    (countDown / 15) * circumference
   } ${circumference}`;
 
   return (
     <div>
-      <svg width="200" height="200">
+      <svg width="200" height="160">
         <circle
           cx="100"
           cy="100"
@@ -55,7 +46,7 @@ function TimerWithCircle({ duration, onTimerEnd, resetTimer, setResetTimer }) {
           strokeDashoffset="0"
         />
         <text x="100" y="110" textAnchor="middle" fontSize="20" fill="#000">
-          {timer}
+          {countDown}
         </text>
       </svg>
     </div>
