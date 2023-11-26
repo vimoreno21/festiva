@@ -6,71 +6,32 @@ import QuizQuestion from "../components/QuizQuestion";
 import QuizRanking from "../components/QuizRanking";
 import backgroundMusic from "../audio/hipjazz.mp3";
 import AudioPlayer from "../components/AudioPlayer";
+import { useLocation } from "react-router-dom";
+import WinnersPodium from "../components/WinnersPodium";
 
 /*
     Notes
-    - navigate to rankings
-    - once all questions end navigate to leaderboard
-    - once all users pick their answers we can move on to the next question without waiting for timer to end
-    - if deemed necessary, fix timer so that it can play on reload and it stops playing when we go to previous page
-    - make text responsive or add word count
+    -  fix audio stuff
     - fix empty section on bottom of page
-    - change quiz_name so its passed on from game library page
 */
 
-const temp_users = [
-  {
-    user_name: "Mel",
-    user_avatar: "/temporary_avatars/frog-transparent.gif",
-    points: 10,
-  },
-  {
-    user_name: "Desa",
-    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
-    points: 0,
-  },
-  {
-    user_name: "Hudaa",
-    user_avatar: "/temporary_avatars/parrot-transparent.gif",
-    points: 20,
-  },
-  {
-    user_name: "Ricardo",
-    user_avatar: "/temporary_avatars/owl-transparent.gif",
-    points: 1000,
-  },
-  {
-    user_name: "Arian",
-    user_avatar: "/temporary_avatars/walrus-transparent.gif",
-    points: 2,
-  },
-  {
-    user_name: "Desa",
-    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
-    points: 0,
-  },
-  {
-    user_name: "Desa",
-    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
-    points: 0,
-  },
-  {
-    user_name: "Desa",
-    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
-    points: 0,
-  },
-  {
-    user_name: "Desa",
-    user_avatar: "/temporary_avatars/hedgehog-transparent.gif",
-    points: 0,
-  },
-];
-
-function QuestionDisplayPage() {
+function QuestionDisplayPage({ socket, icons }) {
   const [showRanking, setShowRanking] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true); // for audio
+  const [scores, setScores] = useState(null);
+  const [showWinnersPodium, setShowWinnersPodium] = useState(false);
 
+  const location = useLocation();
+  const quiz = location.state?.quiz || {};
+  const game = location.state?.game || {};
   const navigate = useNavigate();
+  const [gameObject, setGameObject] = useState(game);
+
+  useEffect(() => {
+    socket.on("get-scores", (value) => {
+      setScores(value);
+    });
+  }, [socket]);
 
   const handleExitButton = () => {
     // replaces history stack with the quizGameLibrary page
@@ -95,16 +56,27 @@ function QuestionDisplayPage() {
         </button>
         <span className="game-title">Quizoot</span>
       </div>
-      {showRanking ? (
+      {showWinnersPodium ? (
+        <WinnersPodium scores={scores} icons={icons} />
+      ) : showRanking ? (
         <QuizRanking
           setShowRanking={setShowRanking}
           setIsPlaying={setIsPlaying}
-          users={temp_users}
+          gameObject={gameObject}
+          setGameObject={setGameObject}
+          scores={scores}
+          setScores={setScores}
+          socket={socket}
+          icons={icons}
         />
       ) : (
         <QuizQuestion
           setShowRanking={setShowRanking}
           setIsPlaying={setIsPlaying}
+          quiz={quiz}
+          gameObject={gameObject}
+          setShowWinnersPodium={setShowWinnersPodium}
+          socket={socket}
         />
       )}
     </div>

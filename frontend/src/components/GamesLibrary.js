@@ -68,7 +68,6 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
 
   const navigate = useNavigate();
   let combinedList;
-  console.log(quizzes);
 
   if (quizzes.length !== 0)
   {
@@ -90,7 +89,7 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
         id: id,
         users: {},
         round: 0,
-        q_and_a: quiz.questions
+        q_and_a: quiz.q_and_a
       };
       // start the game 
       socket.emit('create-game', game);
