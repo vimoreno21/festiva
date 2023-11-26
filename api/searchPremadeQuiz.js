@@ -1,8 +1,11 @@
+// protected route
 const express = require('express');
 const router = express.Router();
 const PQuiz = require('../models/premadeQuizModel')
+const auth = require('../middleware/auth_jwt')
 
-router.post('/', async (req, res) => {
+
+router.post('/', auth, async (req, res) => {
 
     const name = req.body.quiz_name;
     console.log(name)

@@ -14,7 +14,7 @@ function QuizGameLibraryPage({socket}) {
   const navigate = useNavigate();
 
   useEffect(() => {
-  fetchQuizzes(user, setQuizzes);
+  fetchQuizzes(user, setQuizzes, navigate);
   }, []);
 
   const handleQuizClick = (quiz) => {

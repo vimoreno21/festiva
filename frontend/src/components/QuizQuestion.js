@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import TimerWithCircle from "../components/TimerWithCircle";
-
+import { useNavigate } from "react-router-dom";
 
 function QuizQuestion({ setShowRanking, setIsPlaying}) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [resetTimer, setResetTimer] = useState(false);
   const [quizData, setQuizData] = useState([]);
   const [showAnswer, setShowAnswer] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchQuiz() {
@@ -19,11 +20,16 @@ function QuizQuestion({ setShowRanking, setIsPlaying}) {
           {
             method: "POST",
             body: js,
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'x-auth-token': JSON.parse(localStorage.getItem('user_data'))?.token },
           }
         );
 
         const res = await response.json();
+
+        if (response.status == 401) {
+          navigate('/start');
+        }
+
         setQuizData(res);
       } catch (e) {
         alert(e.toString());

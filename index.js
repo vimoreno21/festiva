@@ -168,7 +168,7 @@ io.on('connection', socket => {
                 socket.emit('count-down', "Time is up!");
                 socket.to(game.id).emit('count-down', "Time is up!");
 
-                
+
                 socket.emit('get-scores', currentGame.getUsers(), currentGame.getSubmitted());
                 socket.to(game.id).emit('get-scores', currentGame.getUsers(), currentGame.getSubmitted());
                 currentGame.resetSubmitted();
@@ -180,7 +180,7 @@ io.on('connection', socket => {
 
     socket.on('submit-answer', (game) => {
         let currentGame = games[game.id];
-        
+
         if (currentGame) {
             let currentUser = currentGame.getUser(socket.id);
             let points = 0;
@@ -213,8 +213,7 @@ io.on('connection', socket => {
 // socket.io admin ui
 instrument(io, { auth: false })
 
-app.use(cors());
-app.use(bodyParser.json());
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
@@ -227,6 +226,12 @@ app.use((req, res, next) => {
     );
     next();
 });
+
+
+app.use(cors());
+app.use(bodyParser.json());
+
+
 
 
 if (process.env.NODE_ENV === 'production') {
@@ -247,18 +252,23 @@ app.use('/api/register', registerRouter);
 const registerVerificationRouter = require('./api/registerVerification');
 app.use('/api/registerVerification', registerVerificationRouter);
 
+// protected route
 const createQuizRouter = require('./api/createQuiz');
 app.use('/api/createQuiz', createQuizRouter);
 
+// protected route
 const searchPremadeQuizRouter = require('./api/searchPremadeQuiz');
 app.use('/api/searchPremadeQuiz', searchPremadeQuizRouter);
 
+// not used in frontend? supposed to be protected route
 const searchUserQuizRouter = require('./api/searchUserQuiz');
 app.use('/api/searchUserQuiz', searchUserQuizRouter);
 
+// not used in frontend? supposed to be protected route
 const getPremadeQuizzesRouter = require('./api/getPremadeQuizzes');
 app.use('/api/getPremadeQuizzes', getPremadeQuizzesRouter);
 
+// protected route
 const getUserQuizzesRouter = require('./api/getUserQuizzes');
 app.use('/api/getUserQuizzes', getUserQuizzesRouter);
 
@@ -268,11 +278,14 @@ app.use('/api/sendPasswordRecovery', sendPasswordRecoveryRouter);
 const verifyPasswordRecoveryPinRouter = require('./api/verifyPasswordRecoveryPin');
 app.use('/api/verifyPasswordRecoveryPin', verifyPasswordRecoveryPinRouter);
 
+
 const resetPasswordRouter = require('./api/resetPassword');
 app.use('/api/resetPassword', resetPasswordRouter);
 
+// protected route
 const delQuizRouter = require('./api/deleteQuiz');
 app.use('/api/deleteQuiz', delQuizRouter);
+
 
 
 

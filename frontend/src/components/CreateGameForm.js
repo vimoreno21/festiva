@@ -67,10 +67,15 @@ const CreateGameForm = () => {
       const response = await fetch(endpoint, {
         method: 'POST',
         body: jsonBody,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-auth-token': JSON.parse(localStorage.getItem('user_data'))?.token },
       });
 
       let res = await response.json();
+      console.log(response.status)
+      if (response.status == 401) {
+        navigate('/start');
+      }
+
       if (res.message === 'Quiz created successfully') {
         console.log("created quiz!");
         setResultCreateQuiz('Quiz created successfully');
@@ -79,13 +84,14 @@ const CreateGameForm = () => {
         setResultCreateQuiz('Error creating quiz.');
       }
     } catch (e) {
-      alert(e.toString());
+      console.error(e.toString());
       return;
     }
     setFirstButtonClicked(true);
   };
 
   return (
+    <>
     <Card className="max-w-[650px]" style={{maxHeight: '80vh', paddingTop: '30px'}}>
       <CardHeader className="flex gap-3">
         <h1>Input Your Game Information</h1>
@@ -160,6 +166,7 @@ const CreateGameForm = () => {
           )}
         </CardBody>
     </Card>
+    </>
   );
 }
 export default CreateGameForm;
