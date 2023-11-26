@@ -1,11 +1,41 @@
 import React, { useEffect, useState } from "react";
 import TimerWithCircle from "../components/TimerWithCircle";
-
+import { useNavigate } from "react-router-dom";
 function QuizQuestion({ setShowRanking, setIsPlaying, quiz, gameObject, setShowWinnersPodium, socket }) {
+  const [quizData, setQuizData] = useState([]);
   const [showAnswer, setShowAnswer] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsPlaying(true);
+    async function fetchQuiz() {
+      let obj = { quiz_name: "team quiz 2" };
+      let js = JSON.stringify(obj);
+
+      try {
+        const response = await fetch(
+          "/api/searchPremadeQuiz",
+          {
+            method: "POST",
+            body: js,
+            headers: { "Content-Type": "application/json", 'x-auth-token': JSON.parse(localStorage.getItem('user_data'))?.token },
+          }
+        );
+
+        const res = await response.json();
+
+        if (response.status == 401) {
+          navigate('/start');
+        }
+
+        setQuizData(res);
+      } catch (e) {
+        alert(e.toString());
+        return;
+      }
+    }
+
+    fetchQuiz();
   }, []);
   
   // returns the className for the correct answer choice if correct and vice versa

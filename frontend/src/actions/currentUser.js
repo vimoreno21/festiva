@@ -4,7 +4,7 @@
 export const isLoggedIn = () => {
     // Get the user data from localStorage
     const userData = localStorage.getItem('user_data');
-  
+    
     // Check if user data exists and is valid
     if (userData) {
       try {

@@ -9,11 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    {/* <NextUIProvider> */}
-    <App style={{maxWidth: '100%'}}/>
-    {/* </NextUIProvider> */}
-     
-      
+    <App style={{maxWidth: '100%'}}/>  
   </React.StrictMode>
 );
 

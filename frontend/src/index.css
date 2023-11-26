@@ -27,7 +27,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Adjust as needed for your layout */
+  height: 100vh; 
 }
 
 code {
@@ -87,9 +87,6 @@ button:active {
   transform: scale(0.95);
 }
 
-/* button:focus {
-	outline: none;
-} */
 
 button.ghost {
   background-color: transparent;
@@ -98,7 +95,6 @@ button.ghost {
 
 form {
   background: #8cd9e4;
-  /* background-color: #FFFFFF; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,13 +104,6 @@ form {
   text-align: center;
 }
 
-/* input {
-  background-color: #eee;
-  border: none;
-  padding: 12px 15px;
-  margin: 8px 0;
-  width: 100%;
-} */
 
 .container {
   background: #ffeeb6;
@@ -128,6 +117,10 @@ form {
   max-width: 100%;
   min-height: 480px;
 }
+
+
+
+
 
 .full-width {
   width: 100%;
@@ -584,7 +577,7 @@ footer a {
 
 /* StartPage classes */
 .startpage_div {
-  background-color: #fbe28f;
+  background-color: hsl(46, 93%, 77%);
   background-size: cover;
   height: 100%;
 }

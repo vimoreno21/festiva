@@ -1,4 +1,4 @@
-export const fetchQuizzes = async (user, setQuizzes) => {
+export const fetchQuizzes = async (user, setQuizzes, navigate) => {
      // http://localhost:5000
   const apiEndpoint = '/api/getUserQuizzes';
     try {
@@ -7,14 +7,20 @@ export const fetchQuizzes = async (user, setQuizzes) => {
         body: JSON.stringify({ _id: user.id }), 
         headers: {
           'Content-Type': 'application/json',
+          'x-auth-token': JSON.parse(localStorage.getItem('user_data'))?.token
         },
-      });
-  
+      })
+      
+    
+      const data = await response.json();
+      if (response.status == 401) {
+        navigate('/start');
+      }
       if (!response.ok) {
         throw new Error('Failed to fetch quizzes :(( ');
       }
-  
-      const data = await response.json();
+
+
       setQuizzes(data);
     } catch (error) {
       console.error('Error fetching quizzes :((', error.message);

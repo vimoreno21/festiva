@@ -1,8 +1,10 @@
+// protected route
 const express = require('express');
 const router = express.Router();
 const PQuiz = require('../models/premadeQuizModel')
+const auth = require('../middleware/auth_jwt')
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 
 
     results = await PQuiz.find({quiz_name: {$regex: "", $options: "i"}})
