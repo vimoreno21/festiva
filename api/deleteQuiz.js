@@ -1,8 +1,10 @@
+// protected route
 const express = require('express');
 const router = express.Router();
 const Quiz = require('../models/quizModel')
+const auth = require('../middleware/auth_jwt')
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 
     const id = req.body._id
     results = await Quiz.deleteOne({_id: id})

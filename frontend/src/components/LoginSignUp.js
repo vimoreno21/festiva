@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { Row, Col } from 'reactstrap';
-// import { Link } from "@nextui-org/react";
 import { useNavigate, Link } from "react-router-dom";
 import ForgotPasswordPage from '../pages/ForgotPasswordPage';
+import { User } from '@nextui-org/react';
 
 function LoginSignUp() {
   let loginEmail;
@@ -17,12 +17,17 @@ function LoginSignUp() {
   const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
 
+
+
+
   const togglePanel = () => {
     setIsSignUp(!isSignUp);
   };
 
   // to use these function locally add http://localhost:5000 to before every /api
   const doLogin = async (event) => {
+
+
     setResultSignUp('');
     event.preventDefault();
     let obj = { email: loginEmail.value, password: loginPassword.value };
@@ -41,13 +46,12 @@ function LoginSignUp() {
       if (res.message === "Invalid Email or Password") {
         setMessage('User/Password combination incorrect');
         console.log("login signup no user")
-      } 
-      else if (res.message === "An email has been sent to your account to verify. You must verify before logging in.")
-      {
+      }
+      else if (res.message === "An email has been sent to your account to verify. You must verify before logging in.") {
         setMessage('An email has been sent to your account to verify. You must verify before logging in.');
       }
       else {
-        let user = { email: res.email, name:res.name, _id: res.id };
+        let user = { token: res.token, email: res.email, name:res.name, _id: res.id };
         console.log("inside loginsignup")
         localStorage.setItem('user_data', JSON.stringify(user));
         navigate('/pickgame')
@@ -70,8 +74,7 @@ function LoginSignUp() {
     };
     let jsonBody = JSON.stringify(obj);
 
-    if (signUpPassword2.value !== signUpPassword.value)
-    {
+    if (signUpPassword2.value !== signUpPassword.value) {
       setResultSignUp('Passwords do not match.');
       return;
     }
@@ -91,7 +94,7 @@ function LoginSignUp() {
       let res = await response.json();
       if (res.message === 'Created account successfully! An Email has been sent to your account, please verify to login.') {
         setResultSignUp('Created account successfully! An Email has been sent to your account, please verify to login.');
-      } 
+      }
       else if (res.message === 'User already exists with email.') {
         setResultSignUp('User already exists with email.')
       }
@@ -109,9 +112,9 @@ function LoginSignUp() {
   }
 
   return (
-      <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container" style={{ border: '2px solid #8CD9E4', padding: 0, margin: 0,  maxWidth: '85%'}}>
-        <Row style={{ zIndex: 1 }}>
-          <Col md={6} className="form-container sign-up-container" style={{ padding: 0, margin: 0, maxWidth: '50%'}}>
+    <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="container" style={{ border: '2px solid #8CD9E4', padding: 0, margin: 0, maxWidth: '85%' }}>
+      <Row style={{ zIndex: 1 }}>
+        <Col md={6} className="form-container sign-up-container" style={{ padding: 0, margin: 0, maxWidth: '50%' }}>
             <form onSubmit={doSignup}>
               <h1>Create Account</h1>
               <input type="text" className="form-control mt-3" placeholder="Name" ref={(c) => (signUpName = c)} />
@@ -125,17 +128,18 @@ function LoginSignUp() {
                 {resultSignUp}
               </span>
             </form>
-          </Col>
-          <Col md={6} className="form-container sign-in-container" style={{padding: 0, margin: 0, maxWidth: '50%'}}>
+        </Col>
+        <Col md={6} className="form-container sign-in-container" style={{ padding: 0, margin: 0, maxWidth: '50%' }}>
+
             <form onSubmit={doLogin}>
               <h1>Sign in</h1>
               <input type="email" className="form-control mt-3" placeholder="Email" ref={(c) => (loginEmail = c)} />
               <input type="password" className="form-control mt-3" placeholder="Password" ref={(c) => (loginPassword = c)} />
               <Link to="/ForgotPasswordPage" style={{
-                  color: 'blue',
-                  textDecoration: 'underline',
-                  cursor: 'pointer',
-                }}> Forgot Your Password? 
+                color: 'blue',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+              }}> Forgot Your Password?
               </Link>
               <button className="button_style" type="submit">
                 Sign In
@@ -144,33 +148,33 @@ function LoginSignUp() {
                 {message}
               </span>
             </form>
-          </Col>
-        </Row>
-        <div className="overlay-container" style={{zIndex: 0}}>
-          <div className="overlay">
-            <div className={`overlay-panel ${isSignUp ? 'overlay-left' : 'overlay-right'}`}>
-              {isSignUp ? (
-                <>
-                  <h1>Welcome Back!</h1>
-                  <p>Already have an account? Please login with your personal info</p>
-                  <button className="button_style" onClick={() => { togglePanel(); setMessage(''); }} id="signIn">
-                    Sign In
-                  </button>
-                </>
-              ) : (
-                <>
-                  <h1>Hello, Friend!</h1>
-                  <p>Don't have an account? </p>
-                  <p>Enter your personal details and start the journey with us</p>
-                  <button className="button_style" onClick={() => { togglePanel(); setResultSignUp(''); }} id="signUp">
-                    Sign Up
-                  </button>
-                </>
-              )}
-            </div>
+        </Col>
+      </Row>
+      <div className="overlay-container" style={{ zIndex: 0 }}>
+        <div className="overlay">
+          <div className={`overlay-panel ${isSignUp ? 'overlay-left' : 'overlay-right'}`}>
+            {isSignUp ? (
+              <>
+                <h1>Welcome Back!</h1>
+                <p>Already have an account? Please login with your personal info</p>
+                <button className="button_style" onClick={() => { togglePanel(); setMessage(''); }} id="signIn">
+                  Sign In
+                </button>
+              </>
+            ) : (
+              <>
+                <h1>Hello, Friend!</h1>
+                <p>Don't have an account? </p>
+                <p>Enter your personal details and start the journey with us</p>
+                <button className="button_style" onClick={() => { togglePanel(); setResultSignUp(''); }} id="signUp">
+                  Sign Up
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
+    </div>
   );
 }
 
