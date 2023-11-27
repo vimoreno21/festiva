@@ -23,12 +23,12 @@ const HomePage = () => {
 
                 <List headerText='Create & Sign In:' bodyText='Begin by setting up your account and signing in on our website.' number='1.'/>
                 <List headerText='Host the Fun:' bodyText='Once in, you can host a game and set the stage for an unforgettable evening.' number='2.'/>
-                <List headerText='Join via App:' bodyText='Players, grab your phones! Scan the QR code to download the Festiva! app and hop into the hosted game.' number='3.'/>
+                <List headerText='Join via App:' bodyText='Players, grab your phones! Download the Festiva! app and hop into the hosted game.' number='3.'/>
                 <List headerText='Play & Laugh:' bodyText='With everyone connected, unleash your wittiest answers and enjoy the hilarity that ensues.' number='4.'/>
             </div>
 
             <div className='d-flex flex-column align-items-center justify-content-center w-50'>
-                <img src={QrCodeImg} alt='qr code' className='img_sizing'/>
+                {/* <img src={QrCodeImg} alt='qr code' className='img_sizing'/> */}
                 <Link to='/start' className='button_style text-decoration-none'>
                    Get started
                 </Link>
