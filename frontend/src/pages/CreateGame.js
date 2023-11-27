@@ -7,7 +7,7 @@ const CreateGame = () => {
     <div className="homepage_div container-p" style={{ display: 'flex', justifyContent: 'space-between'}}>
       <div style={{ display: 'absolute' }}>
         <Breadcrumbs size='md'>
-          <BreadcrumbItem href="/pickgame">Choose Game</BreadcrumbItem>
+          // <BreadcrumbItem href="/pickgame">Choose Game</BreadcrumbItem>
           <BreadcrumbItem href="/quizGameLibrary">Pick Quizoot</BreadcrumbItem>
           <BreadcrumbItem>Create Game</BreadcrumbItem>
         </Breadcrumbs>
