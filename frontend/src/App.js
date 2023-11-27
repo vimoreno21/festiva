@@ -24,11 +24,19 @@ const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
 function App() {
 
   const icons = {
-    frog: '/temporary_avatars/frog-transparent.gif',
-    hedgehog: '/temporary_avatars/hedgehog-transparent.gif',
-    owl: '/temporary_avatars/owl-transparent.gif',
-    parrot: '/temporary_avatars/parrot-transparent.gif',
-    walrus: '/temporary_avatars/walrus-transparent.gif'
+    frog: '/avatars/frog.gif',
+    hedgehog: '/avatars/hedgehog.gif',
+    owl: '/avatars/owl.gif',
+    parrot: '/avatars/parrot.gif',
+    walrus: '/avatars/walrus.gif',
+    snake: '/avatars/snake.gif',
+    whale: '/avatars/whale.gif',
+    platypus: '/avatars/platypus.gif',
+    sloth: '/avatars/sloth.gif',
+    chicken: '/avatars/chicken.gif',
+    squid: '/avatars/squid.gif',
+    spider: '/avatars/spider.gif',
+    giraffe: '/avatars/giraffe.gif'
   }
 
   return (
