@@ -38,7 +38,7 @@ const GameLibrary = ({socket, quizzes, setQuizzes, premade, setPremade}) => {
       try {
         const response = await fetch(apiEndpoint, {
           method: 'POST',
-          body: JSON.stringify({ id: quiz._id }), 
+          body: JSON.stringify({ _id: quiz._id }), 
           headers: {
             'Content-Type': 'application/json',
             'x-auth-token': JSON.parse(localStorage.getItem('user_data'))?.token
