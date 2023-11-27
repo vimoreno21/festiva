@@ -45,11 +45,6 @@ function QuizGameLibraryPage({socket}) {
 
     return (
       <div className="librarypage_div container-p " > 
-      {/* style={{ display: 'flex'}} */}
-        // <Breadcrumbs size='md'>
-        //   <BreadcrumbItem href="/pickgame">Choose Game</BreadcrumbItem>
-        //   <BreadcrumbItem> Pick Quizoot</BreadcrumbItem>
-        // </Breadcrumbs>
         <div className="chooseGame" style={{paddingRight:'40px', color:'#6a5acd'}}>Choose A Quizoot:</div>
         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom:'50px', paddingTop:'25px'}}>
           <Autocomplete 
