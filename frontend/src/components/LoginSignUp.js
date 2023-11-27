@@ -80,7 +80,7 @@ function LoginSignUp() {
     }
 
     if (!isPasswordValid(obj.password)) {
-      setResultSignUp('Password must meet complexity requirements: ');
+      setResultSignUp('Password must meet complexity requirements: has one digit, one lowercase letter, one uppercase letter, and be at least 8 characters long.');
       return;
     }
 
@@ -184,11 +184,13 @@ const isPasswordValid = (password) => {
   const hasUpperCase = /[A-Z]/.test(password);
   const hasLowerCase = /[a-z]/.test(password);
   const hasDigit = /\d/.test(password);
+  const hasSpecialChar = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
 
   return (
     password.length >= minLength &&
     hasUpperCase &&
     hasLowerCase &&
+    hasSpecialChar &&
     hasDigit
     // Add more complexity requirements if necessary
   );
