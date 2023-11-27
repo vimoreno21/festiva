@@ -36,7 +36,7 @@ const GlobalNavBar = () => {
             return (
                 <ul style={{justifySelf: 'end'}}>
                     <li className="navbar-item fs-2 mx-5 text-nowrap">
-                        <Link to="/pickgame" className="navbar-link">Play A Game</Link>
+                        <Link to="/quizGameLibrary" className="navbar-link">Play A Game</Link>
                     </li>
                     <li className="navbar-item fs-2 mx-5 text-nowrap">
                         <ProfileDropdown/>
