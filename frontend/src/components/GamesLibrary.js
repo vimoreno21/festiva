@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from "../actions/currentUser";
 import { fetchQuizzes } from '../actions/fetchQuizzes';
 
-const GameLibrary = ({socket, quizzes, setQuizzes}) => {
+const GameLibrary = ({socket, quizzes, setQuizzes, premade, setPremade}) => {
   const list = [
     {
       quiz_name: "Create Game",
@@ -23,7 +23,7 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
 
   const handleMouseEnter = (index) => {
     const updatedHoverState = Array(quizzes.length).fill(false);
-    if (index !== 0) updatedHoverState[index] = true;
+    if (index > premade.length) updatedHoverState[index] = true;
     setIsHovered(updatedHoverState);
   };
 
@@ -49,21 +49,19 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
         if (response.status == 401) {
           navigate('/start');
         }
-
         if (!response.ok) {
           console.error('Failed to delete quiz:', data.message);
           throw new Error('Failed to delete quizzes :(( ');
         }
         else{
-          fetchQuizzes(user, setQuizzes, navigate)
+          fetchQuizzes(user, setQuizzes, navigate);
         }
-
       } catch (error) {
         console.error('Error deleting quizzes :((', error.message);
       }
     };
     deleteQuiz();
-    alert('Button deleted!');
+    alert('Quiz deleted!');
   };
 
   const navigate = useNavigate();
@@ -71,9 +69,9 @@ const GameLibrary = ({socket, quizzes, setQuizzes}) => {
 
   if (quizzes.length !== 0)
   {
-    combinedList = [...list, ...quizzes];
+    combinedList = [...list, ...premade, ...quizzes];
   } else{
-    combinedList = list;
+    combinedList = [...list, ...premade];
   }
   
   const handleQuizClick = (quiz) => {
