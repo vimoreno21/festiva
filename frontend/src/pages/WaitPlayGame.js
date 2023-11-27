@@ -22,13 +22,13 @@ const WaitPlayGame = ({ socket, icons }) => {
   }, [socket]);
 
   return (
-    <section className="wait_play_style container-p">
+    <div className="wait_play_style container-p">
       <Breadcrumbs size="md">
         <BreadcrumbItem href="/pickgame">Choose Game</BreadcrumbItem>
         <BreadcrumbItem href="/quizGameLibrary">Pick Quizoot</BreadcrumbItem>
         <BreadcrumbItem>Play Game</BreadcrumbItem>
       </Breadcrumbs>
-      <div className="d-flex flex-col align-items-center">
+      <div className="d-flex flex-col align-items-center" style={{minHeight:"100vh"}}>
         <div className="div_style mx-5 flex flex-col md:flex-row justify-content-around text-nowrap text-center">
           <p className="fs-1 fw-normal me-1">Playing:</p>
           <p className="fw-bold fs-1">{quiz.quiz_name}</p>
@@ -68,7 +68,7 @@ const WaitPlayGame = ({ socket, icons }) => {
           Start Game
         </button>
       </div>
-    </section>
+    </div>
   );
 };
 

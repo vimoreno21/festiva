@@ -281,7 +281,8 @@ footer a {
   font-family: "Inria Sans", sans-serif;
   background-color: #8cd9e4;
   background-size: cover;
-  height: 100%;
+  /* height: 100%; */
+  min-height: 100vh;
 }
 
 .img_style {
@@ -306,7 +307,7 @@ footer a {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Adjust as needed for your layout */
+  min-height: 100vh; /* Adjust as needed for your layout */
   margin: 0 auto;
   max-width: 95%;
   flex-wrap: wrap;
@@ -334,6 +335,7 @@ footer a {
   position: relative;
   border: none;
 }
+
 
 .img_sizing {
   width: 8%;
@@ -430,14 +432,18 @@ footer a {
 /* Quizoot library classes */
 .librarypage_div {
   background-color: #d1bcf0;
-  background-size: cover;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.component {
+  flex: 1; /* Allow the component to take available vertical space */
 }
 
 .forgot_pass_div {
   background-color: #7fbdff;
   background-size: cover;
-  height: 100%;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -448,7 +454,8 @@ footer a {
 .homepage_div {
   background-color: #8cd9e4;
   background-size: cover;
-  height: 100%;
+  /* height: 100%; */
+  min-height: 100vh;
 }
 
 .img_style {
@@ -571,22 +578,25 @@ footer a {
 
 .wait_play_style {
   background-color: #b4e091;
+  min-height: 100vh;
   background-size: cover;
-  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* StartPage classes */
 .startpage_div {
   background-color: hsl(46, 93%, 77%);
   background-size: cover;
-  height: 100%;
+  min-height: 100vh;
 }
 
 /* AboutPage classes */
 .aboutpage_div {
   background-color: #ffa4a4;
   background-size: cover;
-  height: 100%;
+  /* height: 100%; */
+  min-height: 100vh;
 }
 
 .title-for-about {
@@ -828,6 +838,7 @@ footer a {
 .waiting-area {
   font-size: 1.5rem;
   text-align: center;
+  display:flex;
 }
 
 .instruction-container {

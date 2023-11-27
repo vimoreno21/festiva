@@ -6,16 +6,26 @@ import {Breadcrumbs, BreadcrumbItem, Input, Autocomplete, AutocompleteItem } fro
 import {SearchIcon} from "../images/SearchIcon.jsx";
 import { getUserInfo } from "../actions/currentUser";
 import { fetchQuizzes } from '../actions/fetchQuizzes';
+import { fetchPremadeQuizzes } from '../actions/fetchPremadeQuizzes';
 
 function QuizGameLibraryPage({socket}) {
 
   const [quizzes, setQuizzes] = useState([]);
+  const [premade, setPremade] = useState([]);
   const user = getUserInfo();
   const navigate = useNavigate();
+  const combinedList = [...premade, ...quizzes];
+
+  useEffect(() => {
+    fetchPremadeQuizzes(user, setPremade, navigate);
+    console.log(premade);
+  }, []);
 
   useEffect(() => {
   fetchQuizzes(user, setQuizzes, navigate);
+  console.log(quizzes);
   }, []);
+
 
   const handleQuizClick = (quiz) => {
     // id
@@ -34,7 +44,7 @@ function QuizGameLibraryPage({socket}) {
 
 
     return (
-      <div className="librarypage_div container-p" > 
+      <div className="librarypage_div container-p " > 
       {/* style={{ display: 'flex'}} */}
         <Breadcrumbs size='md'>
           <BreadcrumbItem href="/pickgame">Choose Game</BreadcrumbItem>
@@ -55,15 +65,15 @@ function QuizGameLibraryPage({socket}) {
               border: 'none'
             }}
           >
-            {quizzes.map((quiz) => (
-              <AutocompleteItem key={quiz.quiz_name} value={quiz.quiz_name} onClick={() => handleQuizClick(quiz)}>
+            {combinedList.map((quiz, index) => (
+              <AutocompleteItem key={index} value={quiz.quiz_name} onClick={() => handleQuizClick(quiz)}>
                 {quiz.quiz_name}
               </AutocompleteItem>
             ))}
           </Autocomplete>
         </div>
         
-      <GameLibrary socket={socket} quizzes={quizzes} setQuizzes={setQuizzes}/>
+      <GameLibrary socket={socket} quizzes={quizzes} setQuizzes={setQuizzes} premade={premade} setPremade={setPremade}/>
       </div>
     );
   }

@@ -18,7 +18,6 @@ const GlobalNavBar = () => {
     '/pickgame': '#f7c6d1', 
     '/waitToPlayGame': '#B4E091',
     '/start':'#fbe28f',
-    '/about':'#ffa4a4',
     '/creategame':'#8CD9E4',
     '/quizGameLibrary':'#d1bcf0',
     '/ForgotPasswordPage':'#7fbdff'
@@ -27,21 +26,15 @@ const GlobalNavBar = () => {
     const logoutOrStartLink = () => {
         if (isLoggedIn() !== true) {
             return (
-                <ul>
-                    <li className="navbar-item fs-2 mx-5 text-nowrap">
-                        <Link to="/about" className="navbar-link">About Us</Link>
-                    </li>
-                    <li className="navbar-item fs-2 mx-5 text-nowrap">
+                // <ul>
+                    <li className="navbar-item fs-2 mx-5 text-nowrap" style={{justifySelf: 'end'}}>
                         <Link to="/start" className="navbar-link">Start</Link>
                     </li>
-                </ul>
+                // {/* </ul> */}
             )
         } else {
             return (
-                <ul>
-                    <li className="navbar-item fs-2 mx-5 text-nowrap">
-                        <Link to="/about" className="navbar-link">About Us</Link>
-                    </li>
+                <ul style={{justifySelf: 'end'}}>
                     <li className="navbar-item fs-2 mx-5 text-nowrap">
                         <Link to="/pickgame" className="navbar-link">Play A Game</Link>
                     </li>
@@ -53,7 +46,7 @@ const GlobalNavBar = () => {
         }
     }
     return (
-        <nav style={{backgroundColor: backgrounds[location.pathname]}} className={"navbar_style align-middle py-3 "}>
+        <nav style={{backgroundColor: backgrounds[location.pathname]}} className={"navbar_style align-middle py-3 justify-content-between"}>
 
             <ul className="w-50 d-flex flex-row justify-content-start">
             <li className="navbar-item">
@@ -62,11 +55,9 @@ const GlobalNavBar = () => {
                 </Link>
             </li>
             </ul>
-
-            <ul className='d-none d-md-block  flex-row set_width text-nowrap align-items: center;'>
+            <ul style={{justifySelf: 'end'}}>
                 {logoutOrStartLink()}
             </ul>
-
             <div className="d-md-none position-relative">
             <Hamburger 
                 toggled={open} 

@@ -32,7 +32,7 @@ const EmailVerify = () => {
 					  console.log("didnt work")
 				  } 
 				  catch (e) {
-					alert(e.toString());
+					// alert(e.toString());
 					return;
 				  }
 			} catch (error) {

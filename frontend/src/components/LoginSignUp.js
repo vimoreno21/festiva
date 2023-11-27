@@ -57,7 +57,7 @@ function LoginSignUp() {
         navigate('/pickgame')
       }
     } catch (e) {
-      alert(e.toString());
+      // alert(e.toString());
       return;
     }
   };
@@ -80,7 +80,7 @@ function LoginSignUp() {
     }
 
     if (!isPasswordValid(obj.password)) {
-      setResultSignUp('Password must meet complexity requirements.');
+      setResultSignUp('Password must meet complexity requirements: ');
       return;
     }
 
@@ -102,7 +102,7 @@ function LoginSignUp() {
         setResultSignUp('Error creating account.');
       }
     } catch (e) {
-      alert(e.toString());
+      // alert(e.toString());
       return;
     }
   };
@@ -164,8 +164,7 @@ function LoginSignUp() {
             ) : (
               <>
                 <h1>Hello, Friend!</h1>
-                <p>Don't have an account? </p>
-                <p>Enter your personal details and start the journey with us</p>
+                <p>Don't have an account? Enter your personal details and start the journey with us</p>
                 <button className="button_style" onClick={() => { togglePanel(); setResultSignUp(''); }} id="signUp">
                   Sign Up
                 </button>
