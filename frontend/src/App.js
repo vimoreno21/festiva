@@ -54,13 +54,13 @@ function App() {
                 <Route path="/socketio" element={<SocketIoMelTest socket={socket} icons={icons} />} />
                 {/* represents mobile frontend */}
                 <Route path="/sockettwo" element={<Socket2Page socket={socket} icons={icons} />} />
+                <Route path="/quizGameLibrary" element={<QuizGameLibraryPage socket={socket}/>} />
               </Routes>
             </div>
           }
         />
         {/* Route without navbar */}
         <Route path="/questionDisplay" element={<QuestionDisplayPage socket={socket} icons={icons}/>} />
-        <Route path="/quizGameLibrary" element={<QuizGameLibraryPage socket={socket}/>} />
         <Route path="/CreateGame" element={<CreateGame />} />
         <Route path="/waitToPlayGame" element={<WaitPlayGame socket={socket} icons={icons}/>} />
       </Routes>
