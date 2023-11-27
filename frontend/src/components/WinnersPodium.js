@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import AudioPlayer from "../components/AudioPlayer";
+import applauseSound from "../audio/mixkit-animated-small-group-applause-523.mp3";
 
-function WinnersPodium({ scores, temp_users, icons }) {
+function WinnersPodium({ scores, icons, setIsPlaying }) {
+
+  // handles audio
+  useEffect(() => {
+    setIsPlaying(false);
+  }, []);
+  const [applausePlaying, setApplausePlaying] = useState(true);
+
   // Sort temp_users by points in descending order
   const sortedUsers = Object.values(scores).sort((a, b) => b.points - a.points);
 
@@ -9,6 +18,7 @@ function WinnersPodium({ scores, temp_users, icons }) {
 
   return (
     <div className="podium-container">
+      <AudioPlayer src={applauseSound} isPlaying={applausePlaying} shouldLoop={false}/>
       <div className="winner-message">Congrats winners!!</div>
       <div className="winners-podium">
         {/* Second Place */}

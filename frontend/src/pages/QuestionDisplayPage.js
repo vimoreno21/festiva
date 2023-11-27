@@ -9,12 +9,6 @@ import AudioPlayer from "../components/AudioPlayer";
 import { useLocation } from "react-router-dom";
 import WinnersPodium from "../components/WinnersPodium";
 
-/*
-    Notes
-    -  fix audio stuff
-    - fix empty section on bottom of page
-*/
-
 function QuestionDisplayPage({ socket, icons }) {
   const [showRanking, setShowRanking] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true); // for audio
@@ -49,7 +43,7 @@ function QuestionDisplayPage({ socket, icons }) {
 
   return (
     <div className="questionDisplay-container">
-      <AudioPlayer src={backgroundMusic} isPlaying={isPlaying} />
+      <AudioPlayer src={backgroundMusic} isPlaying={isPlaying} shouldLoop={true}/>
       <div className="game-nav">
         <button className="exit-button" onClick={handleExitButton}>
           {leftArrowIcon} Exit
@@ -57,7 +51,7 @@ function QuestionDisplayPage({ socket, icons }) {
         <span className="game-title">Quizoot</span>
       </div>
       {showWinnersPodium ? (
-        <WinnersPodium scores={scores} icons={icons} />
+        <WinnersPodium scores={scores} icons={icons} setIsPlaying={setIsPlaying}/>
       ) : showRanking ? (
         <QuizRanking
           setShowRanking={setShowRanking}

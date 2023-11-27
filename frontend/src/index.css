@@ -49,7 +49,6 @@ p {
 	font-weight: 100;
 	line-height: 20px;
 	letter-spacing: 0.5px;
-	margin: 20px 0 30px;
 }
 
 .p2 {
@@ -286,6 +285,7 @@ footer a {
 
 /* HomePage classes */
 .homepage_div {
+  font-family: "Inria Sans", sans-serif;
   background-color: #8cd9e4;
   background-size: cover;
   height: 100%;
@@ -630,6 +630,8 @@ footer a {
   font-family: "Inria Sans", sans-serif;
   color: #222;
   margin-bottom: 2rem;
+  width:85%;
+  margin:0 auto;
 }
 
 .answer-grid {
@@ -834,6 +836,41 @@ footer a {
   font-size: 1.5rem;
   text-align: center;
 }
+
+.instruction-container {
+  font-family: "Inria Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  line-height: 1.5;
+  line-height: 1.5;
+}
+
+.instruction-content {
+  line-height: 1.5;
+}
+
+.get-started-button {
+  font-family: "Inria Sans", sans-serif;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 0% !important;
+  justify-content: center;
+  background-color: #ff695c;
+  border-radius: 20px;
+  color: #222;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  padding: 12px 45px;
+  font-weight: bold;
+}
+
+.instruction-style {
+	margin: 0 !important;
+}
+
 
 @keyframes rotateSeesaw {
   0% {

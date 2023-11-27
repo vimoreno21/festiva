@@ -36,7 +36,8 @@ function App() {
     chicken: '/avatars/chicken.gif',
     squid: '/avatars/squid.gif',
     spider: '/avatars/spider.gif',
-    giraffe: '/avatars/giraffe.gif'
+    giraffe: '/avatars/giraffe.gif',
+    panda: '/avatars/panda.gif'
   }
 
   return (
