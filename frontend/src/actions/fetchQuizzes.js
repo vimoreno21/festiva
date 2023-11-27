@@ -10,8 +10,8 @@ export const fetchQuizzes = async (user, setQuizzes, navigate) => {
           'x-auth-token': JSON.parse(localStorage.getItem('user_data'))?.token
         },
       })
+
       
-    
       const data = await response.json();
       if (response.status == 401) {
         navigate('/start');
