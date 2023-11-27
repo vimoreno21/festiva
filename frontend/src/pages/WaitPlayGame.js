@@ -24,7 +24,7 @@ const WaitPlayGame = ({ socket, icons }) => {
   return (
     <div className="wait_play_style container-p">
       <Breadcrumbs size="md">
-        <BreadcrumbItem href="/pickgame">Choose Game</BreadcrumbItem>
+        // <BreadcrumbItem href="/pickgame">Choose Game</BreadcrumbItem>
         <BreadcrumbItem href="/quizGameLibrary">Pick Quizoot</BreadcrumbItem>
         <BreadcrumbItem>Play Game</BreadcrumbItem>
       </Breadcrumbs>
