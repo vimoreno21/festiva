@@ -1,5 +1,4 @@
 import React from "react";
-import { GiPartyPopper } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -23,15 +22,15 @@ const PickGamePage = () => {
 
   return (
     <>
-      <div className="pick_game_style container-p">
+      <div className="pick_game_style">
         <div className="flex flex-col md:flex-row justify-around">
           <div className="md:w-50 div_style flex flex-col">
             <p className="fs-2 fw-bold">
               {" "}
-              <GiPartyPopper /> Step 1: Pick A Game <GiPartyPopper />
+               Step 1: Pick A Game
             </p>
-            <div className="border border-dark p-4">
-              <p className="fw-normal fs-5">
+            <div className="border border-dark p-4 ms-4">
+              <p className="fw-normal fs-5 ">
                 Get ready to quiz your way to a good time! Our game is all about
                 the joy of quizzing, whether you're chilling with friends on a
                 weekend, spicing up a family gathering, or even impressing your

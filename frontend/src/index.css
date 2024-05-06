@@ -1,9 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 /* styles.css */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 * {
   box-sizing: border-box;
@@ -16,18 +15,12 @@ body {
   min-height: 100vh;
 }
 
-#root {
-  width: 100%; /* Set the width to 100% for a full-width layout */
-  padding: 0; /* Remove any padding to ensure full width */
-  margin: 0; /* Remove any margin to ensure full width */
-}
-
 .center-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; 
+  height: 100vh;
 }
 
 code {
@@ -45,19 +38,19 @@ h2 {
 }
 
 p {
-	font-size: 16px;
-	font-weight: 100;
-	line-height: 20px;
-	letter-spacing: 0.5px;
-	margin: 20px 0 30px;
+  font-size: 16px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
 }
 
 .p2 {
-	font-size: 25px;
-	font-weight: 100;
-	line-height: 20px;
-	letter-spacing: 0.5px;
-	margin: 20px 0 30px;
+  font-size: 25px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
 }
 
 span {
@@ -88,7 +81,6 @@ button:active {
   transform: scale(0.95);
 }
 
-
 button.ghost {
   background-color: transparent;
   border-color: #ffffff;
@@ -105,7 +97,6 @@ form {
   text-align: center;
 }
 
-
 .container {
   background: #ffeeb6;
   border-radius: 10px;
@@ -118,10 +109,6 @@ form {
   max-width: 100%;
   min-height: 480px;
 }
-
-
-
-
 
 .full-width {
   width: 100%;
@@ -171,7 +158,9 @@ form {
     z-index: 5;
   }
 }
-
+.setHeight {
+  height: 100%;
+}
 .overlay-container {
   position: absolute;
   top: 0;
@@ -302,7 +291,10 @@ footer a {
 
 .game-library-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust the minmax values as needed */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* Adjust the minmax values as needed */
   gap: 50px; /* Adjust the gap between items as needed */
   display: flex;
   align-items: center;
@@ -326,7 +318,7 @@ footer a {
   background-size: 102% 102%;
   background-color: pink;
   padding: 0.7rem;
-  box-shadow: 0 0.2rem 30rem rgba(0,0,0,0.2);
+  box-shadow: 0 0.2rem 30rem rgba(0, 0, 0, 0.2);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -335,7 +327,6 @@ footer a {
   position: relative;
   border: none;
 }
-
 
 .img_sizing {
   width: 8%;
@@ -424,9 +415,9 @@ footer a {
   font-weight: bold;
   margin: 0;
   font-size: 60px;
-	/* font-weight: 100; */
-	/* line-height: 20px; */
-	letter-spacing: 0.5px;
+  /* font-weight: 100; */
+  /* line-height: 20px; */
+  letter-spacing: 0.5px;
 }
 
 /* Quizoot library classes */
@@ -559,8 +550,7 @@ footer a {
 .pick_game_style {
   font-family: "Inria Sans", sans-serif;
   background-color: #f7c6d1;
-  background-size: cover;
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 .div_style {
@@ -600,10 +590,10 @@ footer a {
 }
 
 .title-for-about {
-	font-size: 60px;
-	left: 15%;
-	margin-top: 5%;
-	position: flex;
+  font-size: 60px;
+  left: 15%;
+  margin-top: 5%;
+  position: flex;
 }
 
 .questionDisplay-container {
@@ -649,7 +639,7 @@ footer a {
   border: 1px solid #999;
   height: 8rem;
   width: 100%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   border-radius: 20px;
   color: #222;
   text-transform: none;
@@ -734,7 +724,7 @@ footer a {
   transform: scale(1.5);
 }
 
-.container.table-styles{
+.container.table-styles {
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 14px 28px rgb(0 0 0 / 20%), 0 10px 10px rgb(0 0 0 / 0%);
   top: 1rem;
@@ -773,7 +763,7 @@ footer a {
 
 .podium-item {
   width: 80px;
-  background: linear-gradient(to bottom, #8CD9E4, #3498db);
+  background: linear-gradient(to bottom, #8cd9e4, #3498db);
   padding-top: 5px;
 }
 .not-winners .podium-item {
@@ -793,7 +783,7 @@ footer a {
 }
 
 .player-avatar {
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .player-points {
@@ -812,8 +802,8 @@ footer a {
   font-size: 1.3rem;
 }
 
-.not-winners  .player-placement{
-  font-size:1rem;
+.not-winners .player-placement {
+  font-size: 1rem;
 }
 
 .winner-message {
@@ -825,18 +815,18 @@ footer a {
 
 .not-winners {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 60%;
   gap: 2rem;
-  margin-top:2rem;
+  margin-top: 2rem;
 }
 
 .waiting-area {
   font-size: 1.5rem;
   text-align: center;
-  display:flex;
+  display: flex;
 }
 
 @keyframes rotateSeesaw {
@@ -859,7 +849,7 @@ footer a {
     font-size: 1.5rem;
   }
   .answer-grid {
-    grid-template-columns: 1fr !important; 
+    grid-template-columns: 1fr !important;
   }
 }
 
@@ -887,11 +877,11 @@ footer a {
 }
 @media (min-width: 1280px) {
   .container-p {
-    padding: 3rem;
+    padding: 5rem;
   }
   .answer-button {
     font-size: 1.5rem !important;
-    height: 10rem !important 
+    height: 10rem !important;
   }
   .question-text {
     font-size: 2.3rem;

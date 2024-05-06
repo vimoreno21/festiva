@@ -14,10 +14,9 @@ import QuizGameLibraryPage from "./pages/QuizGameLibraryPage";
 import EmailVerify from "./components/EmailVerify/index";
 import CreateGame from "./pages/CreateGame";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
-import GlobalNavBar2 from "./components/GlobalNavBarTwo";
 
 const socket = io.connect("https://festiva-ucf-3a962394b6e7.herokuapp.com");
-//const socket = io.connect("http://localhost:5000");
+// const socket = io.connect("http://localhost:5000");
 // console.log(socket)
 
 
@@ -38,16 +37,15 @@ function App() {
         <Route
           path="/*"
           element={
-            <div>
+            <div className="setHeight">
               <GlobalNavBar />
-              {/* <GlobalNavBar2/> */}
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/start" element={<StartPage />} />
                 <Route path="/pickgame" element={<PickGamePage />} />
                 <Route path="/api/registerVerification/:id/verify/:token" element={<EmailVerify />} />
-                <Route path="/quizGameLibrary" element={<QuizGameLibraryPage />} />
+                <Route path="/quizGameLibrary" element={<QuizGameLibraryPage socket={socket} />} />
                 <Route path="/CreateGame" element={<CreateGame />} />
                 <Route path="/ForgotPasswordPage" element={<ForgotPasswordPage/>} />
                 {/* represents web frontend */}
