@@ -287,8 +287,6 @@ const delQuizRouter = require('./api/deleteQuiz');
 app.use('/api/deleteQuiz', delQuizRouter);
 
 
-
-
 serverGame.listen(PORT, () => {
     console.log('Server listening on port ' + PORT);
 }); 

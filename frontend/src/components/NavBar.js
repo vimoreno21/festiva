@@ -49,7 +49,7 @@ function NavBar() {
         {
             open &&
 
-            <ul className="position-fixed bg-nav rounded text-center list-unstyled p-1 set_z">
+            <ul className="position-fixed bg-nav rounded text-center list-unstyled p-1 set_z ">
                 <li className='py-4 px-2'>
                     <Link to="/about" className='text-dark navbar-link'>About Us</Link>
                 </li>
